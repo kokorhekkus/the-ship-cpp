@@ -1,0 +1,260 @@
+
+base.h,248
+#define SHIP_BASE 2,18
+class ShipObject 8,132
+class ScreenObject 15,262
+  short int xloc;ScreenObject::xloc17,294
+  short int yloc;ScreenObject::yloc18,312
+  short int color;ScreenObject::color19,330
+  char look;ScreenObject::look20,371
+
+engine.h,26
+#define SHIP_ENGINE 2,20
+
+enums.h,1125
+#define SHIP_ENUMS3,28
+enum levelFeature 5,48
+  BLANK,6,68
+  WALL,7,77
+  FLOOR,8,85
+  GRASS,9,94
+  USTAIR,10,103
+  DSTAIR,11,113
+  CDOOR,12,123
+  ODOOR13,132
+enum direction 16,144
+  NORTH,17,161
+  NORTHEAST,18,170
+  EAST,19,183
+  SOUTHEAST,20,191
+  SOUTH,21,204
+  SOUTHWEST,22,213
+  WEST,23,226
+  NORTHWEST24,234
+enum roomType 27,250
+  SQUARE,28,266
+  ROUND29,276
+enum levelType 32,288
+  CORRIDORS,33,305
+  FUEL_SEA,34,318
+  FOREST,35,330
+  CAVERN36,340
+enum mapColor 39,353
+  RED,40,370
+  GREEN,41,377
+  CYAN,42,386
+  L_GREY,43,394
+  BROWN,44,404
+  BLUE,45,413
+  MAGENTA,46,421
+  BLACK,47,432
+  ORANGE,48,441
+  L_GREEN,49,451
+  L_CYAN,50,462
+  WHITE,51,472
+  YELLOW,52,481
+  L_BLUE,53,491
+  PINK,54,501
+  D_GREY55,509
+enum inventoryType 58,522
+  LRW,59,543
+  SRW,60,569
+  BODY,61,594
+  HEAD,62,617
+  LEG,63,637
+  FOOT,64,656
+  AMMO,65,676
+enum playerWorld 68,702
+  EARTH,69,721
+  NEWBEIJING,70,730
+  SPARTA71,744
+enum playerCareer 74,757
+  COMMANDO,75,777
+  MEDIC,76,789
+  SAPPER,77,798
+  SCOUT,78,808
+  TECHNICIAN,79,817
+  HIGHCOMMAND,80,831
+  ENGINEER81,846
+
+log.h,22
+#define SHIP_LOG2,17
+
+map.h,242
+#define SHIP_MAP 2,17
+struct MapChar 9,137
+  levelFeature id;10,154
+  char symbol;11,173
+  mapColor color;12,188
+  MapChar(14,207
+  MapChar(15,220
+  ~MapChar(16,277
+class LevelMap 24,444
+  MapChar levelMap[LevelMap::levelMap28,573
+
+monster.h,369
+#define SHIP_MONSTER 2,21
+class Monster 10,125
+  short int id;Monster::id11,182
+  std::string name;Monster::name12,198
+  short int life;Monster::life13,218
+  short int speed;Monster::speed14,236
+  short int armour;Monster::armour15,255
+  short int weapon;Monster::weapon16,275
+  short int xloc;Monster::xloc17,295
+  short int yloc;Monster::yloc18,313
+
+object.h,355
+#define SHIP_OBJECT 2,20
+class Thing 10,117
+  short int id;Thing::id11,172
+  std::string name;Thing::name12,188
+  short int weight;Thing::weight13,208
+class Gun 28,488
+  short int range;Gun::range30,533
+  short int dmgdice_num;Gun::dmgdice_num31,552
+  short int dmgdice_sides;Gun::dmgdice_sides32,577
+  short int to_hit;Gun::to_hit33,604
+
+player.h,704
+#define SHIP_CHARACTER 2,23
+class Player 13,175
+  char* name;Player::name15,240
+  playerWorld world;Player::world16,254
+  playerCareer career;Player::career17,275
+  short int strength;Player::strength21,348
+  short int intelligence;Player::intelligence22,370
+  short int constitution;Player::constitution23,396
+  short int dexterity;Player::dexterity24,422
+  short int luck;Player::luck25,445
+  short int xp;Player::xp28,485
+  short int xp_level;Player::xp_level29,501
+  short int hp;Player::hp30,533
+  short int armour;Player::armour31,568
+  short int speed;Player::speed32,600
+  short int dodge;Player::dodge33,632
+  std::vector<Thing> inventory;Player::inventory36,680
+
+random.h,232
+#define SHIP_RANDOM 2,20
+class Random 7,109
+class Dice 17,297
+  Random random;Dice::random18,330
+  short int numDice;Dice::numDice19,347
+  short int numSides;Dice::numSides20,368
+  short int modifier;Dice::modifier21,390
+
+screens.h,27
+#define SHIP_SCREENS 2,21
+
+base.cpp,265
+ShipObject::ShipObject(12,320
+ShipObject::~ShipObject(13,348
+ScreenObject::ScreenObject(18,561
+ScreenObject::~ScreenObject(21,730
+short int* ScreenObject::getLocation(24,775
+void ScreenObject::setLocation(36,1073
+short int* ScreenObject::setLocation(47,1421
+
+engine.cpp,264
+void init_for_draw(17,319
+void write_char(48,1135
+void write_string(57,1330
+void write_line(71,1673
+void save_screen(92,1991
+void restore_screen(102,2225
+void finish(114,2486
+void vis_cursor(124,2813
+void set_term_color(135,2985
+void error_exit(189,3997
+
+log.cpp,45
+string dateString(9,86
+void shiplog(17,308
+
+main.cpp,17
+int main(16,252
+
+map.cpp,279
+MapChar mapDrawingChars[mapDrawingChars9,98
+void initMapDrawingChars(11,161
+MapChar::MapChar(35,940
+MapChar::MapChar(37,963
+MapChar::~MapChar(40,1083
+LevelMap::LevelMap(45,1286
+LevelMap::~LevelMap(56,1539
+void LevelMap::makeRoom 58,1565
+void LevelMap::generate(72,2020
+
+monster.cpp,424
+Monster::Monster(16,357
+Monster::~Monster(31,843
+short int Monster::getId(40,1005
+string Monster::getName(41,1053
+short int Monster::getLife(42,1102
+short int Monster::getSpeed(43,1154
+short int Monster::getArmour(44,1208
+short int Monster::getWeapon(45,1264
+void Monster::setLife(48,1333
+void Monster::setSpeed(49,1396
+void Monster::setArmour(50,1463
+void Monster::setWeapon(51,1534
+void init_monsters(54,1669
+
+object.cpp,203
+Thing::Thing(12,267
+Thing::~Thing(26,635
+short int Thing::getId(35,791
+string Thing::getName(36,837
+short int Thing::getWeight(37,884
+Gun::Gun(42,1113
+Gun::~Gun(57,1615
+void init_objects(67,1896
+
+player.cpp,968
+Player::Player(16,332
+Player::~Player(28,723
+char* Player::getName(34,820
+playerWorld Player::getWorld(35,867
+playerCareer Player::getCareer(36,922
+short int Player::getStrength(37,980
+short int Player::getIntelligence(38,1039
+short int Player::getConstitution(39,1106
+short int Player::getDexterity(40,1173
+short int Player::getLuck(41,1234
+short int Player::getXP(42,1285
+short int Player::getHP(43,1332
+short int Player::getArmour(44,1379
+short int Player::getSpeed(45,1434
+short int Player::getDodge(46,1487
+void Player::setStrength(49,1552
+void Player::setIntelligence(53,1656
+void Player::setConstitution(57,1776
+void Player::setDexterity(61,1896
+void Player::setLuck(65,2004
+void Player::setXP(69,2092
+void Player::setHP(70,2146
+void Player::setArmour(71,2200
+void Player::setSpeed(72,2270
+void Player::setDodge(73,2336
+void Player::genPrimaryStats(75,2403
+void Player::calcSecondaryStats(78,2439
+void Player::addToInventory(81,2478
+
+random.cpp,182
+Random::Random(17,411
+Random::~Random(21,498
+int Random::inRange(28,671
+bool Random::percentChance(48,1280
+Dice::Dice(61,1603
+Dice::~Dice(68,1824
+short int Dice::roll(75,2025
+
+screens.cpp,205
+void title_screen(13,195
+playerWorld world_choice(28,503
+playerCareer career_choice(61,1156
+void main_screen(121,2457
+void print_msg(151,3298
+string get_pcname(164,3713
+void show_inventory(181,4097
