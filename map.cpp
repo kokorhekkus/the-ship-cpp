@@ -55,6 +55,11 @@ LevelMap::LevelMap() {
 
 LevelMap::~LevelMap() {}
 
+// write a single feature to a location on the level
+void LevelMap::writeFeature(short int x, short int y, levelFeature feature) {
+  levelMap[x][y] = mapDrawingChars[feature];
+}
+
 void LevelMap::makeRoom (roomType type, short int x_start, short int y_start,
 						 short int x_length, short int y_length) {
   if (type == SQUARE) {

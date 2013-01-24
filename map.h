@@ -23,11 +23,14 @@ void initMapDrawingChars();
 // a representation of a single level
 class LevelMap {
 private:
-  // X,Y locations of map drawing characters held
+  // x,y locations of map drawing characters held
   // in a multidimensional array
   //
   // TODO: account for terminals of different sizes
   MapChar levelMap[80][24];
+
+  // write a single feature to a location on the level
+  void writeFeature(short int x, short int y, levelFeature feature);
 
 public:
   LevelMap();
