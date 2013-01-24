@@ -5,6 +5,14 @@
 
 #include <string>
 
+
+// The [x,y] location for an example 80x24 terminal work like this:
+//
+// Top leftmost location is [0,0]
+// Top rightmost location is [79,0]
+// Bottom leftmost location is [0,23]
+// Bottom rightmost location is [79,23]
+
 void init_for_draw(void);
 
 void finish(int);

@@ -49,7 +49,7 @@ void write_char(int x, int y, char c, mapColor color) {
 	chtype ch = c;
 	
 	set_term_color(color);
-	mvaddch(x,y,ch);
+	mvaddch(y,x,ch);
 	refresh();
 }
 
@@ -61,7 +61,7 @@ void write_string(int x, int y, const char* s, mapColor color) {
   
   for (int i=0; i < s_len; i++) {
 	chtype ch = s[i];
-	mvaddch(x,y+i,ch);
+	mvaddch(y,x+i,ch);
   }
   refresh();
 }
@@ -70,18 +70,16 @@ void write_string(int x, int y, const char* s, mapColor color) {
 // 'type' is 1 - horizontal, 2 - vertical
 void write_line(int x, int y, int type, int length, char c, mapColor color) {
   int i;
-  chtype ch;
+  chtype ch = c;
   
   set_term_color(color);
 
   for (i=0;i<length;i++) {
 	if (type == 1) {
-	  ch = c;
-	  mvaddch(x,y+i,ch);
+	  mvaddch(y,x+i,ch);
 	}
 	if (type == 2) {
-	  ch = c;
-	  mvaddch(x+i,y,ch);
+	  mvaddch(y+i,x,ch);
 	}
   }
   refresh();

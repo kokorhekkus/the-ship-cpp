@@ -11,12 +11,12 @@ using namespace std;
 
 // title screen 
 void title_screen() {
-  write_string(4, 36, "The", L_BLUE);
-  write_string(4, 40, "Ship", BLUE);
+  write_string(36, 4, "The", L_BLUE);
+  write_string(40, 4, "Ship", BLUE);
   
-  write_string(6, 27, "Press  Space  to continue", RED);
-  write_char(6, 33, '[', BLUE);
-  write_char(6, 39, ']', BLUE);
+  write_string(27,6, "Press  Space  to continue", RED);
+  write_char(33, 6, '[', BLUE);
+  write_char(39, 6, ']', BLUE);
   
   char c = '\0';
   while (c != ' ') {
@@ -28,16 +28,16 @@ void title_screen() {
 playerWorld world_choice() {
   write_string(2, 2, "Choose your homeworld:", CYAN);
   
-  write_char(4, 5, 'E', CYAN);
-  write_string(4, 7, "arth (1.00G)", BLUE);
+  write_char(5, 4, 'E', CYAN);
+  write_string(7, 4, "arth (1.00G)", BLUE);
   write_char(5, 5, 'N', CYAN);
-  write_string(5, 7, "ew Beijing (0.87G)", BLUE);
-  write_char(6, 5, 'S', CYAN);
-  write_string(6, 7, "parta (1.31G)", BLUE);
+  write_string(7, 5, "ew Beijing (0.87G)", BLUE);
+  write_char(5, 6, 'S', CYAN);
+  write_string(7, 6, "parta (1.31G)", BLUE);
   
   for (int i=4; i<7; i++) {
-	write_char(i, 4, '[', RED);
-	write_char(i, 6, ']', RED);
+	write_char(4, i, '[', RED);
+	write_char(6, i, ']', RED);
   }
   
   for (;;) {
@@ -61,31 +61,31 @@ playerWorld world_choice() {
 playerCareer career_choice() {
   write_string(2, 2, "Choose your career:", CYAN);
   
-  write_char(4, 5, 'C', CYAN);
-  write_string(4, 7, "ommando", BLUE);
+  write_char(5, 4, 'C', CYAN);
+  write_string(7, 4, "ommando", BLUE);
   write_char(5, 5, 'M', CYAN);
-  write_string(5, 7, "edic", BLUE);
-  write_char(6, 5, 'S', CYAN);
-  write_string(6, 7, "apper", BLUE);
-  write_string(7, 4, "Sc ", BLUE);
+  write_string(7, 5, "edic", BLUE);
+  write_char(5, 6, 'S', CYAN);
+  write_string(7, 6, "apper", BLUE);
+  write_string(4, 7, "Sc ", BLUE);
   write_char(7, 7, 'o', CYAN);
-  write_string(7, 9, "ut", BLUE);
-  write_char(8, 5, 'T', CYAN);
-  write_string(8, 7, "echnician", BLUE);
-  write_char(9, 5, 'H', CYAN);
-  write_string(9, 7, "igh Command", BLUE);
-  write_char(10, 5, 'E', CYAN);
-  write_string(10, 7, "ngineer", BLUE);
+  write_string(9, 7, "ut", BLUE);
+  write_char(5, 8, 'T', CYAN);
+  write_string(7, 8, "echnician", BLUE);
+  write_char(5, 9, 'H', CYAN);
+  write_string(7, 9, "igh Command", BLUE);
+  write_char(5, 10, 'E', CYAN);
+  write_string(7, 10, "ngineer", BLUE);
   
   for (int i=4; i<7; i++) {
-	write_char(i, 4, '[', RED);
-	write_char(i, 6, ']', RED);
+	write_char(4, i, '[', RED);
+	write_char(6, i, ']', RED);
   }
-  write_char(7, 6, '[', RED);
-  write_char(7, 8, ']', RED);
+  write_char(6, 7, '[', RED);
+  write_char(8, 7, ']', RED);
   for (int i=8; i<11; i++) {
-	write_char(i, 4, '[', RED);
-	write_char(i, 6, ']', RED);
+	write_char(4, i, '[', RED);
+	write_char(6, i, ']', RED);
   }
   
   for (;;) {
@@ -122,22 +122,22 @@ void main_screen() {
    // Stuff that doesn't ever change
   
   // Primary stats
-  write_string(3, 72, "Str:", L_GREY);
-  write_string(5, 72, "Int:", L_GREY);
-  write_string(7, 72, "Con:", L_GREY);
-  write_string(9, 72, "Dex:", L_GREY);
-  write_string(11, 72, "Luc:", L_GREY);
+  write_string(72, 3, "Str:", L_GREY);
+  write_string(72, 5, "Int:", L_GREY);
+  write_string(72, 7, "Con:", L_GREY);
+  write_string(72, 9, "Dex:", L_GREY);
+  write_string(72, 11, "Luc:", L_GREY);
   
   // bottom status line
-  write_string(24, 24, "L:   /", L_GREY);
-  write_string(24, 34, "C:   /", L_GREY);
-  write_string(24, 44, "Spd:", L_GREY);
-  write_string(24, 53, "Dmg:", L_GREY);
-  write_string(24, 60, "A:  /", L_GREY);
+  write_string(24, 23, "L:   /", L_GREY);
+  write_string(34, 23, "C:   /", L_GREY);
+  write_string(44, 23, "Spd:", L_GREY);
+  write_string(53, 23, "Dmg:", L_GREY);
+  write_string(60, 23, "A:  /", L_GREY);
   
   // top status line
-  write_string(23, 24, "SRW:", L_GREY);
-  write_string(23, 53, "LRW:", L_GREY);
+  write_string(24, 22, "SRW:", L_GREY);
+  write_string(53, 22, "LRW:", L_GREY);
   
   // TODO: print stuff that changes
   //print_stats();   print_2stats();
@@ -153,7 +153,7 @@ void print_msg(const char* msg) {
   write_string(0, 0, "                                   "
 			   "                                   "
 			   "         ", L_GREY);
-  write_string(1, 0, "                                   "
+  write_string(0, 1, "                                   "
 			   "                                   "
 			   "         ", L_GREY);
   // write new message
@@ -162,9 +162,9 @@ void print_msg(const char* msg) {
 
 // screen to get player's name
 string get_pcname() {
-  write_string(4, 8, "Name yourself", CYAN);
-  write_char(4, 21, ':', L_BLUE);
-  write_char(4, 22, ' ', L_GREY);
+  write_string(8, 4, "Name yourself", CYAN);
+  write_char(21, 4, ':', L_BLUE);
+  write_char(22, 4, ' ', L_GREY);
   
   echo();
 
@@ -181,8 +181,8 @@ string get_pcname() {
 void show_inventory(Player pc) {
 	clear();
 	write_string(0,0,">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",BLUE);
-	write_string(0,35,"INVENTORY",RED);
-	write_string(0,44,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",BLUE);
+	write_string(35,0,"INVENTORY",RED);
+	write_string(44,0,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",BLUE);
 
 	// TODO: actually print what's in the player inventory
 

@@ -11,7 +11,6 @@ MapChar mapDrawingChars[8]; // declared extern in the header
 
 void initMapDrawingChars() {
 
-  MapChar blank(BLANK, '\0', WHITE);
   MapChar wall(WALL, '#', D_GREY);
   MapChar floor(FLOOR, '.', L_GREY);
   MapChar grass(GRASS, '.', GREEN);
@@ -20,7 +19,6 @@ void initMapDrawingChars() {
   MapChar cdoor(CDOOR, '+', WHITE);
   MapChar odoor(ODOOR, '/', WHITE);
 
-  mapDrawingChars[BLANK] = blank;
   mapDrawingChars[WALL] = wall;
   mapDrawingChars[FLOOR] = floor;
   mapDrawingChars[GRASS] = grass;
@@ -45,9 +43,10 @@ MapChar::~MapChar() {}
 //----------------------------------------------------------------------
 LevelMap::LevelMap() {
   // create a blank map for an 80x24 screen
-  for (int x = 0; x < 80; x++) {
-	for (int y = 0; y < 24; y++) {
-	  levelMap[x][y] = mapDrawingChars[BLANK];
+  // (do not fill bits where there is screen furniture)
+  for (int x = 0; x < 72; x++) {
+	for (int y = 2; y < 22; y++) {
+	  levelMap[x][y] = mapDrawingChars[WALL];
 	}
   }
   string msg = "Creating new LevelMap object";
@@ -81,8 +80,8 @@ levelFeature LevelMap::at(short int x, short int y) {
 
 // print out the level to terminal
 void LevelMap::print() {
-  for (int x = 0; x < 80; x++) {
-	for (int y = 0; y < 24; y++) {
+  for (int x = 0; x < 72; x++) {
+	for (int y = 2; y < 22; y++) {
 	  write_char(x, y, levelMap[x][y].symbol, levelMap[x][y].color);
 	}
   }

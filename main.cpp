@@ -55,13 +55,13 @@ int main(int argc, char *argv[]) {
   LevelMap currentLevel;
   currentLevel.generate(1, CORRIDORS);
   main_screen();
+  currentLevel.print();
   
   print_msg("You're inside.");
   
   s = "Entering main game loop";
   shiplog(s, 1);
-  for (;;) {
-	
+  while (1) {
 	// get keyb input
 	char c = getch();
 	
