@@ -2,6 +2,7 @@
 
 #include "map.h"
 #include "log.h"
+#include "engine.h"
 
 #include <vector>
 using namespace std;
@@ -76,4 +77,13 @@ void LevelMap::generate(short int depth, levelType type) {
 // returns the feature at the given location
 levelFeature LevelMap::at(short int x, short int y) {
   return levelMap[x][y].id;
+}
+
+// print out the level to terminal
+void LevelMap::print() {
+  for (int x = 0; x < 80; x++) {
+	for (int y = 0; y < 24; y++) {
+	  write_char(x, y, levelMap[x][y].symbol, levelMap[x][y].color);
+	}
+  }
 }

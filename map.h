@@ -41,6 +41,9 @@ public:
 
   // returns the feature at the given location
   levelFeature at(short int x, short int y);
+
+  // print out the level to terminal
+  void print();
 };
 
 #endif
