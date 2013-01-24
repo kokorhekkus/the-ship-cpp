@@ -2,11 +2,15 @@
 
 #include "player.h"
 #include "log.h"
+#include "engine.h"
+
+#include <boost/lexical_cast.hpp>
 
 #include <ncurses.h>
 
-using namespace std;
+#include <string>
 
+using namespace std;
 
 //----------------------------------------------------------------------
 // Player class implementation
@@ -41,6 +45,7 @@ short int Player::getDexterity() const { return dexterity; }
 short int Player::getLuck() const { return luck; }
 short int Player::getXP() const { return xp; }
 short int Player::getHP() const { return hp; }
+short int Player::getMaxHP() const { return max_hp; }
 short int Player::getArmour() const { return armour; }
 short int Player::getSpeed() const { return speed; }
 short int Player::getDodge() const { return dodge; }
@@ -68,14 +73,82 @@ void Player::setLuck(short int new_luck) {
 }
 void Player::setXP(short int new_xp) { xp = new_xp; }
 void Player::setHP(short int new_hp) { hp = new_hp; }
+void Player::setMaxHP(short int new_max_hp) { max_hp = new_max_hp; }
 void Player::setArmour(short int new_armour) { armour = new_armour; }
 void Player::setSpeed(short int new_speed) { speed = new_speed; }
 void Player::setDodge(short int new_dodge) { dodge = new_dodge; }
+ 
+string Player::itos(int i) {
+   stringstream ss;
+   ss << i;
+   return ss.str();
+}
+
+void Player::printMainScreenInfo() {
+
+  // Primary stats
+  string s = itos(strength);
+  char* sc = (char*)s.c_str(); 
+  write_string(77, 3, sc, L_BLUE);
+
+  s = itos(intelligence);
+  sc = (char*)s.c_str(); 
+  write_string(77, 5, sc, L_BLUE);
+
+  s = itos(dexterity);
+  sc = (char*)s.c_str(); 
+  write_string(77, 7, sc, L_BLUE);
+
+  s = itos(constitution);
+  sc = (char*)s.c_str(); 
+  write_string(77, 9, sc, L_BLUE);
+
+  s = itos(luck);
+  sc = (char*)s.c_str(); 
+  write_string(77, 11, sc, L_BLUE);
+
+  // Secondary stats
+  s = itos(hp);
+  sc = (char*)s.c_str(); 
+  write_string(29, 23, sc, L_BLUE);
+
+  s = itos(max_hp);
+  sc = (char*)s.c_str(); 
+  write_string(33, 23, sc, L_BLUE);
+
+  s = itos(xp_level);
+  sc = (char*)s.c_str(); 
+  write_string(43, 23, sc, L_BLUE);
+
+  s = itos(speed);
+  sc = (char*)s.c_str(); 
+  write_string(52, 23, sc, L_BLUE);
+
+  s = itos(armour);
+  sc = (char*)s.c_str(); 
+  write_string(62, 23, sc, L_BLUE);
+
+  s = itos(dodge);
+  sc = (char*)s.c_str(); 
+  write_string(71, 23, sc, L_BLUE);
+}
 
 void Player::genPrimaryStats() {
+  strength = 10;
+  intelligence = 10;
+  constitution = 10;
+  dexterity = 10;
+  luck = 10;
 }
 
 void Player::calcSecondaryStats() {
+  xp = 0;
+  xp_level = 1;
+  hp = 20;
+  max_hp = 20;
+  armour = 5;
+  dodge = 5;
+  speed = 10;
 }
 
 void Player::addToInventory(const Thing& t) {

@@ -26,11 +26,12 @@ private:
 
   // Secondary stats
   short int xp;
-  short int xp_level; // max 50
-  short int hp;       // max 999  
+  short int xp_level; // max 99
+  short int hp;       // max 999
+  short int max_hp;       // max 999
   short int armour;   // max 99
-  short int speed;    // max 99
   short int dodge;    // max 99
+  short int speed;    // max 99
 
   // inventory
   std::vector<Thing> inventory;
@@ -41,6 +42,9 @@ private:
 
   // calculates secondary stats from primary ones
   void calcSecondaryStats();
+
+  // convert an integer to a string
+  std::string itos(int i); 
 
 public:
   Player(char* name, playerWorld world, playerCareer career,
@@ -59,6 +63,7 @@ public:
   short int getLuck() const;
   short int getXP() const;
   short int getHP() const;
+  short int getMaxHP() const;
   short int getArmour() const;
   short int getSpeed() const;
   short int getDodge() const;
@@ -71,9 +76,13 @@ public:
   void setLuck(short int new_luck);
   void setXP(short int new_xp);
   void setHP(short int new_hp);
+  void setMaxHP(short int new_max_hp);
   void setArmour(short int new_armour);
   void setSpeed(short int new_speed);
   void setDodge(short int new_dodge);
+
+  // Printers
+  void printMainScreenInfo(); // print stats and name
 
   // Functionality
   void addToInventory(const Thing& t);  

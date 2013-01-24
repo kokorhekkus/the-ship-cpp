@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
   currentLevel.generate(1, CORRIDORS);
   main_screen();
   currentLevel.print();
-  
+  pc.printMainScreenInfo();
   print_msg("You're inside.");
   
   s = "Entering main game loop";

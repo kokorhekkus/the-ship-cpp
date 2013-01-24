@@ -129,11 +129,11 @@ void main_screen() {
   write_string(72, 11, "Luc:", L_GREY);
   
   // bottom status line
-  write_string(24, 23, "L:   /", L_GREY);
-  write_string(34, 23, "C:   /", L_GREY);
-  write_string(44, 23, "Spd:", L_GREY);
-  write_string(53, 23, "Dmg:", L_GREY);
-  write_string(60, 23, "A:  /", L_GREY);
+  write_string(24, 23, "Life:   /", L_GREY);
+  write_string(37, 23, "Level:", L_GREY);
+  write_string(46, 23, "Speed:", L_GREY);
+  write_string(55, 23, "Armour:", L_GREY);
+  write_string(65, 23, "Dodge:", L_GREY);
   
   // top status line
   write_string(24, 22, "SRW:", L_GREY);
