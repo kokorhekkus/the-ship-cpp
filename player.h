@@ -12,7 +12,7 @@
 // The player
 class Player : public ShipObject, public ScreenObject {
 private:
-  char* name;
+  char* name; // max 28 characters
   playerWorld world;
   playerCareer career;
 
@@ -45,6 +45,9 @@ private:
 
   // convert an integer to a string
   std::string itos(int i); 
+
+  // print out a title for the player
+  std::string title();
 
 public:
   Player(char* name, playerWorld world, playerCareer career,

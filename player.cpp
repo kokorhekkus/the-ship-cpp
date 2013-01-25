@@ -131,7 +131,59 @@ void Player::printMainScreenInfo() {
   s = itos(dodge);
   sc = (char*)s.c_str(); 
   write_string(71, 23, sc, L_BLUE);
+
+  // Print name
+  write_string(0, 22, name, MAGENTA);
+  
+  s = title();
+  sc = (char*)s.c_str();
+  write_string(0, 23, sc, MAGENTA);
 }
+
+// TODO: -Change title based on experience
+//       -Ensure a limit of 28 characters
+string Player::title() {
+  string title;
+  
+  switch(world) {
+  case EARTH:
+	title.append("Terran ");
+	break;
+  case NEWBEIJING:
+	title.append("Beijinger ");
+	break;
+  case SPARTA:
+	title.append("Spartan ");
+	break;
+  }
+
+  switch(career) {
+  case COMMANDO:
+	title.append("Commando");
+	break;
+  case MEDIC:
+	title.append("Medic");
+	break;
+  case SAPPER:
+	title.append("Sapper");
+	break;
+  case SCOUT:
+	title.append("Scout");
+	break;
+  case TECHNICIAN:
+	title.append("Technician");
+	break;
+  case HIGHCOMMAND:
+	title.append("General");
+	break;
+  case ENGINEER:
+	title.append("Engineer");
+	break;
+  }
+
+  return title;
+} 
+
 
 void Player::genPrimaryStats() {
   strength = 10;
