@@ -40,21 +40,22 @@ playerWorld world_choice() {
 	write_char(6, i, ']', RED);
   }
   
-  for (;;) {
-	char c = getch();
-	
-	playerWorld pw;
-	if (c == 'e' || c == 'E') {
-	  pw = EARTH;
-	}
-	if (c == 'n' || c == 'N') {
-	  pw = NEWBEIJING;
-	}
-	if (c == 's' || c == 'S') {
-	  pw = SPARTA;
-	}
-	return pw;
+  char c = '\0';
+  while (c != 'e' && c != 'E' && c != 'n' && c != 'N' && c != 's' && c != 'S') { 
+	c = getch();
   }
+	
+  playerWorld pw;
+  if (c == 'e' || c == 'E') {
+	pw = EARTH;
+  }
+  if (c == 'n' || c == 'N') {
+	pw = NEWBEIJING;
+  }
+  if (c == 's' || c == 'S') {
+	pw = SPARTA;
+  }
+  return pw;
 }
 
 // career choice menu
@@ -88,38 +89,41 @@ playerCareer career_choice() {
 	write_char(6, i, ']', RED);
   }
   
-  for (;;) {
-	char c = getch();
-	
-	playerCareer pc;
-	if (c == 'C' || c == 'c') {
-	  pc = COMMANDO;
-	}
-	if (c == 'M' || c == 'm') {
-	  pc = MEDIC;
-	}
-	if (c == 'S' || c == 's') {
-	  pc = SAPPER;
-	}
-	if (c == 'O' || c == 'o') {
-	  pc =  SCOUT;
-	}
-	if (c == 'T' || c == 't') {
-	  pc = TECHNICIAN;
-	}
-	if (c == 'H' || c == 'h') {
-	  pc = HIGHCOMMAND;
-	}
-	if (c == 'E' || c == 'e') {
-	  pc = ENGINEER;
-	}
-	return pc;
+  char c = '\0';
+  while (c != 'c' && c != 'C' && c != 'm' && c != 'M' && c != 's' && c != 'S'
+		 && c != 'o' && c != 'O' && c != 't' && c != 'T' && c != 'h'
+		 && c != 'H' && c != 'e' && c != 'E') {
+	c = getch();
   }
+
+  playerCareer pc;
+  if (c == 'C' || c == 'c') {
+	pc = COMMANDO;
+  }
+  if (c == 'M' || c == 'm') {
+	pc = MEDIC;
+  }
+  if (c == 'S' || c == 's') {
+	pc = SAPPER;
+  }
+  if (c == 'O' || c == 'o') {
+	pc =  SCOUT;
+  }
+  if (c == 'T' || c == 't') {
+	pc = TECHNICIAN;
+  }
+  if (c == 'H' || c == 'h') {
+	pc = HIGHCOMMAND;
+  }
+  if (c == 'E' || c == 'e') {
+	pc = ENGINEER;
+  }
+  return pc;
 }
 
-// create main game screen
+// create main game screen furniture;
+// i.e. the stuff that doesn't ever change
 void main_screen() {
-   // Stuff that doesn't ever change
   
   // Primary stats
   write_string(72, 3, "Str:", L_GREY);
@@ -138,13 +142,6 @@ void main_screen() {
   // top status line
   write_string(24, 22, "SRW:", L_GREY);
   write_string(53, 22, "LRW:", L_GREY);
-  
-  // TODO: print stuff that changes
-  //print_stats();   print_2stats();
-  //print_weapons(); print_name();
-  //print_status();
-  //print_map();
-  //print_pc();
 }
 
 // print a message to the 2-line message bar at top of screen
