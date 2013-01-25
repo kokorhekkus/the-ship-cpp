@@ -4,6 +4,7 @@
 #include "base.h"
 #include "engine.h"
 #include "enums.h"
+#include "config.h"
 
 // a character to be displayed on the map
 struct MapChar {
@@ -27,7 +28,7 @@ private:
   // in a multidimensional array
   //
   // TODO: account for terminals of different sizes
-  MapChar levelMap[80][24];
+  MapChar levelMap[xTerminalSize][yTerminalSize];
 
   // write a single feature to a location on the level
   void writeFeature(int x, int y, levelFeature feature);

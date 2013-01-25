@@ -23,7 +23,7 @@ monster.o: monster.cpp monster.h log.h
 object.o: object.cpp object.h log.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c object.cpp
 
-map.o: map.cpp map.h enums.h
+map.o: map.cpp map.h enums.h config.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c map.cpp
 
 base.o: base.cpp base.h enums.h

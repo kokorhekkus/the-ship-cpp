@@ -44,8 +44,8 @@ MapChar::~MapChar() {}
 LevelMap::LevelMap() {
   // create a blank map for an 80x24 screen
   // (do not fill bits where there is screen furniture)
-  for (int x = 0; x < 73; x++) {
-	for (int y = 2; y < 22; y++) {
+  for (int x = xMinMapSize; x < xMaxMapSize; x++) {
+	for (int y = yMinMapSize; y < yMaxMapSize; y++) {
 	  levelMap[x][y] = mapDrawingChars[WALL];
 	}
   }
@@ -90,8 +90,8 @@ levelFeature LevelMap::at(int x, int y) {
 
 // print out the level to terminal
 void LevelMap::print() {
-  for (int x = 0; x < 73; x++) {
-	for (int y = 2; y < 22; y++) {
+  for (int x = xMinMapSize; x < xMaxMapSize; x++) {
+	for (int y = yMinMapSize; y < yMaxMapSize; y++) {
 	  write_char(x, y, levelMap[x][y].symbol, levelMap[x][y].color);
 	}
   }
