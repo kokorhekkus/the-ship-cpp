@@ -9,8 +9,8 @@ using namespace std;
 //----------------------------------------------------------------------
 // Thing class implementation
 //----------------------------------------------------------------------
-Thing::Thing(short int a_id, string& a_name, short int a_weight,
-			 short int xloc, short int yloc,
+Thing::Thing(int a_id, string& a_name, int a_weight,
+			 int xloc, int yloc,
 			 mapColor color, char look) :
   ShipObject(),
   ScreenObject(xloc, yloc, color, look),
@@ -32,18 +32,18 @@ Thing::~Thing() {
 }
 
 // Getters
-short int Thing::getId() const { return id; }
+int Thing::getId() const { return id; }
 string Thing::getName() const { return name; }
-short int Thing::getWeight() const { return weight; }
+int Thing::getWeight() const { return weight; }
 
 //----------------------------------------------------------------------
 // Gun class implementation
 //----------------------------------------------------------------------
-Gun::Gun(short int id, string& name, short int weight,
-		 short int xloc, short int yloc,
+Gun::Gun(int id, string& name, int weight,
+		 int xloc, int yloc,
 		 mapColor color, char look,
-		 short int a_range, short int a_to_hit,
-		 short int a_dmgdice_num, short int a_dmgdice_sides) :
+		 int a_range, int a_to_hit,
+		 int a_dmgdice_num, int a_dmgdice_sides) :
   Thing(id, name, weight, xloc, yloc, color, look),
   range(a_range), dmgdice_num(a_dmgdice_num),
   dmgdice_sides(a_dmgdice_sides), to_hit(a_to_hit) {

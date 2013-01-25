@@ -15,16 +15,16 @@ ShipObject::~ShipObject() {}
 //----------------------------------------------------------------------
 // ScreenObject class implementation
 //----------------------------------------------------------------------
-ScreenObject::ScreenObject(short int a_xloc, short int a_yloc, 
+ScreenObject::ScreenObject(int a_xloc, int a_yloc, 
 						   mapColor a_color, char a_look) :
   xloc(a_xloc), yloc(a_yloc), color(a_color), look(a_look) {}
 ScreenObject::~ScreenObject() {}
 
 // Getters
-short int* ScreenObject::getLocation() const {
+int* ScreenObject::getLocation() const {
   // TODO: will this cause a memory leak..? no cleanup
   // of array
-  short int* location_array = new short int[2];
+  int* location_array = new int[2];
   location_array[0] = xloc;
   location_array[1] = yloc;
   return location_array;
@@ -33,7 +33,7 @@ short int* ScreenObject::getLocation() const {
 // Setters
 
 // set location by actual coordinates
-void ScreenObject::setLocation(short int new_xloc, short int new_yloc) {
+void ScreenObject::setLocation(int new_xloc, int new_yloc) {
   // TODO: ensure we aren't in a wall or some other tile that can only
   // hold one thing
   xloc = new_xloc;
@@ -44,11 +44,11 @@ void ScreenObject::setLocation(short int new_xloc, short int new_yloc) {
 // object has moved e.g. north, south-east, etc
 // 
 // returns 1 for a successful move, 0 for a failed move
-short int ScreenObject::setLocation(direction direction, LevelMap level) {
+int ScreenObject::setLocation(direction direction, LevelMap level) {
   // calculate new co-ords, then check if it's OK to move to there
-  short int* new_location = new short int[2];
-  short int new_yloc = yloc;
-  short int new_xloc = xloc;
+  int* new_location = new int[2];
+  int new_yloc = yloc;
+  int new_xloc = xloc;
 
   switch (direction) {
   case NORTH:

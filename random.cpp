@@ -45,7 +45,7 @@ int Random::inRange(int lowest, int highest) {
 }
 
 // returns true if the percent chance is 'beaten'
-bool Random::percentChance(short int percent) {
+bool Random::percentChance(int percent) {
   int num = inRange(0, 100);
   if (num > percent) {
 	return false;
@@ -58,8 +58,8 @@ bool Random::percentChance(short int percent) {
 // Dice class implementation
 //----------------------------------------------------------------------
 
-Dice::Dice(short int a_numDice, short int a_numSides,
-		   short int a_modifier = 0) :
+Dice::Dice(int a_numDice, int a_numSides,
+		   int a_modifier = 0) :
   numDice(a_numDice), numSides(a_numSides), modifier(a_modifier) {
 
   string msg = "Creating new Dice object"; 
@@ -72,7 +72,7 @@ Dice::~Dice() {
 
 // Returns a number which is equivalent to rolling a
 // dice like, '3d4+5' where numDice= 3, numSides = 4, modifier = 5
-short int Dice::roll() {
+int Dice::roll() {
   int rnum = 0;
   for (int i = 0; i<numDice; i++) {
 	int frnum = random.inRange(1, numSides);

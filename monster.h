@@ -9,35 +9,35 @@
 
 // An individual monster
 class Monster : public ShipObject, public ScreenObject {
-  short int id;
+  int id;
   std::string name;
-  short int life;
-  short int speed;
-  short int armour;
-  short int weapon;
-  short int xloc;
-  short int yloc;
+  int life;
+  int speed;
+  int armour;
+  int weapon;
+  int xloc;
+  int yloc;
 
 public:
   // Constructor that sets all Monster variables
-  Monster(short int id, std::string& name, short int life,
-		  short int speed, short int armour, short int weapon,
-		  short int xloc, short int yloc, mapColor color, char look);
+  Monster(int id, std::string& name, int life,
+		  int speed, int armour, int weapon,
+		  int xloc, int yloc, mapColor color, char look);
   ~Monster();
 
   // Getters
-  short int getId() const;
+  int getId() const;
   std::string getName() const;
-  short int getLife() const;
-  short int getSpeed() const;
-  short int getArmour() const;
-  short int getWeapon() const;
+  int getLife() const;
+  int getSpeed() const;
+  int getArmour() const;
+  int getWeapon() const;
 
   // Setters
-  void setLife(short int new_life);
-  void setSpeed(short int new_speed);
-  void setArmour(short int new_armour);
-  void setWeapon(short int new_weapon);
+  void setLife(int new_life);
+  void setSpeed(int new_speed);
+  void setArmour(int new_armour);
+  void setWeapon(int new_weapon);
 };
 
 // Monster intitialisation: set up a list of starting monsters

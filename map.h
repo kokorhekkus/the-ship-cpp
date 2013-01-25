@@ -30,20 +30,20 @@ private:
   MapChar levelMap[80][24];
 
   // write a single feature to a location on the level
-  void writeFeature(short int x, short int y, levelFeature feature);
+  void writeFeature(int x, int y, levelFeature feature);
 
 public:
   LevelMap();
   ~LevelMap();
 
   // functions to draw stuff
-  void makeRoom(roomType type, short int x_start, short int y_start,
-				 short int x_length, short int y_length);
+  void makeRoom(roomType type, int x_start, int y_start,
+				 int x_length, int y_length);
 
-  void generate(short int depth, levelType type);
+  void generate(int depth, levelType type);
 
   // returns the feature at the given location
-  levelFeature at(short int x, short int y);
+  levelFeature at(int x, int y);
 
   // print out the level to terminal
   void print();

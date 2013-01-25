@@ -10,23 +10,23 @@ class Random : public ShipObject{
   ~Random();
 
   int inRange(int lowest, int highest);
-  bool percentChance(short int percent);
+  bool percentChance(int percent);
 };
 
 // Representation of a dice roll 
 class Dice : public ShipObject {
   Random random;
-  short int numDice;
-  short int numSides;
-  short int modifier;
+  int numDice;
+  int numSides;
+  int modifier;
 
 public:
   // Returns a number which is equivalent to rolling a
   // dice like, '3d4+5' where num_dice = 3, num_sides = 4, mod = 5
-  Dice(short int numDice, short int numSides, short int modifier);
+  Dice(int numDice, int numSides, int modifier);
   ~Dice();
   
-  short int roll();
+  int roll();
 };
 
 #endif

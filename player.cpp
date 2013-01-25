@@ -18,7 +18,7 @@ using namespace std;
 
 // Constructor that sets all Player variables
 Player::Player(char* a_name, playerWorld a_world, playerCareer a_career,
-			   short int xloc, short int yloc, 
+			   int xloc, int yloc, 
 			   mapColor color, char look) :
   name(a_name), world(a_world), career(a_career),
   ScreenObject(xloc, yloc, color, look) {
@@ -38,20 +38,20 @@ Player::~Player() {
 char* Player::getName() const { return name; }
 playerWorld Player::getWorld() const { return world; }
 playerCareer Player::getCareer() const { return career; }
-short int Player::getStrength() const { return strength; }
-short int Player::getIntelligence() const { return intelligence; }
-short int Player::getConstitution() const { return constitution; }
-short int Player::getDexterity() const { return dexterity; }
-short int Player::getLuck() const { return luck; }
-short int Player::getXP() const { return xp; }
-short int Player::getHP() const { return hp; }
-short int Player::getMaxHP() const { return max_hp; }
-short int Player::getArmour() const { return armour; }
-short int Player::getSpeed() const { return speed; }
-short int Player::getDodge() const { return dodge; }
+int Player::getStrength() const { return strength; }
+int Player::getIntelligence() const { return intelligence; }
+int Player::getConstitution() const { return constitution; }
+int Player::getDexterity() const { return dexterity; }
+int Player::getLuck() const { return luck; }
+int Player::getXP() const { return xp; }
+int Player::getHP() const { return hp; }
+int Player::getMaxHP() const { return max_hp; }
+int Player::getArmour() const { return armour; }
+int Player::getSpeed() const { return speed; }
+int Player::getDodge() const { return dodge; }
 
 // Setters
-void Player::setStrength(short int new_strength) {
+void Player::setStrength(int new_strength) {
   if (checkStatRange(new_strength,1,50)) {
 	strength = new_strength;
 	calcSecondaryStats();
@@ -60,7 +60,7 @@ void Player::setStrength(short int new_strength) {
 	shiplog(msg,5);
   }
 }
-void Player::setIntelligence(short int new_intelligence) {
+void Player::setIntelligence(int new_intelligence) {
   if (checkStatRange(new_intelligence,1,50)) {
 	intelligence = new_intelligence;
 	calcSecondaryStats();
@@ -69,7 +69,7 @@ void Player::setIntelligence(short int new_intelligence) {
 	shiplog(msg,5);
   }
 }
-void Player::setConstitution(short int new_constitution) {
+void Player::setConstitution(int new_constitution) {
   if (checkStatRange(new_constitution,1,50)) {
 	constitution = new_constitution;
 	calcSecondaryStats();
@@ -78,7 +78,7 @@ void Player::setConstitution(short int new_constitution) {
 	shiplog(msg,5);
   }
 }
-void Player::setDexterity(short int new_dexterity) {
+void Player::setDexterity(int new_dexterity) {
   if (checkStatRange(new_dexterity,1,50)) {
 	dexterity = new_dexterity;
 	calcSecondaryStats();
@@ -87,7 +87,7 @@ void Player::setDexterity(short int new_dexterity) {
 	shiplog(msg,5);
   }
 }
-void Player::setLuck(short int new_luck) {
+void Player::setLuck(int new_luck) {
   if (checkStatRange(new_luck,1,50)) {
 	luck = new_luck;
 	calcSecondaryStats();
@@ -96,18 +96,18 @@ void Player::setLuck(short int new_luck) {
 	shiplog(msg,5);
   }
 }
-void Player::addXP(short int add_xp) {
+void Player::addXP(int add_xp) {
   xp = xp + add_xp;
   // TODO: set xp_level appropriately
 }
-void Player::setHP(short int new_hp) {
+void Player::setHP(int new_hp) {
   if (checkStatRange(new_hp,1,max_hp)) {
 	hp = new_hp;
   } else {
 	// TODO: handle death when hp goes below 1
   }
 }
-void Player::setMaxHP(short int new_max_hp) {
+void Player::setMaxHP(int new_max_hp) {
   if (checkStatRange(new_max_hp,1,999)) {
 	max_hp = new_max_hp;
   } else {
@@ -115,7 +115,7 @@ void Player::setMaxHP(short int new_max_hp) {
 	shiplog(msg,5);
   }
 }
-void Player::setArmour(short int new_armour) {
+void Player::setArmour(int new_armour) {
   if (checkStatRange(new_armour,0,99)) {
 	armour = new_armour;
   } else {
@@ -123,7 +123,7 @@ void Player::setArmour(short int new_armour) {
 	shiplog(msg,5);
   }
 }
-void Player::setSpeed(short int new_speed) {
+void Player::setSpeed(int new_speed) {
   if (checkStatRange(new_speed,0,99)) {
 	speed = new_speed;
   } else {
@@ -131,7 +131,7 @@ void Player::setSpeed(short int new_speed) {
 	shiplog(msg,5);
   }
 }
-void Player::setDodge(short int new_dodge) {
+void Player::setDodge(int new_dodge) {
   if (checkStatRange(new_dodge,0,99)) {
 	dodge = new_dodge;
   } else {

@@ -56,12 +56,12 @@ LevelMap::LevelMap() {
 LevelMap::~LevelMap() {}
 
 // write a single feature to a location on the level
-void LevelMap::writeFeature(short int x, short int y, levelFeature feature) {
+void LevelMap::writeFeature(int x, int y, levelFeature feature) {
   levelMap[x][y] = mapDrawingChars[feature];
 }
 
-void LevelMap::makeRoom (roomType type, short int x_start, short int y_start,
-						 short int x_length, short int y_length) {
+void LevelMap::makeRoom (roomType type, int x_start, int y_start,
+						 int x_length, int y_length) {
   switch(type) {
   case SQUARE:
 	// top left hand corner at [x_start, y_start]
@@ -79,12 +79,12 @@ void LevelMap::makeRoom (roomType type, short int x_start, short int y_start,
 
 }
 
-void LevelMap::generate(short int depth, levelType type) {
+void LevelMap::generate(int depth, levelType type) {
   makeRoom(SQUARE, 10, 10, 4, 4);
 }
 
 // returns the feature at the given location
-levelFeature LevelMap::at(short int x, short int y) {
+levelFeature LevelMap::at(int x, int y) {
   return levelMap[x][y].id;
 }
 

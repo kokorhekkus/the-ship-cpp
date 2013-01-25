@@ -18,20 +18,20 @@ private:
 
   // Primary stats
   // These can be a max of 50
-  short int strength;
-  short int intelligence;
-  short int constitution;
-  short int dexterity;
-  short int luck;
+  int strength;
+  int intelligence;
+  int constitution;
+  int dexterity;
+  int luck;
 
   // Secondary stats
-  short int xp;
-  short int xp_level; // max 99
-  short int hp;       // max 999
-  short int max_hp;       // max 999
-  short int armour;   // max 99
-  short int dodge;    // max 99
-  short int speed;    // max 99
+  int xp;
+  int xp_level; // max 99
+  int hp;       // max 999
+  int max_hp;       // max 999
+  int armour;   // max 99
+  int dodge;    // max 99
+  int speed;    // max 99
 
   // inventory
   std::vector<Thing> inventory;
@@ -54,7 +54,7 @@ private:
 
 public:
   Player(char* name, playerWorld world, playerCareer career,
-		 short int xloc, short int yloc,
+		 int xloc, int yloc,
 		 mapColor color, char look);
   ~Player();
 
@@ -62,31 +62,31 @@ public:
   char* getName() const;
   playerWorld getWorld() const;
   playerCareer getCareer() const;
-  short int getStrength() const;
-  short int getIntelligence() const;
-  short int getConstitution() const;
-  short int getDexterity() const;
-  short int getLuck() const;
-  short int getXP() const;
-  short int getHP() const;
-  short int getMaxHP() const;
-  short int getArmour() const;
-  short int getSpeed() const;
-  short int getDodge() const;
+  int getStrength() const;
+  int getIntelligence() const;
+  int getConstitution() const;
+  int getDexterity() const;
+  int getLuck() const;
+  int getXP() const;
+  int getHP() const;
+  int getMaxHP() const;
+  int getArmour() const;
+  int getSpeed() const;
+  int getDodge() const;
   
   // Setters
-  void setStrength(short int new_strength);
-  void setIntelligence(short int new_intelligence);
-  void setConstitution(short int new_constitution);
-  void setDexterity(short int new_dexterity);
-  void setLuck(short int new_luck);
-  void setHP(short int new_hp);
-  void setMaxHP(short int new_max_hp);
-  void setArmour(short int new_armour);
-  void setSpeed(short int new_speed);
-  void setDodge(short int new_dodge);
+  void setStrength(int new_strength);
+  void setIntelligence(int new_intelligence);
+  void setConstitution(int new_constitution);
+  void setDexterity(int new_dexterity);
+  void setLuck(int new_luck);
+  void setHP(int new_hp);
+  void setMaxHP(int new_max_hp);
+  void setArmour(int new_armour);
+  void setSpeed(int new_speed);
+  void setDodge(int new_dodge);
 
-  void addXP(short int add_xp);
+  void addXP(int add_xp);
 
   // Printers
   void printMainScreenInfo(); // print stats and name

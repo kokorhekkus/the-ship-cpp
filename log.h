@@ -3,7 +3,7 @@
 
 #include <string>
 
-void shiplog(std::string& message, short int level);
+void shiplog(std::string& message, int level);
 std::string dateString();
 
 #endif

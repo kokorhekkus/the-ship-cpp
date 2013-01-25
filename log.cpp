@@ -14,7 +14,7 @@ string dateString() {
   return dt;
 }
 
-void shiplog(string& message, short int level) {
+void shiplog(string& message, int level) {
   std::ofstream logfile;
   logfile.open("TheShip.log", fstream::out | fstream::app);
   logfile << dateString() << level << ":" << message << endl;

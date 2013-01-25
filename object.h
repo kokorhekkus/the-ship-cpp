@@ -9,36 +9,36 @@
 #include <fstream>
 
 class Thing : public ShipObject, public ScreenObject {
-  short int id;
+  int id;
   std::string name;
-  short int weight;
+  int weight;
 
 public:
-  Thing(short int id, std::string& name, short int weight,
-		short int xloc, short int yloc,
+  Thing(int id, std::string& name, int weight,
+		int xloc, int yloc,
 		mapColor color, char look);
   ~Thing();
 
   // Getters
-  short int getId() const;
+  int getId() const;
   std::string getName() const;
-  short int getWeight() const;
+  int getWeight() const;
 };
 
 // a gun
 class Gun : public Thing {
   // weapon stats
-  short int range;
-  short int dmgdice_num;
-  short int dmgdice_sides;
-  short int to_hit;
+  int range;
+  int dmgdice_num;
+  int dmgdice_sides;
+  int to_hit;
 
 public:
-  Gun(short int id, std::string& name, short int weight,
-	  short int xloc, short int yloc,
+  Gun(int id, std::string& name, int weight,
+	  int xloc, int yloc,
 	  mapColor color, char look,
-	  short int range, short int to_hit,
-	  short int dmgdice_num, short int dmgdice_sides);
+	  int range, int to_hit,
+	  int dmgdice_num, int dmgdice_sides);
   ~Gun();
 };
 
