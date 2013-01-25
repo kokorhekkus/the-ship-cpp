@@ -49,6 +49,9 @@ private:
   // print out a title for the player
   std::string title();
 
+  // returns 0 if stat is not in the range min-max, otherwise 1
+  int checkStatRange(int i, int min, int max);
+
 public:
   Player(char* name, playerWorld world, playerCareer career,
 		 short int xloc, short int yloc,

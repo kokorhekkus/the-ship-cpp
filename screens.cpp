@@ -126,11 +126,11 @@ playerCareer career_choice() {
 void main_screen() {
   
   // Primary stats
-  write_string(72, 3, "Str:", L_GREY);
-  write_string(72, 5, "Int:", L_GREY);
-  write_string(72, 7, "Con:", L_GREY);
-  write_string(72, 9, "Dex:", L_GREY);
-  write_string(72, 11, "Luc:", L_GREY);
+  write_string(73, 3, "STR:", L_GREY);
+  write_string(73, 5, "INT:", L_GREY);
+  write_string(73, 7, "CON:", L_GREY);
+  write_string(73, 9, "DEX:", L_GREY);
+  write_string(73, 11, "LCK:", L_GREY);
   
   // bottom status line
   write_string(24, 23, "Life:   /", L_GREY);

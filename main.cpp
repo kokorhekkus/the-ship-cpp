@@ -21,6 +21,9 @@ void print_all(LevelMap lm, Player pc) {
   pc.print();
 }
 
+//----------------------------------------------------------------------
+//                              MAIN
+//----------------------------------------------------------------------
 int main(int argc, char *argv[]) {
   srand(time(0));      // init random seed
   

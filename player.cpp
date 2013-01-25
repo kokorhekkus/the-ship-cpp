@@ -52,31 +52,93 @@ short int Player::getDodge() const { return dodge; }
 
 // Setters
 void Player::setStrength(short int new_strength) {
-  strength = new_strength;
-  calcSecondaryStats();
+  if (checkStatRange(new_strength,1,50)) {
+	strength = new_strength;
+	calcSecondaryStats();
+  } else {
+	string msg = "STR not in range; not setting";
+	shiplog(msg,5);
+  }
 }
 void Player::setIntelligence(short int new_intelligence) {
-  intelligence = new_intelligence;
-  calcSecondaryStats();
+  if (checkStatRange(new_intelligence,1,50)) {
+	intelligence = new_intelligence;
+	calcSecondaryStats();
+  } else {
+	string msg = "INT not in range; not setting";
+	shiplog(msg,5);
+  }
 }
 void Player::setConstitution(short int new_constitution) {
-  constitution = new_constitution;
-  calcSecondaryStats();
+  if (checkStatRange(new_constitution,1,50)) {
+	constitution = new_constitution;
+	calcSecondaryStats();
+  } else {
+	string msg = "CON not in range; not setting";
+	shiplog(msg,5);
+  }
 }
 void Player::setDexterity(short int new_dexterity) {
-  dexterity = new_dexterity;
-  calcSecondaryStats();
+  if (checkStatRange(new_dexterity,1,50)) {
+	dexterity = new_dexterity;
+	calcSecondaryStats();
+  } else {
+	string msg = "DEX not in range; not setting";
+	shiplog(msg,5);
+  }
 }
 void Player::setLuck(short int new_luck) {
-  luck = new_luck;
-  calcSecondaryStats();
+  if (checkStatRange(new_luck,1,50)) {
+	luck = new_luck;
+	calcSecondaryStats();
+  } else {
+	string msg = "LCK not in range; not setting";
+	shiplog(msg,5);
+  }
 }
-void Player::addXP(short int add_xp) { xp = xp + add_xp; }
-void Player::setHP(short int new_hp) { hp = new_hp; }
-void Player::setMaxHP(short int new_max_hp) { max_hp = new_max_hp; }
-void Player::setArmour(short int new_armour) { armour = new_armour; }
-void Player::setSpeed(short int new_speed) { speed = new_speed; }
-void Player::setDodge(short int new_dodge) { dodge = new_dodge; }
+void Player::addXP(short int add_xp) {
+  xp = xp + add_xp;
+  // TODO: set xp_level appropriately
+}
+void Player::setHP(short int new_hp) {
+  if (checkStatRange(new_hp,1,max_hp)) {
+	hp = new_hp;
+  } else {
+	// TODO: handle death when hp goes below 1
+  }
+}
+void Player::setMaxHP(short int new_max_hp) {
+  if (checkStatRange(new_max_hp,1,999)) {
+	max_hp = new_max_hp;
+  } else {
+	string msg = "Max HP not in range; not setting";
+	shiplog(msg,5);
+  }
+}
+void Player::setArmour(short int new_armour) {
+  if (checkStatRange(new_armour,0,99)) {
+	armour = new_armour;
+  } else {
+	string msg = "Armour not in range; not setting";
+	shiplog(msg,5);
+  }
+}
+void Player::setSpeed(short int new_speed) {
+  if (checkStatRange(new_speed,0,99)) {
+	speed = new_speed;
+  } else {
+	string msg = "Speed not in range; not setting";
+	shiplog(msg,5);
+  }
+}
+void Player::setDodge(short int new_dodge) {
+  if (checkStatRange(new_dodge,0,99)) {
+	dodge = new_dodge;
+  } else {
+	string msg = "Dodge not in range; not setting";
+	shiplog(msg,5);
+  }
+}
  
 string Player::itos(int i) {
    stringstream ss;
@@ -190,23 +252,31 @@ string Player::title() {
 
 
 void Player::genPrimaryStats() {
-  strength = 10;
-  intelligence = 10;
-  constitution = 10;
-  dexterity = 10;
-  luck = 10;
+  setStrength(10);
+  setIntelligence(10);
+  setConstitution(10);
+  setDexterity(10);
+  setLuck(10);
 }
 
 void Player::calcSecondaryStats() {
   xp = 0;
   xp_level = 1;
-  hp = 20;
-  max_hp = 20;
-  armour = 5;
-  dodge = 5;
-  speed = 10;
+  setHP(20);
+  setMaxHP(20);
+  setArmour(5);
+  setDodge(5);
+  setSpeed(10);
 }
 
 void Player::addToInventory(const Thing& t) {
   inventory.push_back(t);
+}
+
+int Player::checkStatRange(int i, int min, int max) {
+  if (i > max || i < min) {
+	return 0;
+  } else {
+	return 1;
+  }
 }
