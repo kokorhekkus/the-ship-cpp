@@ -9,7 +9,9 @@ class Random : public ShipObject{
   Random();
   ~Random();
 
+  // returns a number in the range lowest-highest
   int inRange(int lowest, int highest);
+  // returns true if the percent chance is 'beaten'
   bool percentChance(int percent);
 };
 

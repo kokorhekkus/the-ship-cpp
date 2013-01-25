@@ -75,8 +75,6 @@ playerCareer career_choice() {
   write_string(7, 8, "echnician", BLUE);
   write_char(5, 9, 'H', CYAN);
   write_string(7, 9, "igh Command", BLUE);
-  write_char(5, 10, 'E', CYAN);
-  write_string(7, 10, "ngineer", BLUE);
   
   for (int i=4; i<7; i++) {
 	write_char(4, i, '[', RED);
@@ -84,15 +82,15 @@ playerCareer career_choice() {
   }
   write_char(6, 7, '[', RED);
   write_char(8, 7, ']', RED);
-  for (int i=8; i<11; i++) {
+  for (int i=8; i<10; i++) {
 	write_char(4, i, '[', RED);
 	write_char(6, i, ']', RED);
   }
   
   char c = '\0';
-  while (c != 'c' && c != 'C' && c != 'm' && c != 'M' && c != 's' && c != 'S'
-		 && c != 'o' && c != 'O' && c != 't' && c != 'T' && c != 'h'
-		 && c != 'H' && c != 'e' && c != 'E') {
+  while (c != 'c' && c != 'C' && c != 'm' && c != 'M'
+		 && c != 's' && c != 'S' && c != 'o' && c != 'O'
+		 && c != 't' && c != 'T' && c != 'h' && c != 'H') {
 	c = getch();
   }
 
@@ -114,9 +112,6 @@ playerCareer career_choice() {
   }
   if (c == 'H' || c == 'h') {
 	pc = HIGHCOMMAND;
-  }
-  if (c == 'E' || c == 'e') {
-	pc = ENGINEER;
   }
   return pc;
 }
@@ -146,6 +141,11 @@ void main_screen() {
 
 // print a message to the 2-line message bar at top of screen
 void print_msg(const char* msg) {
+  // TODO: -rolling message bar, there is currently no point
+  //       to having 2 lines.
+  //       -limit message to 48 chars, and scroll anything over
+  //        24 to the second line
+
   // blank message display
   write_string(0, 0, "                                   "
 			   "                                   "

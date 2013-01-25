@@ -77,8 +77,7 @@ enum playerCareer {
   SAPPER,
   SCOUT,
   TECHNICIAN,
-  HIGHCOMMAND,
-  ENGINEER
+  HIGHCOMMAND
 };
 
 #endif

@@ -3,12 +3,13 @@
 #include "player.h"
 #include "log.h"
 #include "engine.h"
-
-#include <boost/lexical_cast.hpp>
+#include "random.h"
 
 #include <ncurses.h>
 
-#include <string>
+#include <sstream>
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -25,9 +26,23 @@ Player::Player(char* a_name, playerWorld a_world, playerCareer a_career,
 
   string msg = "Creating new Player object";
   shiplog(msg, 10);
+
+  // set up XP calculation array
+  for (int i=1; i<100; i++) {
+	if (i<=10) {
+	  xpCalcArray[i] = i*100;
+	}
+	if (i>10 || i<=50) {
+	  xpCalcArray[i] = i*1000;
+	}
+	if (i>50 || i<=99) {
+	  xpCalcArray[i] = i*5000;
+	}
+  }
+  
   genPrimaryStats();
-  calcSecondaryStats();
   // TODO: generate starting inventory
+  calcSecondaryStats();
 }
 Player::~Player() {
   string msg = "Destroying Player object";
@@ -97,8 +112,14 @@ void Player::setLuck(int new_luck) {
   }
 }
 void Player::addXP(int add_xp) {
-  xp = xp + add_xp;
-  // TODO: set xp_level appropriately
+  int new_xp = xp + add_xp;
+  if (checkStatRange(new_xp,1,495000)) {
+	xp = new_xp;
+	calcSecondaryStats();
+  } else {
+	string msg = "XP not in range; not setting";
+	shiplog(msg,5);
+  }
 }
 void Player::setHP(int new_hp) {
   if (checkStatRange(new_hp,1,max_hp)) {
@@ -161,11 +182,11 @@ void Player::printMainScreenInfo() const {
   sc = (char*)s.c_str(); 
   write_string(77, 5, sc, L_BLUE);
 
-  s = itos(dexterity);
+  s = itos(constitution);
   sc = (char*)s.c_str(); 
   write_string(77, 7, sc, L_BLUE);
 
-  s = itos(constitution);
+  s = itos(dexterity);
   sc = (char*)s.c_str(); 
   write_string(77, 9, sc, L_BLUE);
 
@@ -242,41 +263,163 @@ string Player::title() const {
   case HIGHCOMMAND:
 	title.append("General");
 	break;
-  case ENGINEER:
-	title.append("Engineer");
-	break;
   }
 
   return title;
 } 
 
-
 void Player::genPrimaryStats() {
-  setStrength(10);
-  setIntelligence(10);
-  setConstitution(10);
-  setDexterity(10);
-  setLuck(10);
+  // called once in constructor, so set initial XP
+  xp = 0;
+  // set base stats
+
+  // -an initial 50 points allocated
+  // -intelligence and luck always start off as 10
+  switch(world) {
+  case EARTH:
+	setStrength(10);
+	setIntelligence(10);
+	setConstitution(10);
+	setDexterity(10);
+	setLuck(10);
+	break;
+  case NEWBEIJING:
+	setStrength(8);
+	setIntelligence(10);
+	setConstitution(8);
+	setDexterity(14);
+	setLuck(10);
+	break;
+  case SPARTA:
+	setStrength(12);
+	setIntelligence(10);
+	setConstitution(12);
+	setDexterity(6);
+	setLuck(10);
+	break;
+  }
+  
+  // the modifiers for career end up adding 2 points
+  switch(career) {
+  case COMMANDO:
+	setStrength(strength+1);
+	setIntelligence(intelligence-2);
+	setConstitution(constitution+3);
+	setDexterity(dexterity);
+	setLuck(luck);
+	break;
+  case MEDIC:
+	setStrength(strength-1);
+	setIntelligence(intelligence+3);
+	setConstitution(constitution-1);
+	setDexterity(dexterity+1);
+	setLuck(luck);
+	break;
+  case SAPPER:
+	setStrength(strength+2);
+	setIntelligence(intelligence-1);
+	setConstitution(constitution+1);
+	setDexterity(dexterity);
+	setLuck(luck-1);
+	break;
+  case SCOUT:
+	setStrength(strength-2);
+	setIntelligence(intelligence);
+	setConstitution(constitution-1);
+	setDexterity(dexterity+2);
+	setLuck(luck+3);
+	break;
+  case TECHNICIAN:
+	setStrength(strength-3);
+	setIntelligence(intelligence+3);
+	setConstitution(constitution-1);
+	setDexterity(dexterity+3);
+	setLuck(luck);
+	break;
+  case HIGHCOMMAND:
+	setStrength(strength-1);
+	setIntelligence(intelligence+2);
+	setConstitution(constitution-1);
+	setDexterity(dexterity-1);
+	setLuck(luck+3);
+	break;
+  }
+
+  // do some very minimal randomising:
+  // small chance of adding or subtracting 1 to each stat
+  Random r;
+  if (r.percentChance(10)) {
+	if (r.percentChance(50)) {
+	  setStrength(strength+1);
+	} else {
+	  setStrength(strength-1);
+	}
+  }
+  if (r.percentChance(10)) {
+	if (r.percentChance(50)) {
+	  setIntelligence(intelligence+1);
+	} else {
+	  setIntelligence(intelligence-1);
+	}
+  }
+  if (r.percentChance(10)) {
+	if (r.percentChance(50)) {
+	  setConstitution(constitution+1);
+	} else {
+	  setConstitution(constitution-1);
+	}
+  }
+  if (r.percentChance(10)) {
+	if (r.percentChance(50)) {
+	  setDexterity(dexterity+1);
+	} else {
+	  setDexterity(dexterity-1);
+	}
+  }
+  if (r.percentChance(10)) {
+	if (r.percentChance(50)) {
+	  setLuck(luck+1);
+	} else {
+	  setLuck(luck-1);
+	}
+  }
 }
 
 void Player::calcSecondaryStats() {
-  xp = 0;
-  xp_level = 1;
-  setHP(20);
-  setMaxHP(20);
-  setArmour(5);
-  setDodge(5);
-  setSpeed(10);
+  // set level based on XP
+  for (int i=1; i<100; i++) {
+
+	ostringstream os;
+	os << "Calculating xp_level for xp value " << xp << ". On iterator " << i << ". xpCalcArray is " <<  xpCalcArray[i];
+	string s = os.str();
+	shiplog(s,50);
+
+	if (xp <= xpCalcArray[i]) {
+	  xp_level = i;
+	  break;
+	}
+  }
+  // TODO: Need to modify the following stats based on worn inventory items
+  
+  // calculate max hit points
+  setHP(constitution*2);
+  setMaxHP(constitution*2);
+  
+  // set to value for nothing on initially
+  setArmour(3);
+
+  setDodge(floor(dexterity*1.3) + 0.5);
+  setSpeed(dodge + (floor(strength*0.3) + 0.5));
 }
 
 void Player::addToInventory(const Thing& t) {
   inventory.push_back(t);
 }
 
-int Player::checkStatRange(int i, int min, int max) {
+bool Player::checkStatRange(int i, int min, int max) {
   if (i > max || i < min) {
-	return 0;
+	return false;
   } else {
-	return 1;
+	return true;
   }
 }

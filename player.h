@@ -6,8 +6,8 @@
 #include "object.h"
 #include "enums.h"
 
-#include <string>
 #include <vector>
+#include <string>
 
 // The player
 class Player : public ShipObject, public ScreenObject {
@@ -28,10 +28,13 @@ private:
   int xp;
   int xp_level; // max 99
   int hp;       // max 999
-  int max_hp;       // max 999
+  int max_hp;   // max 999
   int armour;   // max 99
   int dodge;    // max 99
   int speed;    // max 99
+
+  // XP level calculation array
+  int xpCalcArray[99];
 
   // inventory
   std::vector<Thing> inventory;
@@ -40,7 +43,9 @@ private:
   // based on homeworld and career, in constructor
   void genPrimaryStats();
 
-  // calculates secondary stats from primary ones
+  // calculates secondary stats from primary ones;
+  // isInitial should be set to true in the constructor
+  // and nowhere else. Probably a better way to do this.
   void calcSecondaryStats();
 
   // convert an integer to a string
@@ -49,8 +54,8 @@ private:
   // print out a title for the player
   std::string title() const;
 
-  // returns 0 if stat is not in the range min-max, otherwise 1
-  int checkStatRange(int i, int min, int max);
+  // returns true if stat is not in the range min-max, otherwise false
+  bool checkStatRange(int i, int min, int max);
 
 public:
   Player(char* name, playerWorld world, playerCareer career,
