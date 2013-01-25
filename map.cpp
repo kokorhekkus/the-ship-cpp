@@ -84,7 +84,7 @@ void LevelMap::generate(int depth, levelType type) {
 }
 
 // returns the feature at the given location
-levelFeature LevelMap::at(int x, int y) {
+levelFeature LevelMap::at(int x, int y) const {
   return levelMap[x][y].id;
 }
 

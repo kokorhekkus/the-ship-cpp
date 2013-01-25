@@ -37,7 +37,7 @@ public:
   // set location by cardinal directions: equivalent to saying that the
   // object has moved e.g. north or north-east
   // returns 1 on success, 0 on error
-  int setLocation(direction direction, LevelMap level);
+  int setLocation(direction direction, const LevelMap& level);
   
   // set location by actual coordinates
   void setLocation(int new_xloc, int new_yloc);

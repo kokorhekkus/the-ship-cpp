@@ -44,7 +44,7 @@ public:
   void generate(int depth, levelType type);
 
   // returns the feature at the given location
-  levelFeature at(int x, int y);
+  levelFeature at(int x, int y) const;
 
   // print out the level to terminal
   void print() const;

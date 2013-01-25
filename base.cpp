@@ -44,7 +44,7 @@ void ScreenObject::setLocation(int new_xloc, int new_yloc) {
 // object has moved e.g. north, south-east, etc
 // 
 // returns 1 for a successful move, 0 for a failed move
-int ScreenObject::setLocation(direction direction, LevelMap level) {
+int ScreenObject::setLocation(direction direction, const LevelMap& level) {
   // calculate new co-ords, then check if it's OK to move to there
   int* new_location = new int[2];
   int new_yloc = yloc;
@@ -52,28 +52,28 @@ int ScreenObject::setLocation(direction direction, LevelMap level) {
 
   switch (direction) {
   case NORTH:
-	new_yloc++;
+	new_yloc--;
 	break;
   case NORTHEAST:
-	new_xloc++; new_yloc++;
+	new_xloc++; new_yloc--;
 	break;
   case EAST:
 	new_xloc++;
 	break;
   case SOUTHEAST:
-	new_xloc++; new_yloc--;
+	new_xloc++; new_yloc++;
 	break;
   case SOUTH:
-	new_yloc--;
+	new_yloc++;
 	break;
   case SOUTHWEST:
-	new_xloc--; new_yloc--;
+	new_xloc--; new_yloc++;
 	break;
   case WEST:
 	new_xloc--;
 	break;
   case NORTHWEST:
-	new_xloc--; new_yloc++;
+	new_xloc--; new_yloc--;
 	break;
   default:
 	string msg = "setLocation called with incorrect direction ";

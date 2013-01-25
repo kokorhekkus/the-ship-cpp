@@ -14,10 +14,17 @@
 using namespace std;
 
 // prints out the main game screen
-void print_all(const LevelMap& lm, const Player& pc) {
+void printAll(const LevelMap& lm, const Player& pc) {
   main_screen();
   lm.print();
   pc.printMainScreenInfo();
+  pc.print();
+}
+
+// just print the map area
+// TODO: add monster movement and floor items and LOS
+void printMap(const LevelMap& lm, const Player& pc) {
+  lm.print();
   pc.print();
 }
 
@@ -66,7 +73,7 @@ int main(int argc, char *argv[]) {
   LevelMap currentLevel;
   currentLevel.generate(1, CORRIDORS);
   pc.setLocation(11,11); // just an initial test
-  print_all(currentLevel, pc);
+  printAll(currentLevel, pc);
   print_msg("You're inside.");
   
   s = "Entering main game loop";
@@ -103,47 +110,63 @@ int main(int argc, char *argv[]) {
 	
 	// Rogue-like movement keys & cursor keys
 	//
-	// TODO: Handle more failures to mvoe than just hitting
+	// TODO: Handle more failures to move than just hitting
 	//       a wall
 	// TODO: make code generic so we don't repeat all these lines
 	if (c == 'h')  {
 	  if (pc.setLocation(WEST, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'j') {
 	  if (pc.setLocation(SOUTH, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'k') {
 	  if (pc.setLocation(NORTH, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'l') {
 	  if (pc.setLocation(EAST, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'y') {
 	  if (pc.setLocation(NORTHWEST, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'u') {
 	  if (pc.setLocation(NORTHEAST, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'b') {
 	  if (pc.setLocation(SOUTHWEST, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'n') {
 	  if (pc.setLocation(SOUTHEAST, currentLevel) == 0) {
 		print_msg("Bonk.");
+	  } else {
+		printMap(currentLevel, pc);
 	  }
 	}
 	
