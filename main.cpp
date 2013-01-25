@@ -14,7 +14,7 @@
 using namespace std;
 
 // prints out the main game screen
-void print_all(LevelMap lm, Player pc) {
+void print_all(const LevelMap& lm, const Player& pc) {
   main_screen();
   lm.print();
   pc.printMainScreenInfo();

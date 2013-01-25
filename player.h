@@ -44,10 +44,10 @@ private:
   void calcSecondaryStats();
 
   // convert an integer to a string
-  std::string itos(int i); 
+  std::string itos(int i) const; 
 
   // print out a title for the player
-  std::string title();
+  std::string title() const;
 
   // returns 0 if stat is not in the range min-max, otherwise 1
   int checkStatRange(int i, int min, int max);
@@ -89,8 +89,8 @@ public:
   void addXP(int add_xp);
 
   // Printers
-  void printMainScreenInfo(); // print stats and name
-  void print(); // prints actual pc to the terminal
+  void printMainScreenInfo() const; // print stats and name
+  void print() const; // prints actual pc to the terminal
 
   // Functionality
   void addToInventory(const Thing& t);  

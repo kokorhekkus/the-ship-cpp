@@ -140,17 +140,17 @@ void Player::setDodge(int new_dodge) {
   }
 }
  
-string Player::itos(int i) {
+string Player::itos(int i) const {
    stringstream ss;
    ss << i;
    return ss.str();
 }
 
-void Player::print() {
+void Player::print() const {
   write_char(xloc, yloc, look, color);
 }
 
-void Player::printMainScreenInfo() {
+void Player::printMainScreenInfo() const {
 
   // Primary stats
   string s = itos(strength);
@@ -208,7 +208,7 @@ void Player::printMainScreenInfo() {
 
 // TODO: -Change title based on experience
 //       -Ensure a limit of 28 characters
-string Player::title() {
+string Player::title() const {
   string title;
   
   switch(world) {

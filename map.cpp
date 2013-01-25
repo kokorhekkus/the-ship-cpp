@@ -89,7 +89,7 @@ levelFeature LevelMap::at(int x, int y) {
 }
 
 // print out the level to terminal
-void LevelMap::print() {
+void LevelMap::print() const {
   for (int x = xMinMapSize; x < xMaxMapSize; x++) {
 	for (int y = yMinMapSize; y < yMaxMapSize; y++) {
 	  write_char(x, y, levelMap[x][y].symbol, levelMap[x][y].color);

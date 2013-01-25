@@ -47,7 +47,7 @@ public:
   levelFeature at(int x, int y);
 
   // print out the level to terminal
-  void print();
+  void print() const;
 };
 
 #endif
