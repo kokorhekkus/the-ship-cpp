@@ -13,6 +13,14 @@
 #include <ctime>
 using namespace std;
 
+// prints out the main game screen
+void print_all(LevelMap lm, Player pc) {
+  main_screen();
+  lm.print();
+  pc.printMainScreenInfo();
+  pc.print();
+}
+
 int main(int argc, char *argv[]) {
   srand(time(0));      // init random seed
   
@@ -54,9 +62,8 @@ int main(int argc, char *argv[]) {
   shiplog(s, 1);
   LevelMap currentLevel;
   currentLevel.generate(1, CORRIDORS);
-  main_screen();
-  currentLevel.print();
-  pc.printMainScreenInfo();
+  pc.setLocation(11,11); // just an initial test
+  print_all(currentLevel, pc);
   print_msg("You're inside.");
   
   s = "Entering main game loop";

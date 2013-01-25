@@ -77,15 +77,17 @@ public:
   void setConstitution(short int new_constitution);
   void setDexterity(short int new_dexterity);
   void setLuck(short int new_luck);
-  void setXP(short int new_xp);
   void setHP(short int new_hp);
   void setMaxHP(short int new_max_hp);
   void setArmour(short int new_armour);
   void setSpeed(short int new_speed);
   void setDodge(short int new_dodge);
 
+  void addXP(short int add_xp);
+
   // Printers
   void printMainScreenInfo(); // print stats and name
+  void print(); // prints actual pc to the terminal
 
   // Functionality
   void addToInventory(const Thing& t);  

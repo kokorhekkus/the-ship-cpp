@@ -16,7 +16,7 @@ ShipObject::~ShipObject() {}
 // ScreenObject class implementation
 //----------------------------------------------------------------------
 ScreenObject::ScreenObject(short int a_xloc, short int a_yloc, 
-						   short int a_color, char a_look) :
+						   mapColor a_color, char a_look) :
   xloc(a_xloc), yloc(a_yloc), color(a_color), look(a_look) {}
 ScreenObject::~ScreenObject() {}
 
@@ -41,9 +41,9 @@ void ScreenObject::setLocation(short int new_xloc, short int new_yloc) {
 }
 
 // set location by cardinal directions: equivalent to saying that the
-// object has moved e.g. north or north-east
+// object has moved e.g. north, south-east, etc
 // 
-// returns new location
+// returns 1 for a successful move, 0 for a failed move
 short int ScreenObject::setLocation(direction direction, LevelMap level) {
   // calculate new co-ords, then check if it's OK to move to there
   short int* new_location = new short int[2];

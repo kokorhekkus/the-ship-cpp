@@ -3,6 +3,7 @@
 
 #include "map.h"
 #include "base.h"
+#include "enums.h"
 
 #include <string>
 

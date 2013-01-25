@@ -71,7 +71,7 @@ void Player::setLuck(short int new_luck) {
   luck = new_luck;
   calcSecondaryStats();
 }
-void Player::setXP(short int new_xp) { xp = new_xp; }
+void Player::addXP(short int add_xp) { xp = xp + add_xp; }
 void Player::setHP(short int new_hp) { hp = new_hp; }
 void Player::setMaxHP(short int new_max_hp) { max_hp = new_max_hp; }
 void Player::setArmour(short int new_armour) { armour = new_armour; }
@@ -82,6 +82,10 @@ string Player::itos(int i) {
    stringstream ss;
    ss << i;
    return ss.str();
+}
+
+void Player::print() {
+  write_char(xloc, yloc, look, color);
 }
 
 void Player::printMainScreenInfo() {

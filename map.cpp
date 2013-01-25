@@ -62,20 +62,25 @@ void LevelMap::writeFeature(short int x, short int y, levelFeature feature) {
 
 void LevelMap::makeRoom (roomType type, short int x_start, short int y_start,
 						 short int x_length, short int y_length) {
-  if (type == SQUARE) {
+  switch(type) {
+  case SQUARE:
 	// top left hand corner at [x_start, y_start]
 	// (write floorspace within the 'solid' level)
-	for (int i = 0; i < y_length; i++) {
-	  levelMap[x_start + i][y_start] = mapDrawingChars[FLOOR];
+	for (int x = 0; x < x_length; x++) {
+	  for (int y = 0; y < y_length; y++) {
+		levelMap[x_start + x][y_start + y] = mapDrawingChars[FLOOR];
+	  }
 	}
-	for (int i = 0; i < x_length; i++) {
-	  levelMap[x_start][y_start + i] = mapDrawingChars[FLOOR];
-	}
+	break;
+  case ROUND:
+	// TODO
+	break;
   }
+
 }
 
 void LevelMap::generate(short int depth, levelType type) {
-
+  makeRoom(SQUARE, 10, 10, 4, 4);
 }
 
 // returns the feature at the given location

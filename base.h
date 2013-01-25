@@ -20,14 +20,11 @@ class ScreenObject {
 protected:
   short int xloc;
   short int yloc;
-  short int color; // color when visible
+  mapColor color; // color when visible
   char look;        // symbol to represent object on floor
-  
-  // set location by actual coordinates
-  void setLocation(short int new_xloc, short int new_yloc);
-  
+    
 public:
-  ScreenObject(short int xloc, short int yloc, short int color, char look);
+  ScreenObject(short int xloc, short int yloc, mapColor color, char look);
   virtual ~ScreenObject();
 
   // Getters
@@ -41,6 +38,9 @@ public:
   // object has moved e.g. north or north-east
   // returns 1 on success, 0 on error
   short int setLocation(direction direction, LevelMap level);
+  
+  // set location by actual coordinates
+  void setLocation(short int new_xloc, short int new_yloc);
 };
 
 #endif
