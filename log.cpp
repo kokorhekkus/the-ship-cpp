@@ -1,6 +1,7 @@
 // Logging functionality
 
 #include "log.h"
+#include "config.h"
 
 #include <fstream>
 
@@ -15,8 +16,10 @@ string dateString() {
 }
 
 void shiplog(string& message, int level) {
-  std::ofstream logfile;
-  logfile.open("TheShip.log", fstream::out | fstream::app);
-  logfile << dateString() << level << ":" << message << endl;
-  logfile.close();  
+  if (level <= logLevel) {
+	std::ofstream logfile;
+	logfile.open("TheShip.log", fstream::out | fstream::app);
+	logfile << dateString() << level << ":" << message << endl;
+	logfile.close();
+  }
 }

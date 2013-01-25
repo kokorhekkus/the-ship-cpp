@@ -12,4 +12,7 @@ const int xMaxMapSize = 73;
 const int yMinMapSize = 2;
 const int yMaxMapSize = 22;
 
+// max level of log lines to print
+const int logLevel = 100;
+
 #endif

@@ -29,7 +29,8 @@ map.o: map.cpp map.h enums.h config.h
 base.o: base.cpp base.h enums.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c base.cpp
 
-log.o:  log.cpp log.h
+log.o:  log.cpp log.h config.h
+		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c log.cpp
 
 clean:
 		rm -f theship main.o engine.o random.o player.o screens.o monster.o \
