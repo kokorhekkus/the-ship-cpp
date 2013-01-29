@@ -95,3 +95,8 @@ int ScreenObject::setLocation(direction direction, const LevelMap& level) {
   new_location[1] = new_yloc;
   return 1;
 }
+
+// prints object to the terminal
+void ScreenObject::print() const {
+  write_char(xloc, yloc, look, color);
+} 

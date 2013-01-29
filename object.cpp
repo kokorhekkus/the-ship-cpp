@@ -36,6 +36,7 @@ int Thing::getId() const { return id; }
 string Thing::getName() const { return name; }
 int Thing::getWeight() const { return weight; }
 
+
 //----------------------------------------------------------------------
 // Gun class implementation
 //----------------------------------------------------------------------
@@ -63,7 +64,9 @@ Gun::~Gun() {
 }
 
 // Object initialisation: create a set of starting objects
-// TODO: actually do this.  Perhaps use config files that are easily editable
+// TODO: actually do this.  Perhaps use config files that are easily editable?
+//       Perhaps store the main details in some data structure or other, then 
+//       have an 'instantiate' type proc that created the actual object?
 void init_objects() {
 
 }

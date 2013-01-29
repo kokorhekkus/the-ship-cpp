@@ -4,6 +4,7 @@
 #include "config.h"
 
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 

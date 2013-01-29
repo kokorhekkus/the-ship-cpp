@@ -41,6 +41,9 @@ public:
   
   // set location by actual coordinates
   void setLocation(int new_xloc, int new_yloc);
+
+  // prints object to the terminal
+  virtual void print() const; 
 };
 
 #endif

@@ -32,5 +32,6 @@ void vis_cursor(int visibility);
 void set_term_color(mapColor color);
 
 void error_exit(std::string& msg);
+void error_exit(const char* msg);
 
 #endif

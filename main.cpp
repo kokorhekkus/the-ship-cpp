@@ -59,14 +59,19 @@ int main(int argc, char *argv[]) {
   shiplog("Getting regiment choice", 1);
   playerCareer c_choice = career_choice();
   shiplog("Creating PC", 1);
-  Player pc(name, w_choice, c_choice, 0, 0, WHITE, '@');
+  Player pc(name, w_choice, c_choice, 11, 11, WHITE, '@'); //TODO: set player's location in a random empty bit of map
   clear();
   
   shiplog("Generating starting level", 1);
   LevelMap currentLevel;
   currentLevel.generate(1, CORRIDORS);
-  pc.setLocation(11,11); //TODO: set player's location in a random empty bit of map
+
+  // TEST: generate an object to test picking up and inventory
+  string gunName = "sharplight projector";
+  Gun sharpie(0,gunName,1,11,12,BLUE,'/',5,5,1,6);
+  
   printAll(currentLevel, pc);
+  sharpie.print();
   print_msg("You're inside.");
   
   shiplog("Entering main game loop", 1);
@@ -100,8 +105,9 @@ int main(int argc, char *argv[]) {
 	  restore_screen("scrtocol.tdd");
 	}
 	
-	// Rogue-like movement keys & cursor keys
+	// vi-like movement keys
 	//
+	// TODO: Sort out numpad & cursor keys
 	// TODO: Handle more failures to move than just hitting
 	//       a wall
 	// TODO: make code generic so we don't repeat all these lines

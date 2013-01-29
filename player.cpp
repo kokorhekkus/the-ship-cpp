@@ -42,6 +42,8 @@ Player::Player(char* a_name, playerWorld a_world, playerCareer a_career,
   genPrimaryStats();
   // TODO: generate starting inventory
   calcSecondaryStats();
+  // set starting HP here
+  hp = max_hp;
 }
 Player::~Player() {
   shiplog("Destroying Player object", 10);
@@ -183,10 +185,6 @@ string Player::itos(int i) const {
    stringstream ss;
    ss << i;
    return ss.str();
-}
-
-void Player::print() const {
-  write_char(xloc, yloc, look, color);
 }
 
 void Player::printMainScreenInfo() const {
@@ -406,7 +404,6 @@ void Player::genPrimaryStats() {
 void Player::calcSecondaryStats() {
   // set level based on XP
   for (int i=1; i<100; i++) {
-
 	ostringstream os;
 	os << "Calculating xp_level for xp value " << xp << ". On iterator " << i << ". xpCalcArray is " <<  xpCalcArray[i];
 	string s = os.str();
@@ -420,8 +417,7 @@ void Player::calcSecondaryStats() {
   // TODO: Need to modify the following stats based on worn inventory items
   
   // calculate max hit points
-  setHP(constitution*2);
-  setMaxHP(constitution*2);
+  setMaxHP((constitution*2) + (floor(xp_level*1.5) + 0.5));
   
   // set to value for nothing on initially
   setArmour(3);

@@ -4,6 +4,7 @@
  */
 
 #include "engine.h"
+#include "log.h"
 
 #include <ncurses.h>
 #include <string>
@@ -91,8 +92,8 @@ void save_screen(const char *filepath) {
   FILE *tmpscrdat = fopen(filepath, "w+");
   
   if ((putwin(stdscr, tmpscrdat)) == ERR) {
-	string s = "Can't save temporary data to disk!";
-	error_exit(s);
+	shiplog("Can't save temporary data to disk!", 1);
+	error_exit("Can't save temporary data to disk!");
   }
 }
 
@@ -101,8 +102,8 @@ void restore_screen(const char *filepath) {
   FILE *tmpscrdat = fopen(filepath, "r");
   
   if (tmpscrdat == NULL) {
-	string s = "Can't find data file to load!";
-	error_exit(s);
+	shiplog("Can't find data file to load!", 1);
+	error_exit("Can't find data file to load!");
   }
   stdscr = getwin(tmpscrdat);
   refresh();
@@ -185,6 +186,13 @@ void set_term_color(mapColor color) {
 
 // exit program and print an error message 
 void error_exit(string& msg) {
+  endwin();
+  cout << "*******************************************************************************" << endl;
+  cout << "* THE_SHIP ERROR:" << endl << msg << endl;
+  cout << "*******************************************************************************" << endl;
+  exit(0);
+}
+void error_exit(const char* msg) {
   endwin();
   cout << "*******************************************************************************" << endl;
   cout << "* THE_SHIP ERROR:" << endl << msg << endl;

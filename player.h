@@ -95,7 +95,7 @@ public:
 
   // Printers
   void printMainScreenInfo() const; // print stats and name
-  void print() const; // prints actual pc to the terminal
+
 
   // Functionality
   void addToInventory(const Thing& t);  
