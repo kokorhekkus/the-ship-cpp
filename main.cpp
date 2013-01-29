@@ -69,9 +69,9 @@ int main(int argc, char *argv[]) {
   // TEST: generate an object to test picking up and inventory
   string gunName = "sharplight projector";
   Gun sharpie(0,gunName,1,11,12,BLUE,'/',5,5,1,6);
+  currentLevel.addToFloor(sharpie);
   
   printAll(currentLevel, pc);
-  sharpie.print();
   print_msg("You're inside.");
   
   shiplog("Entering main game loop", 1);
