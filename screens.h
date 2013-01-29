@@ -17,6 +17,6 @@ void print_msg(const char* msg);
 
 std::string get_pcname();
 
-void show_inventory(Player pc);
+void show_inventory(const Player& pc);
 
 #endif

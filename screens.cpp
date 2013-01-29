@@ -175,7 +175,7 @@ string get_pcname() {
 }
 
 // show inventory screen; return to main screen
-void show_inventory(Player pc) {
+void show_inventory(const Player& pc) {
 	clear();
 	write_string(0,0,">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",BLUE);
 	write_string(35,0,"INVENTORY",RED);

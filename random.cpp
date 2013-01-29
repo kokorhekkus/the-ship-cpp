@@ -5,7 +5,6 @@
 #include "log.h"
 
 #include <iostream>
-#include <string>
 #include <cstdlib>
 #include <ctime>
 using namespace std;
@@ -15,12 +14,10 @@ using namespace std;
 //----------------------------------------------------------------------
 
 Random::Random() {
-  string msg = "Creating new Random object"; 
-  shiplog(msg, 10);
+  shiplog("Creating new Random object", 10);
 }
 Random::~Random() {
-  string msg = "Destroying Random object"; 
-  shiplog(msg, 10);
+  shiplog("Destroying Random object", 10);
 }
 
 // returns a number in the range lowest >= num <= highest
@@ -62,12 +59,10 @@ Dice::Dice(int a_numDice, int a_numSides,
 		   int a_modifier = 0) :
   numDice(a_numDice), numSides(a_numSides), modifier(a_modifier) {
 
-  string msg = "Creating new Dice object"; 
-  shiplog(msg, 10);
+  shiplog("Creating new Dice object", 10);
 }
 Dice::~Dice() {
-  string msg = "Destroying Dice object"; 
-  shiplog(msg, 10);
+  shiplog("Destroying Dice object", 10);
 }
 
 // Returns a number which is equivalent to rolling a

@@ -49,11 +49,12 @@ LevelMap::LevelMap() {
 	  levelMap[x][y] = mapDrawingChars[WALL];
 	}
   }
-  string msg = "Creating new LevelMap object";
-  shiplog(msg, 10);
+  shiplog("Creating new LevelMap object", 10);
 }
 
-LevelMap::~LevelMap() {}
+LevelMap::~LevelMap() {
+  shiplog("Destroying LevelMap object", 10);
+}
 
 // write a single feature to a location on the level
 void LevelMap::writeFeature(int x, int y, levelFeature feature) {

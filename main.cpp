@@ -34,52 +34,44 @@ void printMap(const LevelMap& lm, const Player& pc) {
 int main(int argc, char *argv[]) {
   srand(time(0));      // init random seed
   
-  string s = "Initialising";
-  shiplog(s, 1);
+  shiplog("Initialising", 1);
   // init, and enter game loop checking for keyboard input
   init_for_draw();
   init_objects();
   init_monsters();
   initMapDrawingChars();
   
-  s = "Going to title screen"; 
-  shiplog(s, 1);
+  shiplog("Going to title screen", 1);
   vis_cursor(0);
   title_screen();
   clear();
   
-  s = "Getting name";
-  shiplog(s, 1);
+  shiplog("Getting name", 1);
   vis_cursor(1);
   string iname = get_pcname();
   char* name = (char*)iname.c_str(); // convert to character array
   clear();
   vis_cursor(0);
   
-  s = "Getting origin world";
-  shiplog(s, 1);
+  shiplog("Getting origin world", 1);
   playerWorld w_choice = world_choice();
   clear();
-  s = "Getting regiment choice";
-  shiplog(s, 1);
+  shiplog("Getting regiment choice", 1);
   playerCareer c_choice = career_choice();
-  s = "Creating PC";
-  shiplog(s, 1);
+  shiplog("Creating PC", 1);
   Player pc(name, w_choice, c_choice, 0, 0, WHITE, '@');
   clear();
   
-  s = "Generating starting level";
-  shiplog(s, 1);
+  shiplog("Generating starting level", 1);
   LevelMap currentLevel;
   currentLevel.generate(1, CORRIDORS);
-  pc.setLocation(11,11); // just an initial test
+  pc.setLocation(11,11); //TODO: set player's location in a random empty bit of map
   printAll(currentLevel, pc);
   print_msg("You're inside.");
   
-  s = "Entering main game loop";
-  shiplog(s, 1);
+  shiplog("Entering main game loop", 1);
   while (1) {
-	// get keyb input
+	// get curses terminal keyboard input
 	char c = getch();
 	
 	// color test
@@ -175,7 +167,7 @@ int main(int argc, char *argv[]) {
 	  
 	}
 	
-	// Inventory screen
+	// inventory screen
 	if (c == 'i') {
 	  show_inventory(pc);
 	}

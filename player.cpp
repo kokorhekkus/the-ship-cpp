@@ -24,8 +24,7 @@ Player::Player(char* a_name, playerWorld a_world, playerCareer a_career,
   name(a_name), world(a_world), career(a_career),
   ScreenObject(xloc, yloc, color, look) {
 
-  string msg = "Creating new Player object";
-  shiplog(msg, 10);
+  shiplog("Creating new Player object", 10);
 
   // set up XP calculation array
   for (int i=1; i<100; i++) {
@@ -45,8 +44,7 @@ Player::Player(char* a_name, playerWorld a_world, playerCareer a_career,
   calcSecondaryStats();
 }
 Player::~Player() {
-  string msg = "Destroying Player object";
-  shiplog(msg, 10);
+  shiplog("Destroying Player object", 10);
 }
 
 // Getters
@@ -71,7 +69,9 @@ void Player::setStrength(int new_strength) {
 	strength = new_strength;
 	calcSecondaryStats();
   } else {
-	string msg = "STR not in range; not setting";
+	ostringstream os;
+	os << "STR not in range 1-50, is " << new_strength << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -80,7 +80,9 @@ void Player::setIntelligence(int new_intelligence) {
 	intelligence = new_intelligence;
 	calcSecondaryStats();
   } else {
-	string msg = "INT not in range; not setting";
+	ostringstream os;
+	os << "INT not in range 1-50, is " << new_intelligence << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -89,7 +91,9 @@ void Player::setConstitution(int new_constitution) {
 	constitution = new_constitution;
 	calcSecondaryStats();
   } else {
-	string msg = "CON not in range; not setting";
+	ostringstream os;
+	os << "CON not in range 1-50, is " << new_constitution << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -98,7 +102,9 @@ void Player::setDexterity(int new_dexterity) {
 	dexterity = new_dexterity;
 	calcSecondaryStats();
   } else {
-	string msg = "DEX not in range; not setting";
+	ostringstream os;
+	os << "DEX not in range 1-50, is " << new_dexterity << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -107,7 +113,9 @@ void Player::setLuck(int new_luck) {
 	luck = new_luck;
 	calcSecondaryStats();
   } else {
-	string msg = "LCK not in range; not setting";
+	ostringstream os;
+	os << "LCK not in range 1-50, is " << new_luck << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -117,7 +125,9 @@ void Player::addXP(int add_xp) {
 	xp = new_xp;
 	calcSecondaryStats();
   } else {
-	string msg = "XP not in range; not setting";
+	ostringstream os;
+	os << "XP not in range 1 - 495000, is " << new_xp << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -132,7 +142,9 @@ void Player::setMaxHP(int new_max_hp) {
   if (checkStatRange(new_max_hp,1,999)) {
 	max_hp = new_max_hp;
   } else {
-	string msg = "Max HP not in range; not setting";
+	ostringstream os;
+	os << "Max HP not in range 1-999, is " << new_max_hp << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -140,7 +152,9 @@ void Player::setArmour(int new_armour) {
   if (checkStatRange(new_armour,0,99)) {
 	armour = new_armour;
   } else {
-	string msg = "Armour not in range; not setting";
+	ostringstream os;
+	os << "Armour not in range 1-99, is " << new_armour << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -148,7 +162,9 @@ void Player::setSpeed(int new_speed) {
   if (checkStatRange(new_speed,0,99)) {
 	speed = new_speed;
   } else {
-	string msg = "Speed not in range; not setting";
+	ostringstream os;
+	os << "Speed not in range 1-99, is " << new_speed << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }
@@ -156,7 +172,9 @@ void Player::setDodge(int new_dodge) {
   if (checkStatRange(new_dodge,0,99)) {
 	dodge = new_dodge;
   } else {
-	string msg = "Dodge not in range; not setting";
+	ostringstream os;
+	os << "Dodge not in range 1-99, is " << new_dodge << ", not setting";
+	string msg = os.str();
 	shiplog(msg,5);
   }
 }

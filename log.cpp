@@ -23,3 +23,12 @@ void shiplog(string& message, int level) {
 	logfile.close();
   }
 }
+
+void shiplog(const char* message, int level) {
+  if (level <= logLevel) {
+	std::ofstream logfile;
+	logfile.open("TheShip.log", fstream::out | fstream::app);
+	logfile << dateString() << level << ":" << message << endl;
+	logfile.close();
+  }
+}
