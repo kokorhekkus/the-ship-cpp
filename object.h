@@ -8,7 +8,7 @@
 #include <string>
 #include <fstream>
 
-class Thing : public ShipObject, public ScreenObject {
+class Thing : public ScreenObject {
   int id;
   std::string name;
   int weight;

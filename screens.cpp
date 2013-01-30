@@ -1,9 +1,8 @@
 // Print out various screens available in the game
 
-#include "engine.h"
 #include "screens.h"
+#include "engine.h"
 #include "enums.h"
-#include "player.h" 
 
 #include <ncurses.h>
 

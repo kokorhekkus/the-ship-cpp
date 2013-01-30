@@ -7,12 +7,6 @@
 using namespace std;
 
 //----------------------------------------------------------------------
-// ShipObject class implementation
-//----------------------------------------------------------------------
-ShipObject::ShipObject() {}
-ShipObject::~ShipObject() {}
-
-//----------------------------------------------------------------------
 // ScreenObject class implementation
 //----------------------------------------------------------------------
 ScreenObject::ScreenObject(int a_xloc, int a_yloc, 

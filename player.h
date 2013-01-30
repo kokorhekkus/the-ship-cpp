@@ -10,7 +10,7 @@
 #include <string>
 
 // The player
-class Player : public ShipObject, public ScreenObject {
+class Player : public ScreenObject {
 private:
   char* name; // max 28 characters
   playerWorld world;

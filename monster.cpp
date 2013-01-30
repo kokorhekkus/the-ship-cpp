@@ -19,7 +19,6 @@ Monster::Monster(int a_id, string& a_name, int a_life,
 				 int yloc, mapColor color, char look) :
   id(a_id), name(a_name), life(a_life), speed(a_speed),
   armour(a_armour), weapon(a_weapon),
-  ShipObject(),
   ScreenObject(xloc, yloc, color, look) {
 
   string s = "Creating new Monster object with id ";

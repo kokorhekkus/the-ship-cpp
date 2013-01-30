@@ -8,7 +8,7 @@
 #include <string>
 
 // An individual monster
-class Monster : public ShipObject, public ScreenObject {
+class Monster : public ScreenObject {
   int id;
   std::string name;
   int life;

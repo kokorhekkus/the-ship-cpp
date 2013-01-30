@@ -12,7 +12,6 @@ using namespace std;
 Thing::Thing(int a_id, string& a_name, int a_weight,
 			 int xloc, int yloc,
 			 mapColor color, char look) :
-  ShipObject(),
   ScreenObject(xloc, yloc, color, look),
   id(a_id), name(a_name), weight(a_weight) {
   

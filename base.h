@@ -4,14 +4,6 @@
 #include "enums.h"
 #include "map.h"
 
-// The base class for all classes in The Ship
-// Doesn't do anything yet
-class ShipObject {
-public:
-  ShipObject();
-  virtual ~ShipObject();
-};
-
 // forward declaration
 class LevelMap;
 

@@ -1,10 +1,8 @@
 #ifndef SHIP_RANDOM
 #define SHIP_RANDOM 1
 
-#include "base.h"
-
 // Various utilities related to random numbers
-class Random : public ShipObject{
+class Random {
  public:
   Random();
   ~Random();
@@ -16,7 +14,7 @@ class Random : public ShipObject{
 };
 
 // Representation of a dice roll 
-class Dice : public ShipObject {
+class Dice {
   Random random;
   int numDice;
   int numSides;
