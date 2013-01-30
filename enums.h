@@ -80,4 +80,9 @@ enum playerCareer {
   HIGHCOMMAND
 };
 
+enum mapBranch {
+  MAIN,
+  REACTOR
+};
+
 #endif

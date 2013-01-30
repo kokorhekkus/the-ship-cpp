@@ -24,6 +24,10 @@ void initMapDrawingChars();
 // a representation of a single level
 class LevelMap {
 private:
+  // level ID
+  int depth;
+  mapBranch branch;
+
   // x,y locations of map drawing characters held
   // in a multidimensional array
   //
@@ -34,7 +38,7 @@ private:
   void writeFeature(int x, int y, levelFeature feature);
 
 public:
-  LevelMap();
+  LevelMap(int depth, mapBranch branch);
   ~LevelMap();
 
   // functions to draw stuff
@@ -48,6 +52,10 @@ public:
 
   // print out the level to terminal
   void print() const;
+
+  // Getters
+  int getDepth() const;
+  mapBranch getBranch() const;
 };
 
 #endif

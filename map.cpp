@@ -4,6 +4,7 @@
 #include "log.h"
 
 #include <vector>
+#include <sstream>
 using namespace std;
 
 MapChar mapDrawingChars[8]; // declared extern in the header 
@@ -28,7 +29,7 @@ void initMapDrawingChars() {
 }
 
 //----------------------------------------------------------------------
-// MapChar class implementation
+// MapChar struct implementation
 //----------------------------------------------------------------------
 MapChar::MapChar() {}
 
@@ -40,7 +41,9 @@ MapChar::~MapChar() {}
 //----------------------------------------------------------------------
 // LevelMap class implementation
 //----------------------------------------------------------------------
-LevelMap::LevelMap() {
+LevelMap::LevelMap(int a_depth, mapBranch a_branch) :
+  depth(a_depth), branch(a_branch) {
+  
   // create a blank map for an 80x24 screen
   // (do not fill bits where there is screen furniture)
   for (int x = xMinMapSize; x < xMaxMapSize; x++) {
@@ -48,11 +51,18 @@ LevelMap::LevelMap() {
 	  levelMap[x][y] = mapDrawingChars[WALL];
 	}
   }
-  shiplog("Creating new LevelMap object", 10);
+
+  ostringstream oss;
+  oss << "Creating new LevelMap object of depth " << depth << " branch " << branch;
+  string s = oss.str();
+  shiplog(s, 10);
 }
 
 LevelMap::~LevelMap() {
-  shiplog("Destroying LevelMap object", 10);
+  ostringstream oss;
+  oss << "Destroying LevelMap object of depth " << depth << " branch " << branch;
+  string s = oss.str();
+  shiplog(s, 10);
 }
 
 // write a single feature to a location on the level
@@ -95,4 +105,11 @@ void LevelMap::print() const {
 	  write_char(x, y, levelMap[x][y].symbol, levelMap[x][y].color);
 	}
   }
+}
+
+int LevelMap::getDepth() const {
+  return depth;
+}
+mapBranch LevelMap::getBranch() const {
+  return branch;
 }

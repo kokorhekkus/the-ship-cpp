@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
   clear();
   
   shiplog("Generating starting level", 1);
-  LevelMap currentLevel;
+  LevelMap currentLevel(1, MAIN);
   currentLevel.generate(1, CORRIDORS);
 
   // TEST: generate an object to test picking up and inventory
