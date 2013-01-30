@@ -22,7 +22,7 @@ screens.o: screens.cpp screens.h player.h engine.h enums.h
 monster.o: monster.cpp monster.h log.h base.h enums.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c monster.cpp
 
-object.o: object.cpp object.h log.h map.h base.h enums.h
+object.o: object.cpp object.h log.h base.h enums.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c object.cpp
 
 map.o: map.cpp map.h enums.h config.h engine.h base.h log.h

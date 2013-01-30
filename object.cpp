@@ -15,18 +15,16 @@ Thing::Thing(int a_id, string& a_name, int a_weight,
   ScreenObject(xloc, yloc, color, look),
   id(a_id), name(a_name), weight(a_weight) {
   
-  string s = "Creating new Thing object with id ";
   ostringstream oss;
-  oss << id;
-  s.append(oss.str());
+  oss << "Creating new Thing object with id " << id;
+  string s = oss.str();
   shiplog(s, 10);
 }
 
 Thing::~Thing() {
-  string s = "Destroying Thing object with id ";
   ostringstream oss;
-  oss << id;
-  s.append(oss.str());
+  oss << "Destroying Thing object with id " << id;
+  string s = oss.str();
   shiplog(s, 10);
 }
 
@@ -62,7 +60,7 @@ Gun::~Gun() {
   shiplog(s, 10);
 }
 
-// Object initialisation: create a set of starting objects
+// Object initialisation: set up data for all potential game objects
 // TODO: actually do this.  Perhaps use config files that are easily editable?
 //       Perhaps store the main details in some data structure or other, then 
 //       have an 'instantiate' type proc that created the actual object?

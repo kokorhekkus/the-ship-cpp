@@ -1,7 +1,6 @@
 #ifndef SHIP_OBJECT
 #define SHIP_OBJECT 1
 
-#include "map.h"
 #include "base.h"
 #include "enums.h"
 
@@ -42,7 +41,7 @@ public:
   ~Gun();
 };
 
-// Object initialisation: create a set of starting objects
+// Object initialisation: set up data for all potential game objects
 void init_objects();
 
 #endif

@@ -21,17 +21,15 @@ Monster::Monster(int a_id, string& a_name, int a_life,
   armour(a_armour), weapon(a_weapon),
   ScreenObject(xloc, yloc, color, look) {
 
-  string s = "Creating new Monster object with id ";
   ostringstream oss;
-  oss << id;
-  s.append(oss.str());
+  oss << "Creating new Monster object with id " << id;
+  string s = oss.str();
   shiplog(s, 10);
 }
 Monster::~Monster() {
-  string s = "Destroying Monster object with id ";
   ostringstream oss;
-  oss << id;
-  s.append(oss.str());
+  oss << "Destroying Monster object with id "<< id;
+  string s = oss.str();
   shiplog(s, 10);
 }
 
