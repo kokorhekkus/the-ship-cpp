@@ -2,20 +2,15 @@
 #define SHIP_RANDOM 1
 
 // Various utilities related to random numbers
-class Random {
- public:
-  Random();
-  ~Random();
 
-  // returns a number in the range lowest-highest
-  int inRange(int lowest, int highest);
-  // returns true if the percent chance is 'beaten'
-  bool percentChance(int percent);
-};
+// returns a number in the range lowest-highest
+int inRange(int lowest, int highest);
+// returns true if the percent chance is 'beaten'
+bool percentChance(int percent);
 
 // Representation of a dice roll 
 class Dice {
-  Random random;
+private:
   int numDice;
   int numSides;
   int modifier;

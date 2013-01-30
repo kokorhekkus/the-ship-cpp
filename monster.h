@@ -9,6 +9,7 @@
 
 // An individual monster
 class Monster : public ScreenObject {
+private:
   int id;
   std::string name;
   int life;

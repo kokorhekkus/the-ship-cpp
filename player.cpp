@@ -363,37 +363,36 @@ void Player::genPrimaryStats() {
 
   // do some very minimal randomising:
   // small chance of adding or subtracting 1 to each stat
-  Random r;
-  if (r.percentChance(10)) {
-	if (r.percentChance(50)) {
+    if (percentChance(10)) {
+	if (percentChance(50)) {
 	  setStrength(strength+1);
 	} else {
 	  setStrength(strength-1);
 	}
   }
-  if (r.percentChance(10)) {
-	if (r.percentChance(50)) {
+  if (percentChance(10)) {
+	if (percentChance(50)) {
 	  setIntelligence(intelligence+1);
 	} else {
 	  setIntelligence(intelligence-1);
 	}
   }
-  if (r.percentChance(10)) {
-	if (r.percentChance(50)) {
+  if (percentChance(10)) {
+	if (percentChance(50)) {
 	  setConstitution(constitution+1);
 	} else {
 	  setConstitution(constitution-1);
 	}
   }
-  if (r.percentChance(10)) {
-	if (r.percentChance(50)) {
+  if (percentChance(10)) {
+	if (percentChance(50)) {
 	  setDexterity(dexterity+1);
 	} else {
 	  setDexterity(dexterity-1);
 	}
   }
-  if (r.percentChance(10)) {
-	if (r.percentChance(50)) {
+  if (percentChance(10)) {
+	if (percentChance(50)) {
 	  setLuck(luck+1);
 	} else {
 	  setLuck(luck-1);

@@ -9,20 +9,9 @@
 #include <ctime>
 using namespace std;
 
-//----------------------------------------------------------------------
-// Random class implementation
-//----------------------------------------------------------------------
-
-Random::Random() {
-  shiplog("Creating new Random object", 10);
-}
-Random::~Random() {
-  shiplog("Destroying Random object", 10);
-}
-
 // returns a number in the range lowest >= num <= highest
 // REMEMBER TO SEED THE RNG
-int Random::inRange(int lowest, int highest) {
+int inRange(int lowest, int highest) {
   highest++;
   int base_random = rand(); // in [0, RAND_MAX]
   if (RAND_MAX == base_random) {
@@ -42,7 +31,7 @@ int Random::inRange(int lowest, int highest) {
 }
 
 // returns true if the percent chance is 'beaten'
-bool Random::percentChance(int percent) {
+bool percentChance(int percent) {
   int num = inRange(0, 100);
   if (num > percent) {
 	return false;
@@ -70,7 +59,7 @@ Dice::~Dice() {
 int Dice::roll() {
   int rnum = 0;
   for (int i = 0; i<numDice; i++) {
-	int frnum = random.inRange(1, numSides);
+	int frnum = inRange(1, numSides);
 	rnum += frnum;
   }
   return rnum + modifier;

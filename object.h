@@ -8,6 +8,7 @@
 #include <fstream>
 
 class Thing : public ScreenObject {
+private:
   int id;
   std::string name;
   int weight;
