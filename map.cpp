@@ -91,19 +91,9 @@ levelFeature LevelMap::at(int x, int y) const {
 
 // print out the level to terminal
 void LevelMap::print() const {
-  // print level structure and features
   for (int x = xMinMapSize; x < xMaxMapSize; x++) {
 	for (int y = yMinMapSize; y < yMaxMapSize; y++) {
 	  write_char(x, y, levelMap[x][y].symbol, levelMap[x][y].color);
 	}
   }
-
-  // print floor objects
-  for(vector<Thing>::const_iterator it = floorObjects.begin(); it != floorObjects.end(); ++it) {
-	it->print();
-  }
-}
-
-void LevelMap::addToFloor(const Thing& t) {
-  floorObjects.push_back(t);
 }

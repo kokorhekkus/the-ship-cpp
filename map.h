@@ -5,9 +5,6 @@
 #include "engine.h"
 #include "enums.h"
 #include "config.h"
-#include "object.h"
-
-#include <vector>
 
 // a character to be displayed on the map
 struct MapChar {
@@ -24,9 +21,6 @@ struct MapChar {
 extern MapChar mapDrawingChars[8];
 void initMapDrawingChars();
 
-// forward declaration
-class Thing;
-
 // a representation of a single level
 class LevelMap {
 private:
@@ -38,9 +32,6 @@ private:
 
   // write a single feature to a location on the level
   void writeFeature(int x, int y, levelFeature feature);
-
-  // list of objects on the floor on this level
-  std::vector<Thing> floorObjects;
 
 public:
   LevelMap();
@@ -57,9 +48,6 @@ public:
 
   // print out the level to terminal
   void print() const;
-
-  // add an floor object to the level
-  void addToFloor(const Thing& t);  
 };
 
 #endif

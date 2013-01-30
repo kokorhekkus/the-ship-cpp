@@ -42,7 +42,7 @@ public:
   ~Gun();
 };
 
-// Object initialisation: detail the properties of objects in the game
+// Object initialisation: create a set of starting objects
 void init_objects();
 
 #endif
