@@ -17,8 +17,7 @@ using namespace std;
 // prints out the main game screen
 void printAll(const Level& level, const Player& pc) {
   main_screen();
-  level.levelMap->print();
-  level.printObjects();
+  level.print();
   pc.printMainScreenInfo();
   pc.print();
 }
@@ -26,8 +25,7 @@ void printAll(const Level& level, const Player& pc) {
 // just print the map area
 // TODO: add monster movement and LOS
 void printMap(const Level& level, const Player& pc) {
-  level.levelMap->print();
-  level.printObjects();
+  level.print();
   pc.print();
 }
 

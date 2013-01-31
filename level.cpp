@@ -24,3 +24,9 @@ void Level::printObjects() const {
 	it->print();
   }
 }
+
+// prints everything on the level
+void Level::print() const {
+  levelMap->print();
+  printObjects();
+}

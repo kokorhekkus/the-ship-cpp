@@ -16,9 +16,9 @@
 class Level {
 private:
   std::vector<Thing> objects;
+  LevelMap* levelMap;
 
 public:
-  LevelMap* levelMap;
 
   Level(LevelMap* a_levelMap);
   ~Level();
@@ -28,6 +28,9 @@ public:
 
   // print all objects on the level to the terminal
   void printObjects() const;
+
+  // prints everything on the level
+  void print() const;
 };
 
 #endif
