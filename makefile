@@ -40,4 +40,4 @@ level.o: level.cpp level.h map.h object.h
 
 clean:
 		rm -f theship main.o engine.o random.o player.o screens.o monster.o \
-		object.o map.o base.o log.o core TheShip.log *~ *tdd
+		object.o map.o base.o log.o level.o core TheShip.log *~ *tdd
