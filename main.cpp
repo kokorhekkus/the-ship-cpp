@@ -6,6 +6,7 @@
 #include "screens.h"
 #include "monster.h"
 #include "log.h"
+#include "level.h"
 
 #include <ncurses.h>
 #include <string>
@@ -14,17 +15,19 @@
 using namespace std;
 
 // prints out the main game screen
-void printAll(const LevelMap& lm, const Player& pc) {
+void printAll(const Level& level, const Player& pc) {
   main_screen();
-  lm.print();
+  level.levelMap->print();
+  level.printObjects();
   pc.printMainScreenInfo();
   pc.print();
 }
 
 // just print the map area
-// TODO: add monster movement and floor items and LOS
-void printMap(const LevelMap& lm, const Player& pc) {
-  lm.print();
+// TODO: add monster movement and LOS
+void printMap(const Level& level, const Player& pc) {
+  level.levelMap->print();
+  level.printObjects();
   pc.print();
 }
 
@@ -63,15 +66,17 @@ int main(int argc, char *argv[]) {
   clear();
   
   shiplog("Generating starting level", 1);
-  LevelMap currentLevel(1, MAIN);
-  currentLevel.generate(1, CORRIDORS);
+  LevelMap currentLevelMap(1, MAIN);
+  currentLevelMap.generate(1, CORRIDORS);
+  Level currentLevel(&currentLevelMap);
 
   // TEST: generate an object to test picking up and inventory
   string gunName = "sharplight projector";
   Gun sharpie(0,gunName,1,11,12,BLUE,'/',5,5,1,6);
+  currentLevel.addObject(sharpie);
   
   printAll(currentLevel, pc);
-  sharpie.print();
+
   print_msg("You're inside.");
   
   shiplog("Entering main game loop", 1);
@@ -112,56 +117,56 @@ int main(int argc, char *argv[]) {
 	//       a wall
 	// TODO: make code generic so we don't repeat all these lines
 	if (c == 'h')  {
-	  if (pc.setLocation(WEST, currentLevel) == 0) {
+	  if (pc.setLocation(WEST, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'j') {
-	  if (pc.setLocation(SOUTH, currentLevel) == 0) {
+	  if (pc.setLocation(SOUTH, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'k') {
-	  if (pc.setLocation(NORTH, currentLevel) == 0) {
+	  if (pc.setLocation(NORTH, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'l') {
-	  if (pc.setLocation(EAST, currentLevel) == 0) {
+	  if (pc.setLocation(EAST, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'y') {
-	  if (pc.setLocation(NORTHWEST, currentLevel) == 0) {
+	  if (pc.setLocation(NORTHWEST, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'u') {
-	  if (pc.setLocation(NORTHEAST, currentLevel) == 0) {
+	  if (pc.setLocation(NORTHEAST, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'b') {
-	  if (pc.setLocation(SOUTHWEST, currentLevel) == 0) {
+	  if (pc.setLocation(SOUTHWEST, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'n') {
-	  if (pc.setLocation(SOUTHEAST, currentLevel) == 0) {
+	  if (pc.setLocation(SOUTHEAST, currentLevelMap) == 0) {
 		print_msg("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);

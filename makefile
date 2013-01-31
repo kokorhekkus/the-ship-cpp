@@ -5,7 +5,7 @@ theship: main.o engine.o random.o player.o screens.o monster.o object.o map.o \
 		g++ -g -lncurses -o theship main.o engine.o random.o player.o screens.o monster.o \
 		object.o map.o base.o log.o level.o
 
-main.o: main.cpp engine.h object.h map.h base.h player.h screens.h monster.h log.h
+main.o: main.cpp engine.h object.h map.h base.h player.h screens.h monster.h log.h level.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c main.cpp
 
 engine.o: engine.cpp engine.h enums.h log.h

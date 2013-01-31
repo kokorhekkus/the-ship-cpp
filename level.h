@@ -10,19 +10,24 @@
 // that level.  The Thing vector wasn't added to the LevelMap object due
 // to class/header dependency hell that I am currently to lazy/stupid
 // to fix
+
+// TODO: Add a print() func that calls the LevelMap print and the printObjects()
+//       call, and move levelMap back to being private
 class Level {
 private:
   std::vector<Thing> objects;
-  LevelMap* levelMap;
+
 public:
-  Level();
+  LevelMap* levelMap;
+
+  Level(LevelMap* a_levelMap);
   ~Level();
 
   // add an object to the level
   void addObject(const Thing& t);
 
   // print all objects on the level to the terminal
-  void print();
+  void printObjects() const;
 };
 
 #endif
