@@ -12,7 +12,7 @@
 // The player
 class Player : public ScreenObject {
 private:
-  char* name; // max 28 characters
+  std::string name; // max 28 characters
   playerWorld world;
   playerCareer career;
 
@@ -56,13 +56,13 @@ private:
   bool checkStatRange(int i, int min, int max);
 
 public:
-  Player(char* name, playerWorld world, playerCareer career,
+  Player(std::string& name, playerWorld world, playerCareer career,
 		 int xloc, int yloc,
 		 mapColor color, char look);
   ~Player();
 
   // Getters
-  char* getName() const;
+  std::string getName() const;
   playerWorld getWorld() const;
   playerCareer getCareer() const;
   int getStrength() const;

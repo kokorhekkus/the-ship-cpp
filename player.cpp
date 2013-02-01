@@ -18,7 +18,7 @@ using namespace std;
 //----------------------------------------------------------------------
 
 // Constructor that sets all Player variables
-Player::Player(char* a_name, playerWorld a_world, playerCareer a_career,
+Player::Player(string& a_name, playerWorld a_world, playerCareer a_career,
 			   int xloc, int yloc, 
 			   mapColor color, char look) :
   name(a_name), world(a_world), career(a_career),
@@ -50,7 +50,7 @@ Player::~Player() {
 }
 
 // Getters
-char* Player::getName() const { return name; }
+string Player::getName() const { return name; }
 playerWorld Player::getWorld() const { return world; }
 playerCareer Player::getCareer() const { return career; }
 int Player::getStrength() const { return strength; }
@@ -236,7 +236,8 @@ void Player::printMainScreenInfo() const {
   write_string(71, 23, sc, L_BLUE);
 
   // Print name
-  write_string(0, 22, name, MAGENTA);
+  sc = (char*)name.c_str();
+  write_string(0, 22, sc, MAGENTA);
   
   s = title();
   sc = (char*)s.c_str();

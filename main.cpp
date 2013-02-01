@@ -57,7 +57,6 @@ int main(int argc, char *argv[]) {
   shiplog("Getting name", 1);
   vis_cursor(1);
   string iname = get_pcname();
-  char* name = (char*)iname.c_str(); // convert to character array
   clear();
   vis_cursor(0);
   
@@ -67,7 +66,7 @@ int main(int argc, char *argv[]) {
   shiplog("Getting regiment choice", 1);
   playerCareer c_choice = career_choice();
   shiplog("Creating PC", 1);
-  Player pc(name, w_choice, c_choice, 11, 11, WHITE, '@'); //TODO: set player's location in a random empty bit of map
+  Player pc(iname, w_choice, c_choice, 11, 11, WHITE, '@'); //TODO: set player's location in a random empty bit of map
   clear();
   
   shiplog("Generating starting level", 1);
