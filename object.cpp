@@ -9,7 +9,7 @@ using namespace std;
 //----------------------------------------------------------------------
 // Thing class implementation
 //----------------------------------------------------------------------
-Thing::Thing(int a_id, string& a_name, int a_weight,
+Thing::Thing(unsigned int a_id, string& a_name, int a_weight,
 			 int xloc, int yloc,
 			 mapColor color, char look) :
   ScreenObject(xloc, yloc, color, look),
@@ -29,7 +29,7 @@ Thing::~Thing() {
 }
 
 // Getters
-int Thing::getId() const { return id; }
+unsigned int Thing::getId() const { return id; }
 string Thing::getName() const { return name; }
 int Thing::getWeight() const { return weight; }
 
@@ -37,7 +37,7 @@ int Thing::getWeight() const { return weight; }
 //----------------------------------------------------------------------
 // Gun class implementation
 //----------------------------------------------------------------------
-Gun::Gun(int id, string& name, int weight,
+Gun::Gun(unsigned int id, string& name, int weight,
 		 int xloc, int yloc,
 		 mapColor color, char look,
 		 int a_range, int a_to_hit,
@@ -46,24 +46,22 @@ Gun::Gun(int id, string& name, int weight,
   range(a_range), dmgdice_num(a_dmgdice_num),
   dmgdice_sides(a_dmgdice_sides), to_hit(a_to_hit) {
 
-  string s = "Creating new Gun object with id ";
   ostringstream oss;
-  oss << getId();
-  s.append(oss.str());
+  oss << "Creating new Gun object with id " << getId();
+  string s = oss.str();
   shiplog(s, 10);
 }
 Gun::~Gun() {
-  string s = "Destroying Gun object with id ";
   ostringstream oss;
-  oss << getId();
-  s.append(oss.str());
+  oss << "Destroying Gun object with id " << getId();
+  string s = oss.str();
   shiplog(s, 10);
 }
 
 // Object initialisation: set up data for all potential game objects
 // TODO: actually do this.  Perhaps use config files that are easily editable?
 //       Perhaps store the main details in some data structure or other, then 
-//       have an 'instantiate' type proc that created the actual object?
+//       have an 'instantiate' type proc that creates the actual object?
 void init_objects() {
 
 }

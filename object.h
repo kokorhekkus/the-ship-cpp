@@ -9,18 +9,19 @@
 
 class Thing : public ScreenObject {
 private:
-  int id;
+  unsigned int id;
   std::string name;
   int weight;
 
 public:
-  Thing(int id, std::string& name, int weight,
+  // ALWAYS use getSerial() to get a unique serial number for the ID
+  Thing(unsigned int id, std::string& name, int weight,
 		int xloc, int yloc,
 		mapColor color, char look);
   ~Thing();
 
   // Getters
-  int getId() const;
+  unsigned int getId() const;
   std::string getName() const;
   int getWeight() const;
 };
@@ -34,7 +35,7 @@ class Gun : public Thing {
   int to_hit;
 
 public:
-  Gun(int id, std::string& name, int weight,
+  Gun(unsigned int id, std::string& name, int weight,
 	  int xloc, int yloc,
 	  mapColor color, char look,
 	  int range, int to_hit,

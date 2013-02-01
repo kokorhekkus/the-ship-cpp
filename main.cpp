@@ -14,6 +14,13 @@
 #include <ctime>
 using namespace std;
 
+// use this to assign a unique serial number to game objects
+unsigned int objectSerial = 0;
+unsigned int getSerial() {
+  objectSerial++;
+  return objectSerial;
+}
+
 // prints out the main game screen
 void printAll(const Level& level, const Player& pc) {
   main_screen();
@@ -68,9 +75,9 @@ int main(int argc, char *argv[]) {
   currentLevelMap.generate(1, CORRIDORS);
   Level currentLevel(&currentLevelMap);
 
-  // TEST: generate an object to test picking up and inventory
+  // TEST: generate an object on the level to test picking up and inventory
   string gunName = "sharplight projector";
-  Gun sharpie(0,gunName,1,11,12,BLUE,'/',5,5,1,6);
+  Gun sharpie(getSerial(),gunName,1,11,12,BLUE,'/',5,5,1,6);
   currentLevel.addObject(sharpie);
   
   printAll(currentLevel, pc);

@@ -18,6 +18,11 @@ void Level::addObject(const Thing& t) {
   objects.push_back(t);
 }
 
+// remove an object from the level
+void delObject(const Thing& t) {
+
+}
+
 // print all objects on the level to the terminal
 void Level::printObjects() const {
   for(vector<Thing>::const_iterator it = objects.begin(); it != objects.end(); ++it) {
