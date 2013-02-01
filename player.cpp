@@ -425,8 +425,18 @@ void Player::calcSecondaryStats() {
   setSpeed(dodge + (floor(strength*0.3) + 0.5));
 }
 
-void Player::addToInventory(const Thing& t) {
+// add an object to the inventory
+void Player::addToInv(const Thing& t) {
   inventory.push_back(t);
+}
+
+// remove an object from the inventory
+void Player::delFromInv(unsigned int id) {
+  for(vector<Thing>::iterator it = inventory.begin(); it != inventory.end(); ++it) {
+	if (it->getId() == id) {
+	  inventory.erase(it);
+	}
+  }
 }
 
 bool Player::checkStatRange(int i, int min, int max) {

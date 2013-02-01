@@ -96,7 +96,8 @@ public:
 
 
   // Functionality
-  void addToInventory(const Thing& t);  
+  void addToInv(const Thing& t);
+  void delFromInv(unsigned int id);
 };
 
 #endif
