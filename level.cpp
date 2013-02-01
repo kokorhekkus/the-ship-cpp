@@ -19,8 +19,13 @@ void Level::addObject(const Thing& t) {
 }
 
 // remove an object from the level
-void delObject(const Thing& t) {
-
+void Level::delObject(unsigned int id) {
+  // TODO: does not seem hugely efficient to me
+  for(vector<Thing>::iterator it = objects.begin(); it != objects.end(); ++it) {
+	if (it->getId() == id) {
+	  objects.erase(it);
+	}
+  }
 }
 
 // print all objects on the level to the terminal

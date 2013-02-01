@@ -23,8 +23,8 @@ public:
   // add an object to the level
   void addObject(const Thing& t);
 
-  // remove an object from the level
-  void delObject(const Thing& t);
+  // remove an object from the level, using its ID
+  void delObject(unsigned int id);
 
   // print all objects on the level to the terminal
   void printObjects() const;
