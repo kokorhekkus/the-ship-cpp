@@ -3,7 +3,6 @@
 #include "object.h"
 #include "log.h"
 
-#include <string>
 #include <sstream>
 
 using namespace std;
@@ -11,7 +10,7 @@ using namespace std;
 //----------------------------------------------------------------------
 // Thing class implementation
 //----------------------------------------------------------------------
-Thing::Thing(unsigned int a_id, char* a_name, int a_weight,
+Thing::Thing(unsigned int a_id, string& a_name, int a_weight,
 			 int xloc, int yloc,
 			 mapColor color, char look) :
   ScreenObject(xloc, yloc, color, look),
@@ -32,14 +31,14 @@ Thing::~Thing() {
 
 // Getters
 unsigned int Thing::getId() const { return id; }
-char* Thing::getName() const { return name; }
+string Thing::getName() const { return name; }
 int Thing::getWeight() const { return weight; }
 
 
 //----------------------------------------------------------------------
 // Gun class implementation
 //----------------------------------------------------------------------
-Gun::Gun(unsigned int id, char* name, int weight,
+Gun::Gun(unsigned int id, string& name, int weight,
 		 int xloc, int yloc,
 		 mapColor color, char look,
 		 int a_range, int a_to_hit,
@@ -65,5 +64,5 @@ Gun::~Gun() {
 //       Perhaps store the main details in some data structure or other, then 
 //       have an 'instantiate' type proc that creates the actual object?
 void init_objects() {
-
+  shiplog("Initialising objects...",1);
 }

@@ -5,11 +5,13 @@
 
 #include <vector>
 #include <sstream>
+
 using namespace std;
 
 MapChar mapDrawingChars[8]; // declared extern in the header 
 
 void initMapDrawingChars() {
+  shiplog("Initialising map drawing characters...",1);
 
   MapChar wall(WALL, '#', D_GREY);
   MapChar floor(FLOOR, '.', L_GREY);

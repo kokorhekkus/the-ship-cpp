@@ -16,7 +16,7 @@ using namespace std;
 // initialise ncurses and colors, for drawing the game screen
 // -includes signal processing
 void init_for_draw(void) {
-
+  shiplog("Initialising ncurses...",1);
   signal(SIGINT, finish); // init for finish()
   
   // check for and make the neccesary files and folders
@@ -45,13 +45,17 @@ void init_for_draw(void) {
   }
 }
 
+// NOTES:  We don't really need the refresh() call to udpate, the real-world
+// ncurses window, as it's done automatically with the call to getch() that
+// occurs on every iteration of the main game loop
+
 // write a character, 'c', to the co-ords (x,y) with color 'color' 
 void write_char(int x, int y, char c, mapColor color) {
 	chtype ch = c;
 	
 	set_term_color(color);
 	mvaddch(y,x,ch);
-	refresh();
+	//refresh();
 }
 
 // write a string, 's', to the co-ords (x,y) with color 'color'
@@ -64,7 +68,7 @@ void write_string(int x, int y, const char* s, mapColor color) {
 	chtype ch = s[i];
 	mvaddch(y,x+i,ch);
   }
-  refresh();
+  //refresh();
 }
 
 // write a line of color 'color' and length 'length' starting at (x,y)
@@ -83,7 +87,7 @@ void write_line(int x, int y, int type, int length, char c, mapColor color) {
 	  mvaddch(y+i,x,ch);
 	}
   }
-  refresh();
+  //refresh();
 }
 
 
@@ -106,7 +110,7 @@ void restore_screen(const char *filepath) {
 	error_exit("Can't find data file to load!");
   }
   stdscr = getwin(tmpscrdat);
-  refresh();
+  //refresh();
 }
 
 // finish up, get rid of 'stdscr'

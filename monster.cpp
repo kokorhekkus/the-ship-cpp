@@ -49,5 +49,5 @@ void Monster::setWeapon(int new_weapon) { weapon = new_weapon; }
 
 // Monster intitialisation: set up a list of starting monsters
 void init_monsters() {
-
+  shiplog("Initialising monsters...",1);
 }
