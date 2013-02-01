@@ -428,23 +428,28 @@ void Player::calcSecondaryStats() {
 
 // add an object to the inventory
 void Player::addToInv(Thing& t) {
-  shiplog("->addToInv()",50);
+  shiplog("->Player::addToInv()",60);
   ostringstream oss;
   oss << "in addToInv(), object id is " << t.getId();
   string s = oss.str();
   shiplog(s,50);
 
   inventory.push_back(&t);
-  shiplog("push_back() succeeded",99);
+  shiplog("<-Player::addToInv",60);
 }
 
 // remove an object from the inventory
 void Player::delFromInv(unsigned int id) {
+  shiplog("->Player::delFromInv()",60);
   for(list<Thing*>::iterator it = inventory.begin(); it != inventory.end(); ++it) {
 	if ((*it)->getId() == id) {
 	  inventory.erase(it);
+	  // must return, as erasing an element will break the iteration
+	  // over the rest of the list
+	  return;
 	}
   }
+  shiplog("<-Player::delFromInv()",60);
 }
 
 bool Player::checkStatRange(int i, int min, int max) {

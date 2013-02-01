@@ -194,7 +194,7 @@ int main(int argc, char *argv[]) {
 		string s = oss.str();
 		shiplog(s,50);
 		pc.addToInv(t);
-		//currentLevel.delObject(id);
+		currentLevel.delObject(id);
 	  } else {
 		print_msg("There's nothing here.");
 	  }

@@ -4,7 +4,7 @@
 #include "map.h"
 #include "object.h"
 
-#include <vector>
+#include <list>
 
 // A class basically used to store a level map and the objects found on
 // that level.  The Thing vector wasn't added to the LevelMap object due
@@ -12,7 +12,7 @@
 // to fix
 class Level {
 private:
-  std::vector<Thing> objects;
+  std::list<Thing*> objects;
   LevelMap* levelMap;
 
 public:
@@ -28,7 +28,7 @@ public:
   Thing& getObject(unsigned int id);
 
   // add an object to the level
-  void addObject(const Thing& t);
+  void addObject(Thing& t);
 
   // remove an object from the level, using its ID
   void delObject(unsigned int id);

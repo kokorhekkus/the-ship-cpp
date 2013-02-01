@@ -24,18 +24,18 @@ Level::~Level() {
 
 // return 0 if no object at location, otherwise return object ID 
 unsigned int Level::objectAt(int x, int y) {
-  // we can easily compare vectors, so convert from arrays
+  // we can easily compare lists, so convert from arrays
   int locArray1[2] = {x, y};
-  vector<int> locVector1(locArray1, locArray1 + sizeof(locArray1) / sizeof(int));
+  list<int> locList1(locArray1, locArray1 + sizeof(locArray1) / sizeof(int));
   
-  for(vector<Thing>::iterator it = objects.begin(); it != objects.end(); ++it) {
+  for(list<Thing*>::iterator it = objects.begin(); it != objects.end(); ++it) {
 	
-	int* locArray2p = it->getLocation();
+	int* locArray2p = (*it)->getLocation();
 	int locArray2[2] = {*(locArray2p), *(locArray2p+1)};
-	vector<int> locVector2(locArray2, locArray2 + sizeof(locArray2) / sizeof(int));
+	list<int> locList2(locArray2, locArray2 + sizeof(locArray2) / sizeof(int));
 
-	if (locVector1 == locVector2) {
-	  unsigned int retId = it->getId();
+	if (locList1 == locList2) {
+	  unsigned int retId = (*it)->getId();
 	  ostringstream oss;
 	  oss << "Found object ID " << retId << " at location (" << x << "," << y << ")";
 	  string s = oss.str();
@@ -52,34 +52,40 @@ unsigned int Level::objectAt(int x, int y) {
 //          without returning anything!
 // TODO: Make this less dumb and dangerous to use, cf. above
 Thing& Level::getObject(unsigned int id) {
-  for(vector<Thing>::iterator it = objects.begin(); it != objects.end(); ++it) {
-	if (it->getId() == id) {
+  for(list<Thing*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+	if ((*it)->getId() == id) {
 	  shiplog("Returning a ref to an object in Level::getObject()",50);
-	  return *it;
+	  return *(*it);
 	}
   }
   shiplog("Whoops! Should not be here; we will not return correctly from Level::getObject()",1);
 }
 
 // add an object to the level
-void Level::addObject(const Thing& t) {
-  objects.push_back(t);
+void Level::addObject(Thing& t) {
+  objects.push_back(&t);
 }
 
 // remove an object from the level
 void Level::delObject(unsigned int id) {
-  // TODO: does not seem hugely efficient to me
-  for(vector<Thing>::iterator it = objects.begin(); it != objects.end(); ++it) {
-	if (it->getId() == id) {
+  shiplog("->Level::delObject",60);
+  for(list<Thing*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+	if ((*it)->getId() == id) {
+	  shiplog("Found matching object",60);
 	  objects.erase(it);
+	  shiplog("Erased object from level",60);
+	  // must return, as erasing an element will break the iteration
+	  // over the rest of the list
+	  return;
 	}
   }
+  shiplog("<-Level::delObject",60);
 }
 
 // print all objects on the level to the terminal
 void Level::printObjects() const {
-  for(vector<Thing>::const_iterator it = objects.begin(); it != objects.end(); ++it) {
-	it->print();
+  for(list<Thing*>::const_iterator it = objects.begin(); it != objects.end(); ++it) {
+	(*it)->print();
   }
 }
 
