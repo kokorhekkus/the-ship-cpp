@@ -6,7 +6,7 @@
 #include "object.h"
 #include "enums.h"
 
-#include <vector>
+#include <list>
 #include <string>
 
 // The player
@@ -36,8 +36,9 @@ private:
   // XP level calculation array
   int xpCalcArray[99];
 
-  // inventory
-  std::vector<Thing> inventory;
+  // inventory: needs to be pointers to the base class due to
+  //            object slicing
+  std::list<Thing*> inventory;
 
   // used for initial generation of primary stats
   // based on homeworld and career, in constructor
@@ -94,9 +95,8 @@ public:
   // Printers
   void printMainScreenInfo() const; // print stats and name
 
-
   // Functionality
-  void addToInv(const Thing& t);
+  void addToInv(Thing& t);
   void delFromInv(unsigned int id);
 };
 

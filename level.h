@@ -20,6 +20,13 @@ public:
   Level(LevelMap* a_levelMap);
   ~Level();
 
+  // return 0 if no object at location, otherwise return object ID 
+  unsigned int objectAt(int x, int y);
+
+  // return a ref to an object with a certain ID,
+  // use with objectAt() above or you may not get anything back
+  Thing& getObject(unsigned int id);
+
   // add an object to the level
   void addObject(const Thing& t);
 

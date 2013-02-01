@@ -427,14 +427,21 @@ void Player::calcSecondaryStats() {
 }
 
 // add an object to the inventory
-void Player::addToInv(const Thing& t) {
-  inventory.push_back(t);
+void Player::addToInv(Thing& t) {
+  shiplog("->addToInv()",50);
+  ostringstream oss;
+  oss << "in addToInv(), object id is " << t.getId();
+  string s = oss.str();
+  shiplog(s,50);
+
+  inventory.push_back(&t);
+  shiplog("push_back() succeeded",99);
 }
 
 // remove an object from the inventory
 void Player::delFromInv(unsigned int id) {
-  for(vector<Thing>::iterator it = inventory.begin(); it != inventory.end(); ++it) {
-	if (it->getId() == id) {
+  for(list<Thing*>::iterator it = inventory.begin(); it != inventory.end(); ++it) {
+	if ((*it)->getId() == id) {
 	  inventory.erase(it);
 	}
   }

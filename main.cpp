@@ -10,8 +10,10 @@
 
 #include <ncurses.h>
 #include <string>
+#include <sstream>
 #include <cstdlib>
 #include <ctime>
+
 using namespace std;
 
 // use this to assign a unique serial number to game objects
@@ -179,7 +181,23 @@ int main(int argc, char *argv[]) {
 	
 	// pick up objects from the floor
 	if (c == ',') {
-	  
+	  shiplog("Trying to pick up an object",50);
+	  int* loc = pc.getLocation();
+	  int x = *(loc);
+	  int y = *(loc+1);
+
+	  unsigned int id = currentLevel.objectAt(x, y); 
+	  if (id != 0) {
+		Thing& t = currentLevel.getObject(id);
+		ostringstream oss;
+		oss << "in main(), object id is " << t.getId();
+		string s = oss.str();
+		shiplog(s,50);
+		pc.addToInv(t);
+		//currentLevel.delObject(id);
+	  } else {
+		print_msg("There's nothing here.");
+	  }
 	}
 	
 	// inventory screen
