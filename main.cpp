@@ -76,8 +76,7 @@ int main(int argc, char *argv[]) {
   Level currentLevel(&currentLevelMap);
 
   // TEST: generate an object on the level to test picking up and inventory
-  string gunName = "sharplight projector";
-  Gun sharpie(getSerial(),gunName,1,11,12,BLUE,'/',5,5,1,6);
+  Gun sharpie(getSerial(),"sharplight projector",1,11,12,BLUE,'/',5,5,1,6);
   currentLevel.addObject(sharpie);
   
   printAll(currentLevel, pc);

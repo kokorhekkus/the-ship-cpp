@@ -43,9 +43,7 @@ private:
   // based on homeworld and career, in constructor
   void genPrimaryStats();
 
-  // calculates secondary stats from primary ones;
-  // isInitial should be set to true in the constructor
-  // and nowhere else. Probably a better way to do this.
+  // calculates secondary stats from primary ones and inventory
   void calcSecondaryStats();
 
   // convert an integer to a string
