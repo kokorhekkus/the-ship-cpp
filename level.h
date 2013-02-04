@@ -12,6 +12,7 @@
 // to fix
 class Level {
 private:
+  // needs to be pointers to the base class due to object slicing
   std::list<Thing*> objects;
   LevelMap* levelMap;
 

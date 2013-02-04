@@ -11,11 +11,12 @@ class Thing : public ScreenObject {
 private:
   unsigned int id;
   std::string name;
+  inventoryType type;
   int weight;
 
 public:
   // ALWAYS use getSerial() to get a unique serial number for the ID
-  Thing(unsigned int id, std::string& name, int weight,
+  Thing(unsigned int id, std::string& name, int weight, inventoryType type,
 		int xloc, int yloc,
 		mapColor color, char look);
   ~Thing();
@@ -24,6 +25,7 @@ public:
   unsigned int getId() const;
   std::string getName() const;
   int getWeight() const;
+  inventoryType getType() const;
 };
 
 // a gun
@@ -35,7 +37,7 @@ class Gun : public Thing {
   int to_hit;
 
 public:
-  Gun(unsigned int id, std::string& name, int weight,
+  Gun(unsigned int id, std::string& name, int weight, inventoryType type,
 	  int xloc, int yloc,
 	  mapColor color, char look,
 	  int range, int to_hit,
