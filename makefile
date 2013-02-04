@@ -1,11 +1,12 @@
 all: theship
 
 theship: main.o engine.o random.o player.o screens.o monster.o object.o map.o \
-		 base.o log.o level.o
-		g++ -g -lncurses -o theship main.o engine.o random.o player.o screens.o monster.o \
-		object.o map.o base.o log.o level.o
+		 base.o log.o level.o message.o
+		g++ -g -lncurses -o theship main.o engine.o random.o player.o screens.o \
+		monster.o object.o map.o base.o log.o level.o message.o
 
-main.o: main.cpp engine.h object.h map.h base.h player.h screens.h monster.h log.h level.h
+main.o: main.cpp engine.h object.h map.h base.h player.h screens.h monster.h \
+		log.h level.h message.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c main.cpp
 
 engine.o: engine.cpp engine.h enums.h log.h
@@ -38,6 +39,9 @@ log.o:  log.cpp log.h config.h
 level.o: level.cpp level.h map.h object.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c level.cpp
 
+message.o: message.cpp message.h engine.h
+		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c message.cpp
+
 clean:
 		rm -f theship main.o engine.o random.o player.o screens.o monster.o \
-		object.o map.o base.o log.o level.o core TheShip.log *~ *tdd
+		object.o map.o base.o log.o level.o message.o core TheShip.log *~ *tdd

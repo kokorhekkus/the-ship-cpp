@@ -13,10 +13,9 @@ playerCareer career_choice();
 
 void main_screen();
 
-void print_msg(const char* msg);
-
 std::string get_pcname();
 
-void show_inventory(const Player& pc);
+// returns true on player wanting to return to main game screen
+bool show_inventory(const Player& pc);
 
 #endif

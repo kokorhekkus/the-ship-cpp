@@ -7,6 +7,7 @@
 #include "monster.h"
 #include "log.h"
 #include "level.h"
+#include "message.h"
 
 #include <ncurses.h>
 #include <string>
@@ -202,7 +203,10 @@ int main(int argc, char *argv[]) {
 	
 	// inventory screen
 	if (c == 'i') {
-	  show_inventory(pc);
+	  if(show_inventory(pc)) {
+		print_msg(""); // clear screen heading
+		printAll(currentLevel, pc);
+	  }
 	}
 	
 	// Quit
