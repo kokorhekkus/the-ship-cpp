@@ -1,7 +1,7 @@
 #ifndef SHIP_CONFIG
 #define SHIP_CONFIG 1
 
-// TODO: Have a Config object
+// TODO: Have a Config object?
 
 // The area we will be writing to; in essence, the minimum terminal size
 const int xTerminalSize = 80;
@@ -16,5 +16,8 @@ const int yMaxMapSize = 22;
 
 // max level of log lines to print
 const int logLevel = 100;
+
+// max amount of player messages to store in memory
+const unsigned int numPlayerMsgs = 1000;
 
 #endif

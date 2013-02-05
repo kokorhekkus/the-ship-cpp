@@ -39,7 +39,7 @@ log.o:  log.cpp log.h config.h
 level.o: level.cpp level.h map.h object.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c level.cpp
 
-message.o: message.cpp message.h engine.h log.h
+message.o: message.cpp message.h engine.h log.h config.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c message.cpp
 
 clean:

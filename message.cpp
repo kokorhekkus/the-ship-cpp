@@ -9,6 +9,7 @@
 #include "message.h"
 #include "engine.h"
 #include "log.h"
+#include "config.h"
 
 using namespace std;
 
@@ -21,6 +22,12 @@ MessageLog::~MessageLog() {
 
 // print a message to the 2-line message bar at top of screen
 void MessageLog::print(const char* msg) {
+  string s = msg;
+  messages.push_back(s);
+  if (messages.size() > numPlayerMsgs) {
+	messages.pop_front();
+  }
+
   // blank message display
   write_string(0, 0, "                                   "
 			   "                                   "
@@ -32,6 +39,11 @@ void MessageLog::print(const char* msg) {
   write_string(0, 0, msg, L_GREY);
 }
 void MessageLog::print(string& msg) {
+  messages.push_back(msg);
+  if (messages.size() > numPlayerMsgs) {
+	messages.pop_front();
+  }
+
   const char* cmsg = msg.c_str();
   // blank message display
   write_string(0, 0, "                                   "
