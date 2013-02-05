@@ -1,5 +1,5 @@
-#ifndef SHIP_BASE
-#define SHIP_BASE 1
+#ifndef SHIP_SCREENOBJECT
+#define SHIP_SCREENOBJECT 1
 
 #include "enums.h"
 #include "map.h"

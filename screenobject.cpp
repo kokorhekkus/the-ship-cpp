@@ -1,6 +1,6 @@
 // Base classes that many classes in The Ship inherit from
 
-#include "base.h"
+#include "screenobject.h"
 #include "engine.h"
 
 #include <string>

@@ -1,7 +1,7 @@
 #include "engine.h"
 #include "object.h"
 #include "map.h"
-#include "base.h"
+#include "screenobject.h"
 #include "player.h"
 #include "screens.h"
 #include "monster.h"

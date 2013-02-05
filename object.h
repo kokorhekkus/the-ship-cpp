@@ -1,7 +1,7 @@
 #ifndef SHIP_OBJECT
 #define SHIP_OBJECT 1
 
-#include "base.h"
+#include "screenobject.h"
 #include "enums.h"
 
 #include <string>

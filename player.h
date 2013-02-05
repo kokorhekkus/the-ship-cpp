@@ -2,7 +2,7 @@
 #define SHIP_CHARACTER 1
 
 #include "map.h"
-#include "base.h"
+#include "screenobject.h"
 #include "object.h"
 #include "enums.h"
 

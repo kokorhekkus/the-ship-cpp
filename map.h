@@ -1,7 +1,7 @@
 #ifndef SHIP_MAP
 #define SHIP_MAP 1
 
-#include "base.h"
+#include "screenobject.h"
 #include "engine.h"
 #include "enums.h"
 #include "config.h"

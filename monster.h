@@ -2,7 +2,7 @@
 #define SHIP_MONSTER 1
 
 #include "map.h"
-#include "base.h"
+#include "screenobject.h"
 #include "enums.h"
 
 #include <string>
