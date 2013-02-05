@@ -94,6 +94,7 @@ public:
 
   // Printers
   void printMainScreenInfo() const; // print stats and name
+  bool printInventory() const;
 
   // Functionality
   void addToInv(Thing& t);

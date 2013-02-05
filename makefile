@@ -18,7 +18,7 @@ random.o: random.cpp random.h log.h
 player.o: player.cpp player.h object.h log.h enums.h map.h screenobject.h engine.h random.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c player.cpp
 
-screens.o: screens.cpp screens.h player.h engine.h enums.h
+screens.o: screens.cpp screens.h engine.h enums.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c screens.cpp
 
 monster.o: monster.cpp monster.h log.h screenobject.h enums.h

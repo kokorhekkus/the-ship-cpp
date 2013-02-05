@@ -1,7 +1,7 @@
 #ifndef SHIP_SCREENS
 #define SHIP_SCREENS 1
 
-#include "player.h"
+#include "enums.h"
 
 #include <string>
 
@@ -14,8 +14,5 @@ playerCareer career_choice();
 void main_screen();
 
 std::string get_pcname();
-
-// returns true on player wanting to return to main game screen
-bool show_inventory(const Player& pc);
 
 #endif

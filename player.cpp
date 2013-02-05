@@ -244,6 +244,24 @@ void Player::printMainScreenInfo() const {
   write_string(0, 23, sc, MAGENTA);
 }
 
+// show inventory screen; return to main screen
+// returns 1 on the player hitting Space
+bool Player::printInventory() const {
+	clear();
+	write_string(0,0,">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",BLUE);
+	write_string(35,0,"INVENTORY",RED);
+	write_string(44,0,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",BLUE);
+
+	// TODO: actually print what's in the player inventory
+
+	// return to screen on Space.
+	char c = '\0';
+	while (c != ' ') {
+	  c = getch();
+	}
+	return true;
+}
+
 // TODO: -Change title based on experience
 //       -Ensure a limit of 28 characters
 string Player::title() const {

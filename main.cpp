@@ -204,8 +204,8 @@ int main(int argc, char *argv[]) {
 	
 	// inventory screen
 	if (c == 'i') {
-	  if(show_inventory(pc)) {
-		msg.print(""); // clear screen heading
+	  if(pc.printInventory()) {
+		msg.printCurrent();
 		printAll(currentLevel, pc);
 	  }
 	}

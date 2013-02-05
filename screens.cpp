@@ -2,7 +2,6 @@
 
 #include "screens.h"
 #include "engine.h"
-#include "enums.h"
 
 #include <ncurses.h>
 
@@ -153,23 +152,4 @@ string get_pcname() {
   noecho();
   
   return pc_name;
-}
-
-// show inventory screen; return to main screen
-// returns 1 on the player hitting Space
-bool show_inventory(const Player& pc) {
-	clear();
-	write_string(0,0,">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",BLUE);
-	write_string(35,0,"INVENTORY",RED);
-	write_string(44,0,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",BLUE);
-
-	// TODO: actually print what's in the player inventory
-
-	// return to screen on Space.
-	// TODO: add some functionality to this screen
-	char c = '\0';
-	while (c != ' ') {
-	  c = getch();
-	}
-	return true;
 }
