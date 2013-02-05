@@ -8,11 +8,19 @@
 
 #include "message.h"
 #include "engine.h"
+#include "log.h"
 
 using namespace std;
 
+MessageLog::MessageLog() {
+  shiplog("Creating a MessageLog object",5);
+}
+MessageLog::~MessageLog() {
+  shiplog("Destroying a MessageLog object",5);
+}
+
 // print a message to the 2-line message bar at top of screen
-void print_msg(const char* msg) {
+void MessageLog::print(const char* msg) {
   // blank message display
   write_string(0, 0, "                                   "
 			   "                                   "
@@ -23,7 +31,7 @@ void print_msg(const char* msg) {
   // write new message
   write_string(0, 0, msg, L_GREY);
 }
-void print_msg(string msg) {
+void MessageLog::print(string& msg) {
   const char* cmsg = msg.c_str();
   // blank message display
   write_string(0, 0, "                                   "

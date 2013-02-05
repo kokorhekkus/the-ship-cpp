@@ -2,8 +2,18 @@
 #define SHIP_MESSAGE 1
 
 #include <string>
+#include <list>
 
-void print_msg(const char* msg);
-void print_msg(std::string& msg);
+class MessageLog {
+private:
+  std::list<std::string> messages;
+
+public:
+  MessageLog();
+  ~MessageLog();
+
+  void print(const char* msg);
+  void print(std::string& msg);
+};
 
 #endif

@@ -84,7 +84,8 @@ int main(int argc, char *argv[]) {
   
   printAll(currentLevel, pc);
 
-  print_msg("You're inside.");
+  MessageLog msg;
+  msg.print("You're inside.");
   
   shiplog("Entering main game loop", 1);
   while (1) {
@@ -125,56 +126,56 @@ int main(int argc, char *argv[]) {
 	// TODO: make code generic so we don't repeat all these lines
 	if (c == 'h')  {
 	  if (pc.setLocation(WEST, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'j') {
 	  if (pc.setLocation(SOUTH, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'k') {
 	  if (pc.setLocation(NORTH, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'l') {
 	  if (pc.setLocation(EAST, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'y') {
 	  if (pc.setLocation(NORTHWEST, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'u') {
 	  if (pc.setLocation(NORTHEAST, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'b') {
 	  if (pc.setLocation(SOUTHWEST, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
 	}
 	if (c == 'n') {
 	  if (pc.setLocation(SOUTHEAST, currentLevelMap) == 0) {
-		print_msg("Bonk.");
+		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
 	  }
@@ -197,14 +198,14 @@ int main(int argc, char *argv[]) {
 		pc.addToInv(t);
 		currentLevel.delObject(id);
 	  } else {
-		print_msg("There's nothing here.");
+		msg.print("There's nothing here.");
 	  }
 	}
 	
 	// inventory screen
 	if (c == 'i') {
 	  if(show_inventory(pc)) {
-		print_msg(""); // clear screen heading
+		msg.print(""); // clear screen heading
 		printAll(currentLevel, pc);
 	  }
 	}

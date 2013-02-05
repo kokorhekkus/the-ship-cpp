@@ -1,6 +1,8 @@
 #ifndef SHIP_CONFIG
 #define SHIP_CONFIG 1
 
+// TODO: Have a Config object
+
 // The area we will be writing to; in essence, the minimum terminal size
 const int xTerminalSize = 80;
 const int yTerminalSize = 24;
