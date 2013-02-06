@@ -70,6 +70,7 @@ void MessageLog::print(string& msg) {
   }
 }
 
+// print the current state (e.g. last two messages)
 void MessageLog::printCurrent() {
   shiplog("->MessageLog::printCurrent()",50);
   blankDisplay();

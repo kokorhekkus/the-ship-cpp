@@ -247,19 +247,166 @@ void Player::printMainScreenInfo() const {
 // show inventory screen; return to main screen
 // returns 1 on the player hitting Space
 bool Player::printInventory() const {
+  shiplog("->Player::printInventory()",50);
+
+  // Test for no items
+  // THIS TEST SEGFAULTS... with nothing in the inventory  No idea why. committing anyway,
+  //                       as bug only applies with an empty inventory (fix later)
+  if (!inventory.empty()) {
+	// calculate total weight, and number of equipment types
+	int numLrw = 0;
+	int numSrw = 0;
+	int numBody = 0;
+	int numHead = 0;
+	int numLeg = 0;
+	int numFoot = 0;
+	int numAmmo = 0;
+	int weight = 0;
+	shiplog("calculating weight and types",70);
+	for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+	  weight += (*it)->getWeight();
+	  
+	  inventoryType type = (*it)->getType();
+	  switch (type) {
+	  case LRW:
+		numLrw++;
+		break;
+	  case SRW:
+		numSrw++;
+		break;
+	  case BODY:
+		numBody++;
+		break;
+	  case HEAD:
+		numHead++;
+		break;
+	  case LEG:
+		numLeg++;
+		break;
+	  case FOOT:
+		numFoot++;
+		break;
+	  case AMMO:
+		numAmmo++;
+		break;
+	  default:
+		ostringstream oss;
+		oss << "Invalid equipment type: " << type;
+		string s = oss.str();
+		shiplog(s,1);
+	  }
+	}
+	
+	// Inventory screen header
+	shiplog("Writing screen header",70);
 	clear();
 	write_string(0,0,">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",BLUE);
 	write_string(35,0,"INVENTORY",RED);
 	write_string(44,0,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",BLUE);
-
-	// TODO: actually print what's in the player inventory
-
-	// return to screen on Space.
-	char c = '\0';
-	while (c != ' ') {
-	  c = getch();
+	string s = "Total Weight: ";
+	string w = itos(weight);
+	s.append(w);
+	char* sc = (char*)s.c_str();
+	write_string(0,1,sc,L_BLUE);
+	
+	// print out different equipment categories
+	int y = 3;
+	
+	shiplog("Printing out inventory",70);
+	if (numLrw > 0) {
+	  write_string(0,y,"Ranged weapons",RED);
+	  y++;
+	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+		if ((*it)->getType() == LRW) {
+		  s = (*it)->getName();
+		  sc = (char*)s.c_str();
+		  write_string(1,y,sc,BLUE);
+		  y++;
+		}
+	  }
 	}
-	return true;
+	if (numSrw > 0) {
+	  write_string(0,y,"Short-range weapons",RED);
+	  y++;
+	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+		if ((*it)->getType() == SRW) {
+		  s = (*it)->getName();
+		  sc = (char*)s.c_str();
+		  write_string(1,y,sc,BLUE);
+		  y++;
+		}
+	  }
+	}
+	if (numBody > 0) {
+	  write_string(0,y,"Body armour",RED);
+	  y++;
+	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+		if ((*it)->getType() == BODY) {
+		  s = (*it)->getName();
+		  sc = (char*)s.c_str();
+		  write_string(1,y,sc,BLUE);
+		  y++;
+		}
+	  }
+	}
+	if (numHead > 0) {
+	  write_string(0,y,"Headwear",RED);
+	  y++;
+	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+		if ((*it)->getType() == HEAD) {
+		  s = (*it)->getName();
+		  sc = (char*)s.c_str();
+		  write_string(1,y,sc,BLUE);
+		  y++;
+		}
+	  }
+	}
+	if (numLeg > 0) {
+	  write_string(0,y,"Legwear",RED);
+	  y++;
+	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+		if ((*it)->getType() == LEG) {
+		  s = (*it)->getName();
+		  sc = (char*)s.c_str();
+		  write_string(1,y,sc,BLUE);
+		  y++;
+		}
+	  }
+	}
+	if (numFoot > 0) {
+	  write_string(0,y,"Footwear",RED);
+	  y++;
+	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+		if ((*it)->getType() == FOOT) {
+		  s = (*it)->getName();
+		  sc = (char*)s.c_str();
+		  write_string(1,y,sc,BLUE);
+		  y++;
+		}
+	  }
+	}
+	if (numAmmo > 0) {
+	  write_string(0,y,"Ammunition",RED);
+	  y++;
+	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+		if ((*it)->getType() == AMMO) {
+		  s = (*it)->getName();
+		  sc = (char*)s.c_str();
+		  write_string(1,y,sc,BLUE);
+		  y++;
+		}
+	  }
+	}	
+  } else {
+	shiplog("no items in inventory",70);
+  }
+
+  // return to screen on Space.
+  char c = '\0';
+  while (c != ' ') {
+	c = getch();
+  }
+  return true;
 }
 
 // TODO: -Change title based on experience
