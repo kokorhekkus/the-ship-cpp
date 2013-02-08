@@ -62,6 +62,28 @@ Weapon::~Weapon() {
   shiplog(s, 10);
 }
 
+//----------------------------------------------------------------------
+// Armour class implementation
+//----------------------------------------------------------------------
+Armour::Armour(unsigned int id, string& name, int weight, inventoryType type,
+		 int xloc, int yloc,
+		 mapColor color, char look,
+		 int a_modArmour, int a_modDodge) :
+  Thing(id, name, weight, type, xloc, yloc, color, look),
+  modArmour(a_modArmour), modDodge(a_modDodge) {
+
+  ostringstream oss;
+  oss << "Creating new Armour object with id " << getId();
+  string s = oss.str();
+  shiplog(s, 10);
+}
+Armour::~Armour() {
+  ostringstream oss;
+  oss << "Destroying Armour object with id " << getId();
+  string s = oss.str();
+  shiplog(s, 10);
+}
+
 
 //----------------------------------------------------------------------
 // ThingMaker class implementation
@@ -167,14 +189,20 @@ mapColor ThingMaker::getMapColor(int i) {
 // l Luck Mod          61-62    2 
 void ThingMaker::initThings() {
   // Short range weapons
-  SRWDat.push_back("5/sharplightprojector           1  1 1 6 0 0 0 0 0  0 0 0 0 0 ");
+  SRWDat.push_back("5/sharplight projector          1  1 1 6 0 0 0 0 0  0 0 0 0 0 ");
 }
 
 // TODO: randomise the object and its properties
 Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
   switch (type) {
-  case SRW:
-	string dat = SRWDat[0];
+  case LRW:
+  case SRW: {
+	string dat;
+	if (type == SRW) {
+	  dat = SRWDat[0];
+	} else {
+	  dat = LRWDat[0];
+	}
 	
 	int icolor = dat[0] - '0';
 	mapColor color = getMapColor(icolor);
@@ -192,6 +220,57 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	s = dat.substr(42,2);
 	int to_hit = atoi(s.c_str());
 	s = dat.substr(44,2);
+	int armour= atoi(s.c_str());
+	s = dat.substr(46,2);
+	int speed = atoi(s.c_str());
+	s = dat.substr(48,2);
+	int dodge = atoi(s.c_str());
+	s = dat.substr(50,3);
+	int life = atoi(s.c_str());
+	s = dat.substr(53,2);
+	int strength = atoi(s.c_str());
+	s = dat.substr(55,2);
+	int intelligence = atoi(s.c_str());
+	s = dat.substr(57,2);
+	int constitution = atoi(s.c_str());
+	s = dat.substr(59,2);
+	int dexterity = atoi(s.c_str());
+	s = dat.substr(61,2);
+	int luck = atoi(s.c_str());
+
+	Weapon* w;
+	if (type == SRW) {
+	  w = new Weapon(getSerial(),name,weight,SRW,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides);
+	} else {
+	  w = new Weapon(getSerial(),name,weight,LRW,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides);
+	}
+	return w;
+	break;
+  }
+  case BODY:
+  case HEAD:
+  case LEG:
+  case FOOT: {
+	string dat;
+	switch (type) {
+	case BODY:
+	  dat = BodyDat[0]; break;
+	case HEAD:
+	  dat = HeadDat[0]; break;
+	case LEG:
+	  dat = LegDat[0]; break;
+	case FOOT:
+	  dat = FootDat[0]; break;
+	}
+	
+	int icolor = dat[0] - '0';
+	mapColor color = getMapColor(icolor);
+	char look = dat[1];
+	string name = dat.substr(2,30);
+	name.erase(name.find_last_not_of(' ')+1); // right-trim whitespace
+	string s = dat.substr(33,3);
+	int weight = atoi(s.c_str());
+	s = dat.substr(36,2);
 	int  armour= atoi(s.c_str());
 	s = dat.substr(46,2);
 	int  speed = atoi(s.c_str());
@@ -210,9 +289,19 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	s = dat.substr(61,2);
 	int  luck = atoi(s.c_str());
 
-	Weapon* w = new Weapon(getSerial(),name,weight,SRW,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides);
-	return w;
+	Armour* a;
+	switch (type) {
+	case BODY:
+	  a = new Armour(getSerial(),name,weight,BODY,xloc,yloc,color,look,armour,dodge);
+	case HEAD:
+	  a = new Armour(getSerial(),name,weight,HEAD,xloc,yloc,color,look,armour,dodge);
+	case LEG:
+	  a = new Armour(getSerial(),name,weight,LEG,xloc,yloc,color,look,armour,dodge);
+	case FOOT:
+	  a = new Armour(getSerial(),name,weight,FOOT,xloc,yloc,color,look,armour,dodge);
+	}
+	return a;
 	break;
   }
-  
+  }
 }

@@ -61,8 +61,7 @@ enum inventoryType {
   BODY = 2, // body armour
   HEAD = 3, // headwear
   LEG = 4,  // legwear
-  FOOT = 5, // footwear
-  AMMO = 6, // ammunition
+  FOOT = 5  // footwear
 };
 
 enum playerWorld {

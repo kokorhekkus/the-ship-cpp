@@ -291,9 +291,6 @@ bool Player::printInventory() const {
 	  case FOOT:
 		numFoot++;
 		break;
-	  case AMMO:
-		numAmmo++;
-		break;
 	  default:
 		ostringstream oss;
 		oss << "Invalid equipment type: " << type;
@@ -390,18 +387,6 @@ bool Player::printInventory() const {
 		}
 	  }
 	}
-	if (numAmmo > 0) {
-	  write_string(0,y,"Ammunition",RED);
-	  y++;
-	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
-		if ((*it)->getType() == AMMO) {
-		  s = (*it)->getName();
-		  sc = (char*)s.c_str();
-		  write_string(1,y,sc,BLUE);
-		  y++;
-		}
-	  }
-	}	
   } else {
 	shiplog("no items in inventory",70);
   }

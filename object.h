@@ -30,7 +30,7 @@ public:
   inventoryType getType() const;
 };
 
-// a gun
+// a weapon
 class Weapon : public Thing {
   // weapon stats
   int range;
@@ -45,6 +45,20 @@ public:
 	  int range, int to_hit,
 	  int dmgdice_num, int dmgdice_sides);
   ~Weapon();
+};
+
+// a piece of armour
+class Armour : public Thing {
+  // armour stats
+  int modArmour;
+  int modDodge;
+
+public:
+  Armour(unsigned int id, std::string& name, int weight, inventoryType type,
+	  int xloc, int yloc,
+	  mapColor color, char look,
+	  int modArmour, int modDodge);
+  ~Armour();
 };
 
 // Object initialiser, contains all the data we need to
