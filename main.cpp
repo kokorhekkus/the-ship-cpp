@@ -71,9 +71,11 @@ int main(int argc, char *argv[]) {
   currentLevelMap.generate(1, CORRIDORS);
   Level currentLevel(&currentLevelMap);
 
-  Thing* sharpie = tm.instantiate(SRW,11,12);
+  Thing* sharpie = tm.instantiate(LRW,11,12);
+  Thing* armour = tm.instantiate(BODY,10,12);
 
   currentLevel.addObject(*sharpie);
+  currentLevel.addObject(*armour);
   
   printAll(currentLevel, pc);
 

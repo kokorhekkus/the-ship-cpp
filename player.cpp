@@ -274,23 +274,17 @@ bool Player::printInventory() const {
 	  inventoryType type = (*it)->getType();
 	  switch (type) {
 	  case LRW:
-		numLRW++;
-		break;
+		numLRW++; break;
 	  case SRW:
-		numSRW++;
-		break;
+		numSRW++; break;
 	  case BODY:
-		numBody++;
-		break;
+		numBody++; break;
 	  case HEAD:
-		numHead++;
-		break;
+		numHead++; break;
 	  case LEG:
-		numLeg++;
-		break;
+		numLeg++; break;
 	  case FOOT:
-		numFoot++;
-		break;
+		numFoot++; break;
 	  default:
 		ostringstream oss;
 		oss << "Invalid equipment type: " << type;

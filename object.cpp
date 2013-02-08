@@ -170,33 +170,38 @@ mapColor ThingMaker::getMapColor(int i) {
 //
 //   Attribute         Position Length Notes
 //--------------------------------------------------------------
-// O Color             0        1      a number, as defined in enums.h
-// K Look              1        1      a character 
-// N Name              2-32     30
-// W Weight            33-35    3
-// R Range             36-37    2
-// n Number (Dmg Dice) 38-39    2
-// S Sides (Dmg Dice)  40-41    2
-// H To Hit            42-43    2
-// A Armour Mod        44-45    2
-// S Speed Mod         46-47    2
-// D Dodge Mod         48-49    2
-// L Hit Points Mod    50-52    3
-// s Strength Mod      53-54    2 
-// i Intelligence Mod  55-56    2 
-// c Constitution Mod  57-58    2 
-// d Dexterity Mod     59-60    2 
-// l Luck Mod          61-62    2 
+// O Color             0-1      2      a number, as defined in enums.h
+// K Look              2        1      a character 
+// N Name              3-33     30
+// W Weight            34-36    3
+// R Range             37-38    2
+// n Number (Dmg Dice) 39-40    2
+// S Sides (Dmg Dice)  41-42    2
+// H To Hit            43-44    2
+// A Armour Mod        45-46    2
+// S Speed Mod         47-48    2
+// D Dodge Mod         49-50    2
+// L Hit Points Mod    51-53    3
+// s Strength Mod      54-55    2 
+// i Intelligence Mod  56-57    2 
+// c Constitution Mod  58-59    2 
+// d Dexterity Mod     60-61    2 
+// l Luck Mod          62-63    2 
 void ThingMaker::initThings() {
-  // Short range weapons
-  SRWDat.push_back("5/sharplight projector          1  1 1 6 0 0 0 0 0  0 0 0 0 0 ");
+  // Ranged weapons
+  LRWDat.push_back("5 /sharplight projector          1  1 1 6 0 0 0 0 0  0 0 0 0 0 ");
+
+  // Body armour
+  BodyDat.push_back("13]tungsten weave vest            1          3 0 2 0  0 0 0 0 0 ");
 }
 
 // TODO: randomise the object and its properties
 Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
+  shiplog("->ThingMaker::instantiate",50);
   switch (type) {
   case LRW:
   case SRW: {
+	shiplog("LRW/SRW",80);
 	string dat;
 	if (type == SRW) {
 	  dat = SRWDat[0];
@@ -204,38 +209,40 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	  dat = LRWDat[0];
 	}
 	
-	int icolor = dat[0] - '0';
+	string s = dat.substr(0,2);
+	s.erase(s.find_last_not_of(' ')+1); // right-trim whitespace
+	int icolor = atoi(s.c_str());
 	mapColor color = getMapColor(icolor);
-	char look = dat[1];
-	string name = dat.substr(2,30);
+	char look = dat[2];
+	string name = dat.substr(3,30);
 	name.erase(name.find_last_not_of(' ')+1); // right-trim whitespace
-	string s = dat.substr(33,3);
+	s = dat.substr(34,3);
 	int weight = atoi(s.c_str());
-	s = dat.substr(36,2);
+	s = dat.substr(37,2);
 	int range = atoi(s.c_str());
-	s = dat.substr(38,2);
+	s = dat.substr(39,2);
 	int dmgdice_num = atoi(s.c_str());
-	s = dat.substr(40,2);
+	s = dat.substr(41,2);
 	int dmgdice_sides = atoi(s.c_str());
-	s = dat.substr(42,2);
+	s = dat.substr(43,2);
 	int to_hit = atoi(s.c_str());
-	s = dat.substr(44,2);
+	s = dat.substr(45,2);
 	int armour= atoi(s.c_str());
-	s = dat.substr(46,2);
+	s = dat.substr(47,2);
 	int speed = atoi(s.c_str());
-	s = dat.substr(48,2);
+	s = dat.substr(49,2);
 	int dodge = atoi(s.c_str());
-	s = dat.substr(50,3);
+	s = dat.substr(51,3);
 	int life = atoi(s.c_str());
-	s = dat.substr(53,2);
+	s = dat.substr(54,2);
 	int strength = atoi(s.c_str());
-	s = dat.substr(55,2);
+	s = dat.substr(56,2);
 	int intelligence = atoi(s.c_str());
-	s = dat.substr(57,2);
+	s = dat.substr(58,2);
 	int constitution = atoi(s.c_str());
-	s = dat.substr(59,2);
+	s = dat.substr(60,2);
 	int dexterity = atoi(s.c_str());
-	s = dat.substr(61,2);
+	s = dat.substr(62,2);
 	int luck = atoi(s.c_str());
 
 	Weapon* w;
@@ -251,6 +258,7 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
   case HEAD:
   case LEG:
   case FOOT: {
+	shiplog("BODY/HEAD/LEG/FOOT",80);
 	string dat;
 	switch (type) {
 	case BODY:
@@ -263,42 +271,44 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	  dat = FootDat[0]; break;
 	}
 	
-	int icolor = dat[0] - '0';
+	string s = dat.substr(0,2);
+	s.erase(s.find_last_not_of(' ')+1); // right-trim whitespace
+	int icolor = atoi(s.c_str());
 	mapColor color = getMapColor(icolor);
-	char look = dat[1];
-	string name = dat.substr(2,30);
+	char look = dat[2];
+	string name = dat.substr(3,30);
 	name.erase(name.find_last_not_of(' ')+1); // right-trim whitespace
-	string s = dat.substr(33,3);
+	s = dat.substr(34,3);
 	int weight = atoi(s.c_str());
-	s = dat.substr(36,2);
+	s = dat.substr(37,2);
 	int  armour= atoi(s.c_str());
-	s = dat.substr(46,2);
+	s = dat.substr(47,2);
 	int  speed = atoi(s.c_str());
-	s = dat.substr(48,2);
+	s = dat.substr(49,2);
 	int  dodge = atoi(s.c_str());
-	s = dat.substr(50,3);
+	s = dat.substr(51,3);
 	int  life = atoi(s.c_str());
-	s = dat.substr(53,2);
+	s = dat.substr(54,2);
 	int  strength = atoi(s.c_str());
-	s = dat.substr(55,2);
+	s = dat.substr(56,2);
 	int  intelligence = atoi(s.c_str());
-	s = dat.substr(57,2);
+	s = dat.substr(58,2);
 	int  constitution = atoi(s.c_str());
-	s = dat.substr(59,2);
+	s = dat.substr(60,2);
 	int  dexterity = atoi(s.c_str());
-	s = dat.substr(61,2);
+	s = dat.substr(62,2);
 	int  luck = atoi(s.c_str());
 
 	Armour* a;
 	switch (type) {
 	case BODY:
-	  a = new Armour(getSerial(),name,weight,BODY,xloc,yloc,color,look,armour,dodge);
+	  a = new Armour(getSerial(),name,weight,BODY,xloc,yloc,color,look,armour,dodge); break;
 	case HEAD:
-	  a = new Armour(getSerial(),name,weight,HEAD,xloc,yloc,color,look,armour,dodge);
+	  a = new Armour(getSerial(),name,weight,HEAD,xloc,yloc,color,look,armour,dodge); break;
 	case LEG:
-	  a = new Armour(getSerial(),name,weight,LEG,xloc,yloc,color,look,armour,dodge);
+	  a = new Armour(getSerial(),name,weight,LEG,xloc,yloc,color,look,armour,dodge); break;
 	case FOOT:
-	  a = new Armour(getSerial(),name,weight,FOOT,xloc,yloc,color,look,armour,dodge);
+	  a = new Armour(getSerial(),name,weight,FOOT,xloc,yloc,color,look,armour,dodge); break;
 	}
 	return a;
 	break;
