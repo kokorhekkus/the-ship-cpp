@@ -250,12 +250,17 @@ bool Player::printInventory() const {
   shiplog("->Player::printInventory()",50);
 
   // Test for no items
-  // THIS TEST SEGFAULTS... with nothing in the inventory  No idea why. committing anyway,
-  //                       as bug only applies with an empty inventory (fix later)
+  // THIS TEST SEGFAULTS with nothing in the inventory. No idea why.Committing anyway,
+  //                     as bug only applies with an empty inventory (fix later)
+  ostringstream oss;
+  oss << "Size: " << inventory.size() << "Empty: " << inventory.empty();
+  string s = oss.str();
+  shiplog(s,60);
+
   if (!inventory.empty()) {
 	// calculate total weight, and number of equipment types
-	int numLrw = 0;
-	int numSrw = 0;
+	int numLRW = 0;
+	int numSRW = 0;
 	int numBody = 0;
 	int numHead = 0;
 	int numLeg = 0;
@@ -269,10 +274,10 @@ bool Player::printInventory() const {
 	  inventoryType type = (*it)->getType();
 	  switch (type) {
 	  case LRW:
-		numLrw++;
+		numLRW++;
 		break;
 	  case SRW:
-		numSrw++;
+		numSRW++;
 		break;
 	  case BODY:
 		numBody++;
@@ -313,7 +318,7 @@ bool Player::printInventory() const {
 	int y = 3;
 	
 	shiplog("Printing out inventory",70);
-	if (numLrw > 0) {
+	if (numLRW > 0) {
 	  write_string(0,y,"Ranged weapons",RED);
 	  y++;
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
@@ -325,7 +330,7 @@ bool Player::printInventory() const {
 		}
 	  }
 	}
-	if (numSrw > 0) {
+	if (numSRW > 0) {
 	  write_string(0,y,"Short-range weapons",RED);
 	  y++;
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {

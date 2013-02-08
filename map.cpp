@@ -8,7 +8,7 @@
 
 using namespace std;
 
-MapChar mapDrawingChars[8]; // declared extern in the header 
+MapChar mapDrawingChars[8];
 
 void initMapDrawingChars() {
   shiplog("Initialising map drawing characters...",1);

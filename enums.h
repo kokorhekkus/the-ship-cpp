@@ -37,32 +37,32 @@ enum levelType {
 };
 
 enum mapColor { 
-  RED,
-  GREEN,
-  CYAN,
-  L_GREY,
-  BROWN,
-  BLUE,
-  MAGENTA,
-  BLACK,
-  ORANGE,
-  L_GREEN,
-  L_CYAN,
-  WHITE,
-  YELLOW,
-  L_BLUE,
-  PINK,
-  D_GREY
+  RED = 0,
+  GREEN = 1,
+  CYAN = 2,
+  L_GREY = 3,
+  BROWN = 4,
+  BLUE = 5,
+  MAGENTA = 6,
+  BLACK = 7,
+  ORANGE = 8,
+  L_GREEN = 9,
+  L_CYAN = 10,
+  WHITE = 11,
+  YELLOW = 12,
+  L_BLUE = 13,
+  PINK = 14,
+  D_GREY = 15
 };
 
 enum inventoryType {
-  LRW,  // ranged weapons
-  SRW,  // melee weapons
-  BODY, // body armour
-  HEAD, // headwear
-  LEG,  // legwear
-  FOOT, // footwear
-  AMMO, // ammunition
+  LRW = 0,  // ranged weapons
+  SRW = 1,  // melee weapons
+  BODY = 2, // body armour
+  HEAD = 3, // headwear
+  LEG = 4,  // legwear
+  FOOT = 5, // footwear
+  AMMO = 6, // ammunition
 };
 
 enum playerWorld {

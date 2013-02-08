@@ -18,7 +18,6 @@ struct MapChar {
 };
 
 // initialise a list of map drawing characters
-extern MapChar mapDrawingChars[8];
 void initMapDrawingChars();
 
 // a representation of a single level
