@@ -71,11 +71,19 @@ int main(int argc, char *argv[]) {
   currentLevelMap.generate(1, CORRIDORS);
   Level currentLevel(&currentLevelMap);
 
-  Thing* sharpie = tm.instantiate(LRW,11,12);
-  Thing* armour = tm.instantiate(BODY,10,12);
-
-  currentLevel.addObject(*sharpie);
-  currentLevel.addObject(*armour);
+  // TEST OBJECTS
+  Thing* lrw = tm.instantiate(LRW,10,12);
+  Thing* srw = tm.instantiate(SRW,11,12);
+  Thing* body = tm.instantiate(BODY,12,12);
+  Thing* head = tm.instantiate(HEAD,13,12);
+  Thing* leg = tm.instantiate(LEG,10,13);
+  Thing* foot = tm.instantiate(FOOT,11,13);
+  currentLevel.addObject(*lrw);
+  currentLevel.addObject(*srw);
+  currentLevel.addObject(*body);
+  currentLevel.addObject(*head);
+  currentLevel.addObject(*leg);
+  currentLevel.addObject(*foot);
   
   printAll(currentLevel, pc);
 
@@ -177,7 +185,7 @@ int main(int argc, char *argv[]) {
 	}
 	
 	// pick up objects from the floor
-	if (c == ',') {
+	if (c == 'g') {
 	  shiplog("Trying to pick up an object",50);
 	  int* loc = pc.getLocation();
 	  int x = *(loc);

@@ -188,11 +188,23 @@ mapColor ThingMaker::getMapColor(int i) {
 // d Dexterity Mod     60-61    2 
 // l Luck Mod          62-63    2 
 void ThingMaker::initThings() {
-  // Ranged weapons
+  // Ranged weapons (/)
   LRWDat.push_back("5 /sharplight projector          1  1 1 6 0 0 0 0 0  0 0 0 0 0 ");
 
-  // Body armour
-  BodyDat.push_back("13]tungsten weave vest            1          3 0 2 0  0 0 0 0 0 ");
+  // Melee weapons (\) (note escaped '\')
+  SRWDat.push_back("14\\forceknife                    1  1 1 4 0 0 0 0 0  0 0 0 0 0 ");
+
+  // Body armour (])
+  BodyDat.push_back("13]tungsten weave vest            5          3 0 2 0  0 0 0 0 0 ");
+
+  // Headwear (^)
+  HeadDat.push_back("15^carbon fibre headband          1          1 0 0 0  0 0 0 0 0 ");
+
+  // Legwear (|)
+  LegDat.push_back("11|ceramic plate leggings         10         9 0 0 0  0 0 0 0 0 ");
+
+  // Footwear (-)
+  FootDat.push_back("4 -combat boots                   2          2 0 5 0  0 0 0 0 0 ");
 }
 
 // TODO: randomise the object and its properties
