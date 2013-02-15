@@ -25,6 +25,7 @@ Level::~Level() {
 // return 0 if no object at location, otherwise return object ID 
 unsigned int Level::objectAt(int x, int y) {
   // we can easily compare lists, so convert from arrays
+  // (easy to initialise a list from an array)
   int locArray1[2] = {x, y};
   list<int> locList1(locArray1, locArray1 + sizeof(locArray1) / sizeof(int));
   

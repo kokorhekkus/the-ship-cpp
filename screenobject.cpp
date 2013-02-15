@@ -25,6 +25,9 @@ int* ScreenObject::getLocation() const {
   return location_array;
 }
 
+int ScreenObject::getX() const { return xloc; }
+int ScreenObject::getY() const { return yloc; }
+
 // Setters
 
 // set location by actual coordinates
@@ -41,7 +44,6 @@ void ScreenObject::setLocation(int new_xloc, int new_yloc) {
 // returns 1 for a successful move, 0 for a failed move
 int ScreenObject::setLocation(direction direction, const LevelMap& level) {
   // calculate new co-ords, then check if it's OK to move to there
-  int* new_location = new int[2];
   int new_yloc = yloc;
   int new_xloc = xloc;
 
@@ -86,8 +88,6 @@ int ScreenObject::setLocation(direction direction, const LevelMap& level) {
   xloc = new_xloc;
   yloc = new_yloc;
 
-  new_location[0] = new_xloc;
-  new_location[1] = new_yloc;
   return 1;
 }
 

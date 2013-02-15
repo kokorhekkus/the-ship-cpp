@@ -152,9 +152,8 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
+		int x = pc.getX();
+		int y = pc.getY();
 		unsigned int objectId = currentLevel.objectAt(x,y);
 		if (objectId != 0) {
 		  Thing t = currentLevel.getObject(objectId);

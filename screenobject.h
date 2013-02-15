@@ -19,10 +19,10 @@ public:
   ScreenObject(int xloc, int yloc, mapColor color, char look);
   virtual ~ScreenObject();
 
-  // Getters
-
-  // returns an array of 2 integers for [x,y]
-  int* getLocation() const;
+  // returns location
+  int* getLocation() const; // returns an array [x,y]
+  int getX() const;
+  int getY() const;
 
   // Setters
 
