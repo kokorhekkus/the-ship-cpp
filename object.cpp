@@ -2,6 +2,7 @@
 
 #include "object.h"
 #include "log.h"
+#include "engine.h"
 
 #include <sstream>
 #include <algorithm>
@@ -12,6 +13,9 @@ using namespace std;
 //----------------------------------------------------------------------
 // Thing class implementation
 //----------------------------------------------------------------------
+const string Thing::invIDs =    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+string Thing::invIDsAvailable = "0000000000000000000000000000000000000000000000000000";
+
 Thing::Thing(unsigned int a_id, string& a_name, int a_weight, inventoryType a_type,
 			 int xloc, int yloc,
 			 mapColor color, char look) :
@@ -36,7 +40,40 @@ unsigned int Thing::getId() const { return id; }
 string Thing::getName() const { return name; }
 int Thing::getWeight() const { return weight; }
 inventoryType Thing::getType() const { return type; }
+char Thing::getInvID() const { return invID; }
 
+// get an available letter to identify an object in the player's inventory
+char Thing::getNextInvID() {
+  string::iterator it;
+  for (it = invIDsAvailable.begin(); it < invIDsAvailable.end(); ++it) {
+	if (*it == '0') {
+	  int index = distance(invIDsAvailable.begin(), it);
+	  invIDsAvailable[index] = '1';
+	  return invIDs[index];
+	}
+  }
+  // no more characters to assign, should never happen due to inventory size limit
+  shiplog("Run out of inventory letters to assign!",1);
+  error_exit("Run out of inventory letters to assign!");
+}
+
+// used when an object is added to the inventory
+void Thing::setInventoryLetter() {
+  shiplog("Setting an inventory letter",60);
+  invID = getNextInvID();
+}
+// used when an object is removed from the inventory
+void Thing::delInventoryLetter() {
+  shiplog("Deleting an inventory letter",60);
+  string::const_iterator it;
+  for (it = invIDs.begin(); it < invIDs.end(); ++it) {
+	if (*it == invID) {
+	  int index = distance(invIDs.begin(), it);
+	  invIDsAvailable[index] = '0';
+	} 
+  }
+  invID = '\0';
+}
 
 //----------------------------------------------------------------------
 // Weapon class implementation
@@ -163,6 +200,7 @@ mapColor ThingMaker::getMapColor(int i) {
 }
 
 // set up the vector of condensed information on base objects in the game
+// TODO: add a 'level' to define how rare/powerful objects are
 //
 // object definition string:
 //

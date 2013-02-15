@@ -11,10 +11,21 @@
 // Base class for all objects in the game
 class Thing : public ScreenObject {
 private:
+  // Object attributes
   unsigned int id;
+  char invID;
   std::string name;
   inventoryType type;
   int weight;
+
+  // List of available inventory letters, and a mask to indicate which are taken already,
+  // for use with inventory letter assigning accents
+  // TODO: investigate if this is the best way of doing things, e.g.
+  //       with the 'static' declaration
+  const static std::string invIDs;
+  static std::string invIDsAvailable;
+  // get an available letter to identify an object in the player's inventory
+  char getNextInvID();
 
 public:
   // ALWAYS use getSerial() to get a unique serial number for the ID
@@ -28,6 +39,11 @@ public:
   std::string getName() const;
   int getWeight() const;
   inventoryType getType() const;
+  char getInvID() const;
+
+  // used when an object is added/removed to/from the inventory
+  void setInventoryLetter();
+  void delInventoryLetter();
 };
 
 // a weapon

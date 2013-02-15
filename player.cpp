@@ -253,7 +253,7 @@ bool Player::printInventory() const {
   // THIS TEST SEGFAULTS with nothing in the inventory. No idea why.Committing anyway,
   //                     as bug only applies with an empty inventory (fix later)
   ostringstream oss;
-  oss << "Size: " << inventory.size() << "Empty: " << inventory.empty();
+  oss << "Inventory Size: " << inventory.size();
   string s = oss.str();
   shiplog(s,60);
 
@@ -306,8 +306,8 @@ bool Player::printInventory() const {
 	write_string(0,1,sc,L_BLUE);
 	
 	// print out different equipment categories
-	int y = 3;
-	
+	int y = 3; // y position of line
+
 	shiplog("Printing out inventory",70);
 	if (numLRW > 0) {
 	  write_string(0,y,"Ranged weapons",RED);
@@ -315,6 +315,11 @@ bool Player::printInventory() const {
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
 		if ((*it)->getType() == LRW) {
 		  s = (*it)->getName();
+		  char invLetter = (*it)->getInvID();
+		  string invID = " - ";
+		  string::iterator sit = invID.begin();
+		  invID.insert(sit,invLetter);
+		  s.insert(0,invID);
 		  sc = (char*)s.c_str();
 		  write_string(1,y,sc,BLUE);
 		  y++;
@@ -327,6 +332,11 @@ bool Player::printInventory() const {
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
 		if ((*it)->getType() == SRW) {
 		  s = (*it)->getName();
+		  char invLetter = (*it)->getInvID();
+		  string invID = " - ";
+		  string::iterator sit = invID.begin();
+		  invID.insert(sit,invLetter);
+		  s.insert(0,invID);
 		  sc = (char*)s.c_str();
 		  write_string(1,y,sc,BLUE);
 		  y++;
@@ -339,6 +349,11 @@ bool Player::printInventory() const {
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
 		if ((*it)->getType() == BODY) {
 		  s = (*it)->getName();
+		  char invLetter = (*it)->getInvID();
+		  string invID = " - ";
+		  string::iterator sit = invID.begin();
+		  invID.insert(sit,invLetter);
+		  s.insert(0,invID);
 		  sc = (char*)s.c_str();
 		  write_string(1,y,sc,BLUE);
 		  y++;
@@ -351,6 +366,11 @@ bool Player::printInventory() const {
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
 		if ((*it)->getType() == HEAD) {
 		  s = (*it)->getName();
+		  char invLetter = (*it)->getInvID();
+		  string invID = " - ";
+		  string::iterator sit = invID.begin();
+		  invID.insert(sit,invLetter);
+		  s.insert(0,invID);
 		  sc = (char*)s.c_str();
 		  write_string(1,y,sc,BLUE);
 		  y++;
@@ -363,6 +383,11 @@ bool Player::printInventory() const {
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
 		if ((*it)->getType() == LEG) {
 		  s = (*it)->getName();
+		  char invLetter = (*it)->getInvID();
+		  string invID = " - ";
+		  string::iterator sit = invID.begin();
+		  invID.insert(sit,invLetter);
+		  s.insert(0,invID);
 		  sc = (char*)s.c_str();
 		  write_string(1,y,sc,BLUE);
 		  y++;
@@ -375,6 +400,11 @@ bool Player::printInventory() const {
 	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
 		if ((*it)->getType() == FOOT) {
 		  s = (*it)->getName();
+		  char invLetter = (*it)->getInvID();
+		  string invID = " - ";
+		  string::iterator sit = invID.begin();
+		  invID.insert(sit,invLetter);
+		  s.insert(0,invID);
 		  sc = (char*)s.c_str();
 		  write_string(1,y,sc,BLUE);
 		  y++;
@@ -583,6 +613,7 @@ void Player::addToInv(Thing& t) {
   string s = oss.str();
   shiplog(s,50);
 
+  t.setInventoryLetter();
   inventory.push_back(&t);
   shiplog("<-Player::addToInv",60);
 }
@@ -592,6 +623,7 @@ void Player::delFromInv(unsigned int id) {
   shiplog("->Player::delFromInv()",60);
   for(list<Thing*>::iterator it = inventory.begin(); it != inventory.end(); ++it) {
 	if ((*it)->getId() == id) {
+	  (*it)->delInventoryLetter();
 	  inventory.erase(it);
 	  // must return, as erasing an element will break the iteration
 	  // over the rest of the list
