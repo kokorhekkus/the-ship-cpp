@@ -126,135 +126,29 @@ int main(int argc, char *argv[]) {
 	// TODO: Sort out numpad & cursor keys
 	// TODO: Handle more failures to move than just hitting
 	//       a wall
-	// TODO: make code generic so we don't repeat all these lines
-	if (c == 'h')  {
-	  if (pc.setLocation(WEST, currentLevelMap) == 0) {
-		msg.print("Bonk.");
-	  } else {
-		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
-		unsigned int objectId = currentLevel.objectAt(x,y);
-		if (objectId != 0) {
-		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
-		  s.append(".");
-		  msg.print(s);
-		}
+	if (c == 'h' || c == 'j' || c == 'k' || c == 'l' ||
+		c == 'y' || c == 'u' || c == 'b' || c == 'n') {
+	  direction dir;
+	  switch (c) {
+	  case 'h':
+		dir = WEST; break;
+	  case 'j':
+		dir = SOUTH; break;
+	  case 'k':
+		dir = NORTH; break;
+	  case 'l':
+		dir = EAST; break;
+	  case 'y':
+		dir = NORTHWEST; break;
+	  case 'u':
+		dir = NORTHEAST; break;
+	  case 'b':
+		dir = SOUTHWEST; break;
+	  case 'n':
+		dir = SOUTHEAST; break;
 	  }
-	}
-	if (c == 'j') {
-	  if (pc.setLocation(SOUTH, currentLevelMap) == 0) {
-		msg.print("Bonk.");
-	  } else {
-		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
-		unsigned int objectId = currentLevel.objectAt(x,y);
-		if (objectId != 0) {
-		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
-		  s.append(".");
-		  msg.print(s);
-		}
-	  }
-	}
-	if (c == 'k') {
-	  if (pc.setLocation(NORTH, currentLevelMap) == 0) {
-		msg.print("Bonk.");
-	  } else {
-		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
-		unsigned int objectId = currentLevel.objectAt(x,y);
-		if (objectId != 0) {
-		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
-		  s.append(".");
-		  msg.print(s);
-		}
-	  }
-	}
-	if (c == 'l') {
-	  if (pc.setLocation(EAST, currentLevelMap) == 0) {
-		msg.print("Bonk.");
-	  } else {
-		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
-		unsigned int objectId = currentLevel.objectAt(x,y);
-		if (objectId != 0) {
-		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
-		  s.append(".");
-		  msg.print(s);
-		}
-	  }
-	}
-	if (c == 'y') {
-	  if (pc.setLocation(NORTHWEST, currentLevelMap) == 0) {
-		msg.print("Bonk.");
-	  } else {
-		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
-		unsigned int objectId = currentLevel.objectAt(x,y);
-		if (objectId != 0) {
-		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
-		  s.append(".");
-		  msg.print(s);
-		}
-	  }
-	}
-	if (c == 'u') {
-	  if (pc.setLocation(NORTHEAST, currentLevelMap) == 0) {
-		msg.print("Bonk.");
-	  } else {
-		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
-		unsigned int objectId = currentLevel.objectAt(x,y);
-		if (objectId != 0) {
-		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
-		  s.append(".");
-		  msg.print(s);
-		}
-	  }
-	}
-	if (c == 'b') {
-	  if (pc.setLocation(SOUTHWEST, currentLevelMap) == 0) {
-		msg.print("Bonk.");
-	  } else {
-		printMap(currentLevel, pc);
-		int* loc = pc.getLocation();
-		int x = *(loc);
-		int y = *(loc+1);
-		unsigned int objectId = currentLevel.objectAt(x,y);
-		if (objectId != 0) {
-		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
-		  s.append(".");
-		  msg.print(s);
-		}
-	  }
-	}
-	if (c == 'n') {
-	  if (pc.setLocation(SOUTHEAST, currentLevelMap) == 0) {
+
+	  if (pc.setLocation(dir, currentLevelMap) == 0) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
