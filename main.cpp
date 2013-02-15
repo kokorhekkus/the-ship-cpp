@@ -132,6 +132,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	if (c == 'j') {
@@ -139,6 +150,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	if (c == 'k') {
@@ -146,6 +168,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	if (c == 'l') {
@@ -153,6 +186,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	if (c == 'y') {
@@ -160,6 +204,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	if (c == 'u') {
@@ -167,6 +222,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	if (c == 'b') {
@@ -174,6 +240,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	if (c == 'n') {
@@ -181,6 +258,17 @@ int main(int argc, char *argv[]) {
 		msg.print("Bonk.");
 	  } else {
 		printMap(currentLevel, pc);
+		int* loc = pc.getLocation();
+		int x = *(loc);
+		int y = *(loc+1);
+		unsigned int objectId = currentLevel.objectAt(x,y);
+		if (objectId != 0) {
+		  Thing t = currentLevel.getObject(objectId);
+		  string s = "You see a ";
+		  s.append(t.getName());
+		  s.append(".");
+		  msg.print(s);
+		}
 	  }
 	}
 	
