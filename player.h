@@ -97,7 +97,7 @@ public:
 
   // Printers
   void printMainScreenInfo() const; // print stats and name
-  bool printInventory() const;
+  int printInventory() const;
 
   // Functionality
   int addToInv(Thing& t); // return 1 on success, 0 on failure

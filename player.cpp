@@ -263,8 +263,9 @@ int Player::printItems(const char* heading, inventoryType type, int position) co
   return position;
 }
 // show inventory screen; return to main screen
-// returns 1 on the player hitting Space
-bool Player::printInventory() const {
+// returns 1 on the player hitting Space after succesful screen
+// returns 0 on no items in inventory
+int Player::printInventory() const {
   shiplog("->Player::printInventory()",50);
 
   // Test for no items
@@ -346,6 +347,7 @@ bool Player::printInventory() const {
 	}
   } else {
 	shiplog("no items in inventory",70);
+	return 0;
   }
 
   // return to screen on Space.
@@ -353,7 +355,7 @@ bool Player::printInventory() const {
   while (c != ' ') {
 	c = getch();
   }
-  return true;
+  return 1;
 }
 
 // TODO: -Change title based on experience
@@ -540,7 +542,8 @@ void Player::calcSecondaryStats() {
 
 // add an object to the inventory,
 // max 52 items
-// returns 1 on success, 0 on failure
+// returns 1 on success
+// returns 0 on failure due to full inventory
 int Player::addToInv(Thing& t) {
   shiplog("->Player::addToInv()",60);
   ostringstream oss;
@@ -552,8 +555,12 @@ int Player::addToInv(Thing& t) {
   // TODO: once the bug with the segfault on empty inventory operations
   //       is resolved, ensure we don't add more than 52 items to the list,
   //       and return 0 if we do
-  inventory.push_back(&t);
-  
+  // if (inventory.size() == 52) {
+  //shiplog("Inventory full, not adding",5);
+  //return 0;
+  //} else {
+      inventory.push_back(&t);
+  //}
   shiplog("<-Player::addToInv",60);
   return 1;
 }

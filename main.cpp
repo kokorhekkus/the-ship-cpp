@@ -84,6 +84,11 @@ int main(int argc, char *argv[]) {
   currentLevel.addObject(*head);
   currentLevel.addObject(*leg);
   currentLevel.addObject(*foot);
+
+  // For some reason the bloody inventory list segfaults on being accessed if empty,
+  // unless we do something like the following.  No idea why:
+  pc.addToInv(*lrw);
+  pc.delFromInv(lrw->getId());
   
   printAll(currentLevel, pc);
 
@@ -181,6 +186,8 @@ int main(int argc, char *argv[]) {
 		shiplog(s,50);
 		if (pc.addToInv(t)) {
 		  currentLevel.delObject(id);
+		} else {
+		  msg.print("Your inventory is full- drop something.");
 		}
 	  } else {
 		msg.print("There's nothing here.");
@@ -189,9 +196,12 @@ int main(int argc, char *argv[]) {
 	
 	// inventory screen
 	if (c == 'i') {
-	  if(pc.printInventory()) {
+	  if (pc.printInventory()) {
 		msg.printCurrent();
 		printAll(currentLevel, pc);
+	  } else {
+		// currently only return is 0 for no items
+		msg.print("You have no items in your inventory.");
 	  }
 	}
 	
