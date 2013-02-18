@@ -244,6 +244,24 @@ void Player::printMainScreenInfo() const {
   write_string(0, 23, sc, MAGENTA);
 }
 
+int Player::printItems(const char* heading, inventoryType type, int position) const {
+  write_string(0,position,heading,RED);
+  position++;
+  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
+	if ((*it)->getType() == type) {
+	  string s = (*it)->getName();
+	  char invLetter = (*it)->getInvID();
+	  string invID = " - ";
+		  string::iterator sit = invID.begin();
+		  invID.insert(sit,invLetter);
+		  s.insert(0,invID);
+		  char* sc = (char*)s.c_str();
+		  write_string(1,position,sc,BLUE);
+		  position++;
+	}
+  }
+  return position;
+}
 // show inventory screen; return to main screen
 // returns 1 on the player hitting Space
 bool Player::printInventory() const {
@@ -265,7 +283,6 @@ bool Player::printInventory() const {
 	int numHead = 0;
 	int numLeg = 0;
 	int numFoot = 0;
-	int numAmmo = 0;
 	int weight = 0;
 	shiplog("calculating weight and types",70);
 	for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
@@ -306,110 +323,26 @@ bool Player::printInventory() const {
 	write_string(0,1,sc,L_BLUE);
 	
 	// print out different equipment categories
-	int y = 3; // y position of line
+	int position = 3; // y position of line
 
 	shiplog("Printing out inventory",70);
 	if (numLRW > 0) {
-	  write_string(0,y,"Ranged weapons",RED);
-	  y++;
-	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
-		if ((*it)->getType() == LRW) {
-		  s = (*it)->getName();
-		  char invLetter = (*it)->getInvID();
-		  string invID = " - ";
-		  string::iterator sit = invID.begin();
-		  invID.insert(sit,invLetter);
-		  s.insert(0,invID);
-		  sc = (char*)s.c_str();
-		  write_string(1,y,sc,BLUE);
-		  y++;
-		}
-	  }
+	  position = printItems("Ranged Weapons", LRW, position);
 	}
 	if (numSRW > 0) {
-	  write_string(0,y,"Short-range weapons",RED);
-	  y++;
-	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
-		if ((*it)->getType() == SRW) {
-		  s = (*it)->getName();
-		  char invLetter = (*it)->getInvID();
-		  string invID = " - ";
-		  string::iterator sit = invID.begin();
-		  invID.insert(sit,invLetter);
-		  s.insert(0,invID);
-		  sc = (char*)s.c_str();
-		  write_string(1,y,sc,BLUE);
-		  y++;
-		}
-	  }
+	  position = printItems("Short-range Weapons", SRW, position);
 	}
 	if (numBody > 0) {
-	  write_string(0,y,"Body armour",RED);
-	  y++;
-	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
-		if ((*it)->getType() == BODY) {
-		  s = (*it)->getName();
-		  char invLetter = (*it)->getInvID();
-		  string invID = " - ";
-		  string::iterator sit = invID.begin();
-		  invID.insert(sit,invLetter);
-		  s.insert(0,invID);
-		  sc = (char*)s.c_str();
-		  write_string(1,y,sc,BLUE);
-		  y++;
-		}
-	  }
+	  position = printItems("Body Armour", BODY, position);
 	}
 	if (numHead > 0) {
-	  write_string(0,y,"Headwear",RED);
-	  y++;
-	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
-		if ((*it)->getType() == HEAD) {
-		  s = (*it)->getName();
-		  char invLetter = (*it)->getInvID();
-		  string invID = " - ";
-		  string::iterator sit = invID.begin();
-		  invID.insert(sit,invLetter);
-		  s.insert(0,invID);
-		  sc = (char*)s.c_str();
-		  write_string(1,y,sc,BLUE);
-		  y++;
-		}
-	  }
+	  position = printItems("Headwear", HEAD, position);
 	}
 	if (numLeg > 0) {
-	  write_string(0,y,"Legwear",RED);
-	  y++;
-	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
-		if ((*it)->getType() == LEG) {
-		  s = (*it)->getName();
-		  char invLetter = (*it)->getInvID();
-		  string invID = " - ";
-		  string::iterator sit = invID.begin();
-		  invID.insert(sit,invLetter);
-		  s.insert(0,invID);
-		  sc = (char*)s.c_str();
-		  write_string(1,y,sc,BLUE);
-		  y++;
-		}
-	  }
+	  position = printItems("Legwear", LEG, position);
 	}
 	if (numFoot > 0) {
-	  write_string(0,y,"Footwear",RED);
-	  y++;
-	  for(list<Thing*>::const_iterator it = inventory.begin(); it != inventory.end(); ++it) {
-		if ((*it)->getType() == FOOT) {
-		  s = (*it)->getName();
-		  char invLetter = (*it)->getInvID();
-		  string invID = " - ";
-		  string::iterator sit = invID.begin();
-		  invID.insert(sit,invLetter);
-		  s.insert(0,invID);
-		  sc = (char*)s.c_str();
-		  write_string(1,y,sc,BLUE);
-		  y++;
-		}
-	  }
+	  position = printItems("Footwear", FOOT, position);
 	}
   } else {
 	shiplog("no items in inventory",70);
@@ -605,8 +538,10 @@ void Player::calcSecondaryStats() {
   setSpeed(dodge + (floor(strength*0.3) + 0.5));
 }
 
-// add an object to the inventory
-void Player::addToInv(Thing& t) {
+// add an object to the inventory,
+// max 52 items
+// returns 1 on success, 0 on failure
+int Player::addToInv(Thing& t) {
   shiplog("->Player::addToInv()",60);
   ostringstream oss;
   oss << "in addToInv(), object id is " << t.getId();
@@ -614,8 +549,13 @@ void Player::addToInv(Thing& t) {
   shiplog(s,50);
 
   t.setInventoryLetter();
+  // TODO: once the bug with the segfault on empty inventory operations
+  //       is resolved, ensure we don't add more than 52 items to the list,
+  //       and return 0 if we do
   inventory.push_back(&t);
+  
   shiplog("<-Player::addToInv",60);
+  return 1;
 }
 
 // remove an object from the inventory

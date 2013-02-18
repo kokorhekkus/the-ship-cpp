@@ -179,8 +179,9 @@ int main(int argc, char *argv[]) {
 		oss << "in main(), object id is " << t.getId();
 		string s = oss.str();
 		shiplog(s,50);
-		pc.addToInv(t);
-		currentLevel.delObject(id);
+		if (pc.addToInv(t)) {
+		  currentLevel.delObject(id);
+		}
 	  } else {
 		msg.print("There's nothing here.");
 	  }
@@ -195,6 +196,7 @@ int main(int argc, char *argv[]) {
 	}
 	
 	// Quit
+	// TODO: Confirmation dialog
 	if (c == 'Q') { break; }
   }
   finish(0);

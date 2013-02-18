@@ -15,7 +15,7 @@ ScreenObject::ScreenObject(int a_xloc, int a_yloc,
   xloc(a_xloc), yloc(a_yloc), color(a_color), look(a_look) {}
 ScreenObject::~ScreenObject() {}
 
-// Getters
+// Location getters
 int* ScreenObject::getLocation() const {
   // TODO: will this cause a memory leak..? no cleanup
   // of array
@@ -24,7 +24,6 @@ int* ScreenObject::getLocation() const {
   location_array[1] = yloc;
   return location_array;
 }
-
 int ScreenObject::getX() const { return xloc; }
 int ScreenObject::getY() const { return yloc; }
 
@@ -39,7 +38,7 @@ void ScreenObject::setLocation(int new_xloc, int new_yloc) {
 }
 
 // set location by cardinal directions: equivalent to saying that the
-// object has moved e.g. north, south-east, etc
+// object/player/monster has moved e.g. north, south-east, etc
 // 
 // returns 1 for a successful move, 0 for a failed move
 int ScreenObject::setLocation(direction direction, const LevelMap& level) {
@@ -73,14 +72,13 @@ int ScreenObject::setLocation(direction direction, const LevelMap& level) {
 	new_xloc--; new_yloc--;
 	break;
   default:
-	string msg = "setLocation called with incorrect direction ";
-	error_exit(msg);
+	error_exit("setLocation called with incorrect direction");
   }
 
   // check to make sure we are not going to place this object in
   // a space it cannot occupy on the level map
   //
-  // TODO: needs a lot more work
+  // TODO: needs work to give relevant return codes for different features
   if (level.at(new_xloc, new_yloc) == WALL) {
 	return 0;
   }

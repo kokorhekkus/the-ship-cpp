@@ -56,6 +56,9 @@ private:
   // returns true if stat is not in the range min-max, otherwise false
   bool checkStatRange(int i, int min, int max);
 
+  // logic to print out inventory items
+  int printItems(const char* heading, inventoryType type, int position) const;
+
 public:
   Player(std::string& name, playerWorld world, playerCareer career,
 		 int xloc, int yloc,
@@ -97,7 +100,7 @@ public:
   bool printInventory() const;
 
   // Functionality
-  void addToInv(Thing& t);
+  int addToInv(Thing& t); // return 1 on success, 0 on failure
   void delFromInv(unsigned int id);
 };
 
