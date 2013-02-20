@@ -555,7 +555,7 @@ int Player::addToInv(Thing& t) {
   // TODO: once the bug with the segfault on empty inventory operations
   //       is resolved, ensure we don't add more than 52 items to the list,
   //       and return 0 if we do
-  // if (inventory.size() == 52) {
+  //if (inventory.size() == 52) {
   //shiplog("Inventory full, not adding",5);
   //return 0;
   //} else {

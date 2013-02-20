@@ -295,13 +295,7 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	s = dat.substr(62,2);
 	int luck = atoi(s.c_str());
 
-	Weapon* w;
-	if (type == SRW) {
-	  w = new Weapon(getSerial(),name,weight,SRW,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides);
-	} else {
-	  w = new Weapon(getSerial(),name,weight,LRW,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides);
-	}
-	return w;
+	Weapon* w = new Weapon(getSerial(),name,weight,type,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides);	return w;
 	break;
   }
   case BODY:
@@ -349,17 +343,7 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	s = dat.substr(62,2);
 	int  luck = atoi(s.c_str());
 
-	Armour* a;
-	switch (type) {
-	case BODY:
-	  a = new Armour(getSerial(),name,weight,BODY,xloc,yloc,color,look,armour,dodge); break;
-	case HEAD:
-	  a = new Armour(getSerial(),name,weight,HEAD,xloc,yloc,color,look,armour,dodge); break;
-	case LEG:
-	  a = new Armour(getSerial(),name,weight,LEG,xloc,yloc,color,look,armour,dodge); break;
-	case FOOT:
-	  a = new Armour(getSerial(),name,weight,FOOT,xloc,yloc,color,look,armour,dodge); break;
-	}
+	Armour* a = new Armour(getSerial(),name,weight,type,xloc,yloc,color,look,armour,dodge); 
 	return a;
 	break;
   }
