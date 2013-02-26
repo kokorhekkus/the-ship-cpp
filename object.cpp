@@ -3,6 +3,7 @@
 #include "object.h"
 #include "log.h"
 #include "engine.h"
+#include "random.h"
 
 #include <sstream>
 #include <algorithm>
@@ -243,9 +244,34 @@ void ThingMaker::initThings() {
 
   // Footwear (-)
   FootDat.push_back("4 -combat boots                   2          2 0 5 0  0 0 0 0 0 ");
+
+  // set up adjectives
+  adjectivesGun.push_back("big");           adjectivesGun.push_back("old");
+  adjectivesGun.push_back("huge");          adjectivesGun.push_back("new");
+  adjectivesGun.push_back("small");         adjectivesGun.push_back("well-balanced");
+  adjectivesGun.push_back("tiny");          adjectivesGun.push_back("unusual");
+  adjectivesGun.push_back("chrome-plated"); adjectivesGun.push_back("deadly-looking");
+  adjectivesGun.push_back("matte black");   adjectivesGun.push_back("plastic");
+  adjectivesGun.push_back("rusty");         adjectivesGun.push_back("ceramic");
+  adjectivesGun.push_back("corroded");      adjectivesGun.push_back("metal");
+  adjectivesGun.push_back("sleek");         adjectivesGun.push_back("antique");
+  adjectivesGun.push_back("glossy");        adjectivesGun.push_back("dull");
+
+  adjectivesArmour.push_back("red");          adjectivesArmour.push_back("old");
+  adjectivesArmour.push_back("green");        adjectivesArmour.push_back("new");
+  adjectivesArmour.push_back("blue");         adjectivesArmour.push_back("unusual");
+  adjectivesArmour.push_back("yellow");       adjectivesArmour.push_back("antique");
+  adjectivesArmour.push_back("indigo");       adjectivesArmour.push_back("fancy");
+  adjectivesArmour.push_back("camoflage");    adjectivesArmour.push_back("faded");
+  adjectivesArmour.push_back("dusty");        adjectivesArmour.push_back("badly fitting");
+  adjectivesArmour.push_back("bulky");        adjectivesArmour.push_back("rotting");
+  adjectivesArmour.push_back("well-fitting"); adjectivesArmour.push_back("brand-new");
+  adjectivesArmour.push_back("ripped");       adjectivesArmour.push_back("teal");
 }
 
-// TODO: randomise the object and its properties
+// TODO: randomise the object and its properties: all objects in The Ship are unique
+// TODO: add more than one object per group, and pick which one to instantiate based on level
+//       and rarity
 Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
   shiplog("->ThingMaker::instantiate",50);
   switch (type) {
@@ -259,13 +285,24 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	  dat = LRWDat[0];
 	}
 	
+	// item colour & look
 	string s = dat.substr(0,2);
 	s.erase(s.find_last_not_of(' ')+1); // right-trim whitespace
 	int icolor = atoi(s.c_str());
 	mapColor color = getMapColor(icolor);
+
 	char look = dat[2];
+
+	// name the item
 	string name = dat.substr(3,30);
 	name.erase(name.find_last_not_of(' ')+1); // right-trim whitespace
+	// append adjective
+	int adjIdx = inRange(0,adjectivesGun.size()-1);
+	string adj = adjectivesGun[adjIdx];
+	adj.append(" ");
+	name = adj + name;
+
+	// item attributes
 	s = dat.substr(34,3);
 	int weight = atoi(s.c_str());
 	s = dat.substr(37,2);
@@ -315,13 +352,24 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	  dat = FootDat[0]; break;
 	}
 	
+	// item colour & look
 	string s = dat.substr(0,2);
 	s.erase(s.find_last_not_of(' ')+1); // right-trim whitespace
 	int icolor = atoi(s.c_str());
 	mapColor color = getMapColor(icolor);
+
 	char look = dat[2];
+
+	// name the item
 	string name = dat.substr(3,30);
 	name.erase(name.find_last_not_of(' ')+1); // right-trim whitespace
+	// append adjective
+	int adjIdx = inRange(0,adjectivesGun.size()-1);
+	string adj = adjectivesArmour[adjIdx];
+	adj.append(" ");
+	name = adj + name;
+
+	// item attributes
 	s = dat.substr(34,3);
 	int weight = atoi(s.c_str());
 	s = dat.substr(37,2);

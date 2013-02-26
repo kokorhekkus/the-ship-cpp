@@ -20,12 +20,12 @@ private:
 
   // List of available inventory letters, and a mask to indicate which are taken already,
   // for use with inventory letter assigning accents
-  // TODO: investigate if this is the best way of doing things, e.g.
-  //       with the 'static' declaration
+  // -Declared static so it's a shared resource between all objects
   const static std::string invIDs;
   static std::string invIDsAvailable;
   // get an available letter to identify an object in the player's inventory
   char getNextInvID();
+  
 
 public:
   // ALWAYS use getSerial() to get a unique serial number for the ID
@@ -89,6 +89,9 @@ private:
   std::vector<std::string> LegDat;
   std::vector<std::string> FootDat;
   std::vector<std::string> AmmoDat;
+
+  std::vector<std::string> adjectivesGun;
+  std::vector<std::string> adjectivesArmour;
 
   // use this to assign a unique serial number to game objects
   unsigned int getSerial();
