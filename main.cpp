@@ -162,8 +162,14 @@ int main(int argc, char *argv[]) {
 		unsigned int objectId = currentLevel.objectAt(x,y);
 		if (objectId != 0) {
 		  Thing t = currentLevel.getObject(objectId);
-		  string s = "You see a ";
-		  s.append(t.getName());
+		  string s = "You see ";
+		  string name = t.getName();
+		  if (name[0] == 'a' || name[0] == 'e' || name[0] == 'i' || name[0] == 'o' || name[0] == 'u') {
+			s.append("an ");
+		  } else {
+			s.append("a ");
+		  }
+		  s.append(name);
 		  s.append(".");
 		  msg.print(s);
 		}

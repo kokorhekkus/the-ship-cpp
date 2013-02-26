@@ -228,22 +228,28 @@ mapColor ThingMaker::getMapColor(int i) {
 // l Luck Mod          62-63    2 
 void ThingMaker::initThings() {
   // Ranged weapons (/)
-  LRWDat.push_back("5 /sharplight projector          1  1 1 6 0 0 0 0 0  0 0 0 0 0 ");
+  LRWDat.push_back( "5 /sharplight projector          1  3 1 6 0 0 0 0 0  0 0 0 0 0 ");
+  LRWDat.push_back( "5 /maser                         3  6 3 100 0 0 0 0  0 0 0 0 0 ");
 
   // Melee weapons (\) (note escaped '\')
   SRWDat.push_back("14\\forceknife                    1  1 1 4 0 0 0 0 0  0 0 0 0 0 ");
+  SRWDat.push_back("14\\monofilament loop             1  1 1 100 0 0 0 0  0 0 0 0 0 ");
 
   // Body armour (])
-  BodyDat.push_back("13]tungsten weave vest            5          3 0 2 0  0 0 0 0 0 ");
+  BodyDat.push_back("13]tungsten weave vest           5          3 0 2 0  0 0 0 0 0 ");
+  BodyDat.push_back("13]ceramic plate armour          10         100 0 0  0 0 0 0 0 ");
 
   // Headwear (^)
-  HeadDat.push_back("15^carbon fibre headband          1          1 0 0 0  0 0 0 0 0 ");
+  HeadDat.push_back("15^carbon fibre headband         1          1 0 0 0  0 0 0 0 0 ");
+  HeadDat.push_back("15^three-ply helmet              3          3 0 0 0  0 0 0 0 0 ");
 
   // Legwear (|)
-  LegDat.push_back("11|ceramic plate leggings         10         9 0 0 0  0 0 0 0 0 ");
+  LegDat.push_back( "11|pair of Kevlar trousers       3          6 0 1 0  0 0 0 0 0 ");
+  LegDat.push_back( "11|set of ceramic plate leggings 10         9 0 0 0  0 0 0 0 0 ");
 
   // Footwear (-)
-  FootDat.push_back("4 -combat boots                   2          2 0 5 0  0 0 0 0 0 ");
+  FootDat.push_back("4 -pair of combat boots          2          2 0 5 0  0 0 0 0 0 ");
+  FootDat.push_back("4 -pair of tabi                  1          0 5 3 0  0 0 0 0 0 ");
 
   // set up adjectives
   adjectivesGun.push_back("big");           adjectivesGun.push_back("old");
@@ -278,11 +284,14 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
   case LRW:
   case SRW: {
 	shiplog("LRW/SRW",80);
+	int datIdx;
 	string dat;
 	if (type == SRW) {
-	  dat = SRWDat[0];
+	  datIdx = inRange(0,SRWDat.size()-1);
+	  dat = SRWDat[datIdx];
 	} else {
-	  dat = LRWDat[0];
+	  datIdx = inRange(0,LRWDat.size()-1);
+	  dat = LRWDat[datIdx];
 	}
 	
 	// item colour & look
@@ -340,16 +349,21 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
   case LEG:
   case FOOT: {
 	shiplog("BODY/HEAD/LEG/FOOT",80);
+	int datIdx;
 	string dat;
 	switch (type) {
 	case BODY:
-	  dat = BodyDat[0]; break;
+	  datIdx = inRange(0,BodyDat.size()-1);
+	  dat = BodyDat[datIdx]; break;
 	case HEAD:
-	  dat = HeadDat[0]; break;
+	  datIdx = inRange(0,HeadDat.size()-1);
+	  dat = HeadDat[datIdx]; break;
 	case LEG:
-	  dat = LegDat[0]; break;
+	  datIdx = inRange(0,LegDat.size()-1);
+	  dat = LegDat[datIdx]; break;
 	case FOOT:
-	  dat = FootDat[0]; break;
+	  datIdx = inRange(0,FootDat.size()-1);
+	  dat = FootDat[datIdx]; break;
 	}
 	
 	// item colour & look

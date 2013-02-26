@@ -47,6 +47,7 @@ public:
 };
 
 // a weapon
+// TODO: add 'extra' damage, e.g. the 2 in 1d6+2
 class Weapon : public Thing {
   // weapon stats
   int range;
