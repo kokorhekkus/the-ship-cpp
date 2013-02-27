@@ -80,13 +80,13 @@ void Thing::delInventoryLetter() {
 // Weapon class implementation
 //----------------------------------------------------------------------
 Weapon::Weapon(unsigned int id, string& name, int weight, inventoryType type,
-		 int xloc, int yloc,
-		 mapColor color, char look,
-		 int a_range, int a_to_hit,
-		 int a_dmgdice_num, int a_dmgdice_sides) :
+			   int xloc, int yloc,
+			   mapColor color, char look,
+			   int a_range, int a_to_hit,
+			   int a_dmgdice_num, int a_dmgdice_sides, int a_dmg_extra) :
   Thing(id, name, weight, type, xloc, yloc, color, look),
-  range(a_range), dmgdice_num(a_dmgdice_num),
-  dmgdice_sides(a_dmgdice_sides), to_hit(a_to_hit) {
+  range(a_range), to_hit(a_to_hit), dmgdice_num(a_dmgdice_num),
+  dmgdice_sides(a_dmgdice_sides), dmg_extra(a_dmg_extra) {
 
   ostringstream oss;
   oss << "Creating new Weapon object with id " << getId();
@@ -104,9 +104,9 @@ Weapon::~Weapon() {
 // Armour class implementation
 //----------------------------------------------------------------------
 Armour::Armour(unsigned int id, string& name, int weight, inventoryType type,
-		 int xloc, int yloc,
-		 mapColor color, char look,
-		 int a_modArmour, int a_modDodge) :
+			   int xloc, int yloc,
+			   mapColor color, char look,
+			   int a_modArmour, int a_modDodge) :
   Thing(id, name, weight, type, xloc, yloc, color, look),
   modArmour(a_modArmour), modDodge(a_modDodge) {
 
@@ -205,7 +205,7 @@ mapColor ThingMaker::getMapColor(int i) {
 //
 // object definition string:
 //
-// OKNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNWWWRRnnSSHHAASSDDLLLssiiccddll
+// OKNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNWWWRRnnSSEEHHAASSDDLLLssiiccddllrrr
 //
 //   Attribute         Position Length Notes
 //--------------------------------------------------------------
@@ -216,52 +216,55 @@ mapColor ThingMaker::getMapColor(int i) {
 // R Range             37-38    2
 // n Number (Dmg Dice) 39-40    2
 // S Sides (Dmg Dice)  41-42    2
-// H To Hit            43-44    2
-// A Armour Mod        45-46    2
-// S Speed Mod         47-48    2
-// D Dodge Mod         49-50    2
-// L Hit Points Mod    51-53    3
-// s Strength Mod      54-55    2 
-// i Intelligence Mod  56-57    2 
-// c Constitution Mod  58-59    2 
-// d Dexterity Mod     60-61    2 
-// l Luck Mod          62-63    2 
+// E Extra Damage      43-44    2
+// H To Hit            45-46    2
+// A Armour Mod        47-48    2
+// S Speed Mod         49-50    2
+// D Dodge Mod         51-53    2
+// L Hit Points Mod    54-56    3
+// s Strength Mod      56-57    2 
+// i Intelligence Mod  58-59    2 
+// c Constitution Mod  60-61    2 
+// d Dexterity Mod     62-63    2 
+// l Luck Mod          64-65    2 
+// r Rarity            65-67    3      Percent generation chance, lower is rarer
 void ThingMaker::initThings() {
   // Ranged weapons (/)
-  LRWDat.push_back( "5 /sharplight projector          1  3 1 6 0 0 0 0 0  0 0 0 0 0 ");
-  LRWDat.push_back( "5 /maser                         3  6 3 100 0 0 0 0  0 0 0 0 0 ");
+  LRWDat.push_back( "5 /sharplight projector          1  3 1 6 0 0 0 0 0 0  0 0 0 0 0 10");
+  LRWDat.push_back( "5 /maser                         3  6 3 100 0 0 0 0 0  0 0 0 0 0 40");
 
   // Melee weapons (\) (note escaped '\')
-  SRWDat.push_back("14\\forceknife                    1  1 1 4 0 0 0 0 0  0 0 0 0 0 ");
-  SRWDat.push_back("14\\monofilament loop             1  1 1 100 0 0 0 0  0 0 0 0 0 ");
+  SRWDat.push_back("14\\forceknife                    1  1 1 4 0 0 0 0 0 0  0 0 0 0 0 10");
+  SRWDat.push_back("14\\monofilament loop             1  1 1 100 0 0 0 0 0  0 0 0 0 0 20");
 
   // Body armour (])
-  BodyDat.push_back("13]tungsten weave vest           5          3 0 2 0  0 0 0 0 0 ");
-  BodyDat.push_back("13]ceramic plate armour          10         100 0 0  0 0 0 0 0 ");
+  BodyDat.push_back("13]tungsten weave vest           5            3 0 2 0  0 0 0 0 0 20");
+  BodyDat.push_back("13]ceramic plate armour          10           100 0 0  0 0 0 0 0 30");
 
   // Headwear (^)
-  HeadDat.push_back("15^carbon fibre headband         1          1 0 0 0  0 0 0 0 0 ");
-  HeadDat.push_back("15^three-ply helmet              3          3 0 0 0  0 0 0 0 0 ");
+  HeadDat.push_back("15^carbon fibre headband         1            1 0 0 0  0 0 0 0 0 10");
+  HeadDat.push_back("15^three-ply helmet              3            3 0 0 0  0 0 0 0 0 20");
 
   // Legwear (|)
-  LegDat.push_back( "11|pair of Kevlar trousers       3          6 0 1 0  0 0 0 0 0 ");
-  LegDat.push_back( "11|set of ceramic plate leggings 10         9 0 0 0  0 0 0 0 0 ");
+  LegDat.push_back( "11|pair of Kevlar trousers       3            6 0 1 0  0 0 0 0 0 20");
+  LegDat.push_back( "11|set of ceramic plate leggings 10           9 0 0 0  0 0 0 0 0 30");
 
   // Footwear (-)
-  FootDat.push_back("4 -pair of combat boots          2          2 0 5 0  0 0 0 0 0 ");
-  FootDat.push_back("4 -pair of tabi                  1          0 5 3 0  0 0 0 0 0 ");
+  FootDat.push_back("4 -pair of combat boots          2            2 0 5 0  0 0 0 0 0 10");
+  FootDat.push_back("4 -pair of tabi                  1            0 5 3 0  0 0 0 0 0 20");
 
   // set up adjectives
-  adjectivesGun.push_back("big");           adjectivesGun.push_back("old");
-  adjectivesGun.push_back("huge");          adjectivesGun.push_back("new");
-  adjectivesGun.push_back("small");         adjectivesGun.push_back("well-balanced");
-  adjectivesGun.push_back("tiny");          adjectivesGun.push_back("unusual");
-  adjectivesGun.push_back("chrome-plated"); adjectivesGun.push_back("deadly-looking");
-  adjectivesGun.push_back("matte black");   adjectivesGun.push_back("plastic");
-  adjectivesGun.push_back("rusty");         adjectivesGun.push_back("ceramic");
-  adjectivesGun.push_back("corroded");      adjectivesGun.push_back("metal");
-  adjectivesGun.push_back("sleek");         adjectivesGun.push_back("antique");
-  adjectivesGun.push_back("glossy");        adjectivesGun.push_back("dull");
+  adjectivesGun.push_back("big");             adjectivesGun.push_back("old");
+  adjectivesGun.push_back("huge");            adjectivesGun.push_back("new");
+  adjectivesGun.push_back("small");           adjectivesGun.push_back("well-balanced");
+  adjectivesGun.push_back("tiny");            adjectivesGun.push_back("unusual");
+  adjectivesGun.push_back("chrome-plated");   adjectivesGun.push_back("deadly-looking");
+  adjectivesGun.push_back("matte black");     adjectivesGun.push_back("plastic");
+  adjectivesGun.push_back("rusty");           adjectivesGun.push_back("ceramic");
+  adjectivesGun.push_back("corroded");        adjectivesGun.push_back("metallic");
+  adjectivesGun.push_back("sleek");           adjectivesGun.push_back("antique");
+  adjectivesGun.push_back("glossy");          adjectivesGun.push_back("dull");
+  adjectivesGun.push_back("black");           adjectivesGun.push_back("pitted");
 
   adjectivesArmour.push_back("red");          adjectivesArmour.push_back("old");
   adjectivesArmour.push_back("green");        adjectivesArmour.push_back("new");
@@ -273,11 +276,11 @@ void ThingMaker::initThings() {
   adjectivesArmour.push_back("bulky");        adjectivesArmour.push_back("rotting");
   adjectivesArmour.push_back("well-fitting"); adjectivesArmour.push_back("brand-new");
   adjectivesArmour.push_back("ripped");       adjectivesArmour.push_back("teal");
+  adjectivesArmour.push_back("decorated");    adjectivesArmour.push_back("pitted");
 }
 
 // TODO: randomise the object and its properties: all objects in The Ship are unique
-// TODO: add more than one object per group, and pick which one to instantiate based on level
-//       and rarity
+// TODO: pick which object to instantiate based on level and rarity
 Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
   shiplog("->ThingMaker::instantiate",50);
   switch (type) {
@@ -321,27 +324,29 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	s = dat.substr(41,2);
 	int dmgdice_sides = atoi(s.c_str());
 	s = dat.substr(43,2);
-	int to_hit = atoi(s.c_str());
+	int dmg_extra = atoi(s.c_str());
 	s = dat.substr(45,2);
-	int armour= atoi(s.c_str());
+	int to_hit = atoi(s.c_str());
 	s = dat.substr(47,2);
-	int speed = atoi(s.c_str());
+	int armour= atoi(s.c_str());
 	s = dat.substr(49,2);
+	int speed = atoi(s.c_str());
+	s = dat.substr(51,2);
 	int dodge = atoi(s.c_str());
-	s = dat.substr(51,3);
+	s = dat.substr(54,3);
 	int life = atoi(s.c_str());
-	s = dat.substr(54,2);
-	int strength = atoi(s.c_str());
 	s = dat.substr(56,2);
-	int intelligence = atoi(s.c_str());
+	int strength = atoi(s.c_str());
 	s = dat.substr(58,2);
-	int constitution = atoi(s.c_str());
+	int intelligence = atoi(s.c_str());
 	s = dat.substr(60,2);
-	int dexterity = atoi(s.c_str());
+	int constitution = atoi(s.c_str());
 	s = dat.substr(62,2);
+	int dexterity = atoi(s.c_str());
+	s = dat.substr(64,2);
 	int luck = atoi(s.c_str());
 
-	Weapon* w = new Weapon(getSerial(),name,weight,type,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides);	return w;
+	Weapon* w = new Weapon(getSerial(),name,weight,type,xloc,yloc,color,look,range,to_hit,dmgdice_num,dmgdice_sides,dmg_extra);	return w;
 	break;
   }
   case BODY:
@@ -386,23 +391,23 @@ Thing* ThingMaker::instantiate(inventoryType type, int xloc, int yloc) {
 	// item attributes
 	s = dat.substr(34,3);
 	int weight = atoi(s.c_str());
-	s = dat.substr(37,2);
-	int  armour= atoi(s.c_str());
 	s = dat.substr(47,2);
-	int  speed = atoi(s.c_str());
+	int  armour= atoi(s.c_str());
 	s = dat.substr(49,2);
+	int  speed = atoi(s.c_str());
+	s = dat.substr(51,2);
 	int  dodge = atoi(s.c_str());
-	s = dat.substr(51,3);
+	s = dat.substr(54,3);
 	int  life = atoi(s.c_str());
-	s = dat.substr(54,2);
-	int  strength = atoi(s.c_str());
 	s = dat.substr(56,2);
-	int  intelligence = atoi(s.c_str());
+	int  strength = atoi(s.c_str());
 	s = dat.substr(58,2);
-	int  constitution = atoi(s.c_str());
+	int  intelligence = atoi(s.c_str());
 	s = dat.substr(60,2);
-	int  dexterity = atoi(s.c_str());
+	int  constitution = atoi(s.c_str());
 	s = dat.substr(62,2);
+	int  dexterity = atoi(s.c_str());
+	s = dat.substr(64,2);
 	int  luck = atoi(s.c_str());
 
 	Armour* a = new Armour(getSerial(),name,weight,type,xloc,yloc,color,look,armour,dodge); 

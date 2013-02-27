@@ -47,20 +47,22 @@ public:
 };
 
 // a weapon
-// TODO: add 'extra' damage, e.g. the 2 in 1d6+2
 class Weapon : public Thing {
   // weapon stats
   int range;
+  // the following three equate to:
+  // 1d6+2 : 1 = dmgdice_num, 6 = dmgdice_sides, 2 = dmg_extra
   int dmgdice_num;
   int dmgdice_sides;
+  int dmg_extra;
   int to_hit;
 
 public:
   Weapon(unsigned int id, std::string& name, int weight, inventoryType type,
-	  int xloc, int yloc,
-	  mapColor color, char look,
-	  int range, int to_hit,
-	  int dmgdice_num, int dmgdice_sides);
+		 int xloc, int yloc,
+		 mapColor color, char look,
+		 int range, int to_hit,
+		 int dmgdice_num, int dmgdice_sides, int dmg_extra);
   ~Weapon();
 };
 
