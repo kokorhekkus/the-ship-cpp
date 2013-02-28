@@ -85,11 +85,6 @@ int main(int argc, char *argv[]) {
   currentLevel.addObject(*leg);
   currentLevel.addObject(*foot);
 
-  // For some reason the bloody inventory list segfaults on being accessed if empty,
-  // unless we do something like the following.  No idea why:
-  pc.addToInv(*lrw);
-  pc.delFromInv(lrw->getId());
-  
   printAll(currentLevel, pc);
 
   MessageLog msg;

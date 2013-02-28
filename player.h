@@ -34,7 +34,7 @@ private:
   int speed;    // max 99
 
   // XP level calculation array
-  int xpCalcArray[99];
+  int xpCalcArray[100];
 
   // inventory: needs to be pointers to the base class due to
   //            object slicing

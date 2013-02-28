@@ -27,14 +27,14 @@ Player::Player(string& a_name, playerWorld a_world, playerCareer a_career,
   shiplog("Creating new Player object", 10);
 
   // set up XP calculation array
-  for (int i=1; i<100; i++) {
+  for (int i=0; i<100; i++) {
 	if (i<=10) {
 	  xpCalcArray[i] = i*100;
 	}
-	if (i>10 || i<=50) {
+	if (i>10 && i<=50) {
 	  xpCalcArray[i] = i*1000;
 	}
-	if (i>50 || i<=99) {
+	if (i>50) {
 	  xpCalcArray[i] = i*5000;
 	}
   }
@@ -269,8 +269,6 @@ int Player::printInventory() const {
   shiplog("->Player::printInventory()",50);
 
   // Test for no items
-  // THIS TEST SEGFAULTS with nothing in the inventory. No idea why.Committing anyway,
-  //                     as bug only applies with an empty inventory (fix later)
   ostringstream oss;
   oss << "Inventory Size: " << inventory.size();
   string s = oss.str();
@@ -552,15 +550,12 @@ int Player::addToInv(Thing& t) {
   shiplog(s,50);
 
   t.setInventoryLetter();
-  // TODO: once the bug with the segfault on empty inventory operations
-  //       is resolved, ensure we don't add more than 52 items to the list,
-  //       and return 0 if we do
-  //if (inventory.size() == 52) {
-  //shiplog("Inventory full, not adding",5);
-  //return 0;
-  //} else {
+  if (inventory.size() == 52) {
+  shiplog("Inventory full, not adding",5);
+  return 0;
+  } else {
       inventory.push_back(&t);
-  //}
+  }
   shiplog("<-Player::addToInv",60);
   return 1;
 }
