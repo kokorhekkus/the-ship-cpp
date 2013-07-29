@@ -2,8 +2,8 @@ all: theship
 
 theship: main.o engine.o random.o player.o screens.o monster.o object.o map.o \
 		 screenobject.o log.o level.o message.o
-		g++ -g -lncurses -o theship main.o engine.o random.o player.o screens.o \
-		monster.o object.o map.o screenobject.o log.o level.o message.o
+		g++ -g -o theship main.o engine.o random.o player.o screens.o \
+		monster.o object.o map.o screenobject.o log.o level.o message.o -lncurses -ltinfo
 
 main.o: main.cpp engine.h object.h map.h screenobject.h player.h screens.h monster.h \
 		log.h level.h message.h
