@@ -96,30 +96,30 @@ int main(int argc, char *argv[]) {
 	char c = getch();
 	
 	// color test
-	if (c == 'c') {
-	  save_screen("scrtocol.tdd");
-	  clear();
-	  write_line(4,30,1,20,'r',RED);
-	  write_line(5,30,1,20,'g',GREEN);
-	  write_line(6,30,1,20,'c',CYAN);
-	  write_line(7,30,1,20,'g',L_GREY);
-	  write_line(8,30,1,20,'b',BROWN);
-	  write_line(9,30,1,20,'b',BLUE);
-	  write_line(10,30,1,20,'m',MAGENTA);
-	  write_line(11,30,1,20,'b',BLACK);
-	  write_line(12,30,1,20,'o',ORANGE);
-	  write_line(13,30,1,20,'g',L_GREEN);
-	  write_line(14,30,1,20,'c',L_CYAN);
-	  write_line(15,30,1,20,'w',WHITE);
-	  write_line(16,30,1,20,'y',YELLOW);
-	  write_line(17,30,1,20,'b',L_BLUE);
-	  write_line(18,30,1,20,'p',PINK);
-	  write_line(19,30,1,20,'g',D_GREY);
-	}
-	if (c == 'C') {
-	  clear();
-	  restore_screen("scrtocol.tdd");
-	}
+	//if (c == 'c') {
+//	  save_screen("scrtocol.tdd");
+//	  clear();
+//	  write_line(4,30,1,20,'r',RED);
+//	  write_line(5,30,1,20,'g',GREEN);
+//	  write_line(6,30,1,20,'c',CYAN);
+//	  write_line(7,30,1,20,'g',L_GREY);
+//	  write_line(8,30,1,20,'b',BROWN);
+//	  write_line(9,30,1,20,'b',BLUE);
+//	  write_line(10,30,1,20,'m',MAGENTA);
+//	  write_line(11,30,1,20,'b',BLACK);
+//	  write_line(12,30,1,20,'o',ORANGE);
+//	  write_line(13,30,1,20,'g',L_GREEN);
+//	  write_line(14,30,1,20,'c',L_CYAN);
+//	  write_line(15,30,1,20,'w',WHITE);
+//	  write_line(16,30,1,20,'y',YELLOW);
+//	  write_line(17,30,1,20,'b',L_BLUE);
+//	  write_line(18,30,1,20,'p',PINK);
+//	  write_line(19,30,1,20,'g',D_GREY);
+//	}
+//	if (c == 'C') {
+//	  clear();
+//	  restore_screen("scrtocol.tdd");
+//	}
 	
 	// vi-like movement keys
 	//
