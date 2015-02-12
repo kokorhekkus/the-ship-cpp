@@ -31,3 +31,4 @@ void error_exit(std::string& msg);
 void error_exit(const char* msg);
 
 #endif
+
