@@ -23,10 +23,6 @@ void write_string(int x, int y, const char* s, mapColor color);
 
 void write_line(int x, int y, int type, int length, char c, mapColor color);
 
-void save_screen(const char *filepath);
-
-void restore_screen(const char *filepath);
-
 void vis_cursor(int visibility);
 
 void set_term_color(mapColor color);

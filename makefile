@@ -1,19 +1,20 @@
 all: theship
 
+# NOTE: Add -ltinfo to run in a native Linux env (i.e. not Cygwin)
 theship: main.o engine.o random.o player.o screens.o monster.o object.o map.o \
 		 screenobject.o log.o level.o message.o
 		g++ -g -o theship main.o engine.o random.o player.o screens.o \
-		monster.o object.o map.o screenobject.o log.o level.o message.o -lncurses -ltinfo
+		monster.o object.o map.o screenobject.o log.o level.o message.o -lncurses
 
 main.o: main.cpp engine.h object.h map.h screenobject.h player.h screens.h monster.h \
 		log.h level.h message.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c main.cpp
 
 engine.o: engine.cpp engine.h enums.h log.h
-		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c engine.cpp
+		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat -c engine.cpp 
 
 random.o: random.cpp random.h log.h
-		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c random.cpp
+		g++ -std=c++11 -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c random.cpp
 
 player.o: player.cpp player.h object.h log.h enums.h map.h screenobject.h engine.h random.h
 		g++ -g -W -Wunused -Wreturn-type -Wswitch -Wformat  -c player.cpp

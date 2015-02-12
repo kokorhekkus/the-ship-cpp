@@ -5,7 +5,6 @@
 
 #include "engine.h"
 #include "log.h"
-
 #include <ncurses.h>
 #include <string>
 #include <cstdlib>
@@ -87,29 +86,6 @@ void write_line(int x, int y, int type, int length, char c, mapColor color) {
 	  mvaddch(y+i,x,ch);
 	}
   }
-  //refresh();
-}
-
-
-// save current screen to a file
-void save_screen(const char *filepath) {
-  FILE *tmpscrdat = fopen(filepath, "w+");
-  
-  if ((putwin(stdscr, tmpscrdat)) == ERR) {
-	shiplog("Can't save temporary data to disk!", 1);
-	error_exit("Can't save temporary data to disk!");
-  }
-}
-
-// restore screen from a file
-void restore_screen(const char *filepath) {
-  FILE *tmpscrdat = fopen(filepath, "r");
-  
-  if (tmpscrdat == NULL) {
-	shiplog("Can't find data file to load!", 1);
-	error_exit("Can't find data file to load!");
-  }
-  stdscr = getwin(tmpscrdat);
   //refresh();
 }
 

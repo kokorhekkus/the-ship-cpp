@@ -4,30 +4,17 @@
 #include "random.h"
 #include "log.h"
 
+#include <random>
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+
 using namespace std;
 
 // returns a number in the range lowest >= num <= highest
-// REMEMBER TO SEED THE RNG
 int inRange(int lowest, int highest) {
-  highest++;
-  int base_random = rand(); // in [0, RAND_MAX]
-  if (RAND_MAX == base_random) {
-	return inRange(lowest, highest);
-  }
-  // now guaranteed to be in [0, RAND_MAX]
-  int range     = highest - lowest;
-  int remainder = RAND_MAX % range;
-  int bucket    = RAND_MAX / range;
-  // There are range buckets, plus one smaller interval
-  // within remainder of RAND_MAX
-  if (base_random < RAND_MAX - remainder) {
-    return lowest + base_random/bucket;
-  } else {
-    return inRange(lowest, highest);
-  }
+  std::random_device rd;
+  std::mt19937 mt(rd());
+  std::uniform_int_distribution<int> distribution(lowest, highest);
+  return distribution(mt);
 }
 
 // returns true if the percent chance is 'beaten'
