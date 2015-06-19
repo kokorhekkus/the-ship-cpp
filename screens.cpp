@@ -12,7 +12,7 @@ void title_screen() {
   write_string(36, 4, "The", L_BLUE);
   write_string(40, 4, "Ship", BLUE);
   
-  write_string(27,6, "Press  Space  to continue", RED);
+  write_string(27, 6, "Press  Space  to continue", RED);
   write_char(33, 6, '[', BLUE);
   write_char(39, 6, ']', BLUE);
   

@@ -1,14 +1,0 @@
-
-makefile,287
-theship:theship1,0
-main.o:main.o5,208
-engine.o:engine.o8,358
-random.o:random.o11,465
-player.o:player.o14,564
-screens.o:screens.o17,686
-monster.o:monster.o20,815
-object.o:object.o23,924
-map.o:map.o26,1029
-base.o:base.o29,1124
-log.o:log.o32,1223
-clean:clean34,1246
