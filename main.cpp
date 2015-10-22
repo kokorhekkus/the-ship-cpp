@@ -17,19 +17,16 @@
 
 using namespace std;
 
-// prints out the main game screen
-void printAll(const Level& level, const Player& pc) {
-  main_screen();
-  level.print();
-  pc.printMainScreenInfo();
-  pc.print();
-}
+// print the screen
+//   print_all: if TRUE, print whole screen, if FALSE only print map area
+void printScreen(const Level& level, const Player& pc, bool print_all) {
+	level.print();
+  	pc.print();
 
-// just print the map area
-// TODO: add monster movement and LOS
-void printMap(const Level& level, const Player& pc) {
-  level.print();
-  pc.print();
+  	if (print_all) {
+  		main_screen();
+  		pc.printMainScreenInfo();
+  	}
 }
 
 //----------------------------------------------------------------------
@@ -50,6 +47,8 @@ int main(int argc, char *argv[]) {
   title_screen();
   clear();
   
+  // TODO: check for savegame
+
   shiplog("Getting name", 1);
   vis_cursor(1);
   string iname = get_pcname();
@@ -67,7 +66,7 @@ int main(int argc, char *argv[]) {
   
   shiplog("Generating starting level", 1);
   LevelMap currentLevelMap(1, MAIN);
-  currentLevelMap.generate(1, CORRIDORS);
+  currentLevelMap.generate(1, CAVERN);
   Level currentLevel(&currentLevelMap);
 
   // TEST OBJECTS
@@ -77,14 +76,14 @@ int main(int argc, char *argv[]) {
   Thing* head = tm.instantiate(HEAD,13,12);
   Thing* leg = tm.instantiate(LEG,10,13);
   Thing* foot = tm.instantiate(FOOT,11,13);
-  currentLevel.addObject(*lrw);
-  currentLevel.addObject(*srw);
-  currentLevel.addObject(*body);
-  currentLevel.addObject(*head);
-  currentLevel.addObject(*leg);
-  currentLevel.addObject(*foot);
+  //currentLevel.addObject(*lrw);
+  //currentLevel.addObject(*srw);
+  //currentLevel.addObject(*body);
+  //currentLevel.addObject(*head);
+  //currentLevel.addObject(*leg);
+  //currentLevel.addObject(*foot);
 
-  printAll(currentLevel, pc);
+  printScreen(currentLevel, pc, TRUE);
 
   MessageLog msg;
   msg.print("You're inside.");
@@ -124,7 +123,7 @@ int main(int argc, char *argv[]) {
 	  if (pc.setLocation(dir, currentLevelMap) == 0) {
 		msg.print("Bonk.");
 	  } else {
-		printMap(currentLevel, pc);
+		printScreen(currentLevel, pc, FALSE);
 		int x = pc.getX();
 		int y = pc.getY();
 		unsigned int objectId = currentLevel.objectAt(x,y);
@@ -172,7 +171,7 @@ int main(int argc, char *argv[]) {
 	if (c == 'i') {
 	  if (pc.printInventory()) {
 		msg.printCurrent();
-		printAll(currentLevel, pc);
+		printScreen(currentLevel, pc, TRUE);
 	  } else {
 		// currently only return is 0 for no items
 		msg.print("You have no items in your inventory.");

@@ -26,7 +26,7 @@ enum direction {
 
 enum roomType {
   SQUARE,
-  ROUND
+  HEX
 };
 
 enum levelType {

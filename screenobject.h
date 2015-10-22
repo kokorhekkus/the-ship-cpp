@@ -13,7 +13,7 @@ protected:
   int xloc;
   int yloc;
   mapColor color; // color when visible
-  char look;        // symbol to represent object on floor
+  char look; // symbol to represent object on floor
     
 public:
   ScreenObject(int xloc, int yloc, mapColor color, char look);

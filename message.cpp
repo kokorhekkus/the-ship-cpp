@@ -61,12 +61,12 @@ void MessageLog::print(string& msg) {
   write_string(0, 1, cmsg, L_GREY);
   // print last message at the top
   if (messages.size() > 1) {
-	list<string>::iterator it = messages.end();
-	it--; it--; // end() returns a past-of-end iterator,
+	 list<string>::iterator it = messages.end();
+	 it--; it--; // end() returns a past-of-end iterator,
 	            // so decrement twice to get last message
-	string msg2 = *it;
-	const char* cmsg2 = msg2.c_str();
-	write_string(0, 0, cmsg2, L_GREY);
+	 string msg2 = *it;
+	 const char* cmsg2 = msg2.c_str();
+	 write_string(0, 0, cmsg2, L_GREY);
   }
 }
 
@@ -77,16 +77,16 @@ void MessageLog::printCurrent() {
   list<string>::iterator it = messages.end();
   unsigned int msgNum = messages.size(); 
   if (msgNum >= 1) {
-	it--;
-	string msg = *it;
-	const char* cmsg = msg.c_str();
-	write_string(0, 1, cmsg, L_GREY);
+	 it--;
+	 string msg = *it;
+	 const char* cmsg = msg.c_str();
+	 write_string(0, 1, cmsg, L_GREY);
 
-	if (msgNum > 1) {
-	  it--;
-	  string msg = *it;
-	  const char* cmsg = msg.c_str();
-	  write_string(0, 0, cmsg, L_GREY);
-	}
+	 if (msgNum > 1) {
+	   it--;
+	   string msg = *it;
+	   const char* cmsg = msg.c_str();
+	   write_string(0, 0, cmsg, L_GREY);
+	 }
   }
 }

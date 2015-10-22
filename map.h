@@ -36,14 +36,16 @@ private:
   // write a single feature to a location on the level
   void writeFeature(int x, int y, levelFeature feature);
 
+  // functions to draw stuff
+  void makeSquareRoom(int x_start, int y_start, int x_length, int y_length);
+  void makeRoundRoom(int x_start, int y_start, int x_length, int y_length);
+  void makeCavernLevel();
+
 public:
   LevelMap(int depth, mapBranch branch);
   ~LevelMap();
 
-  // functions to draw stuff
-  void makeRoom(roomType type, int x_start, int y_start,
-				 int x_length, int y_length);
-
+  // Create the structural aspects of the level
   void generate(int depth, levelType type);
 
   // returns the feature at the given location
