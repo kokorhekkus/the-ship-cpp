@@ -29,12 +29,13 @@ private:
 
   // x,y locations of map drawing characters held
   // in a multidimensional array
-  //
-  // TODO: account for terminals of different sizes
   MapChar levelMap[xTerminalSize][yTerminalSize];
 
   // write a single feature to a location on the level
   void writeFeature(int x, int y, levelFeature feature);
+
+  // make map edges solid
+  void mapBoundary();
 
   // functions to draw stuff
   void makeSquareRoom(int x_start, int y_start, int x_length, int y_length);

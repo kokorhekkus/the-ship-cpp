@@ -16,6 +16,7 @@ void initMapDrawingChars() {
   shiplog("Initialising map drawing characters...",1);
 
   MapChar wall(WALL, '#', D_GREY);
+  MapChar uwall(UWALL, '#', D_GREY);
   MapChar floor(FLOOR, '.', L_GREY);
   MapChar grass(GRASS, '.', GREEN);
   MapChar ustair(USTAIR, '<', WHITE);
@@ -24,6 +25,7 @@ void initMapDrawingChars() {
   MapChar odoor(ODOOR, '/', WHITE);
 
   mapDrawingChars[WALL] = wall;
+  mapDrawingChars[UWALL] = uwall;
   mapDrawingChars[FLOOR] = floor;
   mapDrawingChars[GRASS] = grass;
   mapDrawingChars[USTAIR] = ustair;
@@ -69,6 +71,18 @@ LevelMap::~LevelMap() {
   shiplog(s, 10);
 }
 
+// make map edges solid, with undiggable wall
+void LevelMap::mapBoundary() {
+  for (int xx = xMinMapSize; xx < xMaxMapSize; xx++) {
+    levelMap[xx][yMinMapSize] = mapDrawingChars[UWALL];
+    levelMap[xx][yMaxMapSize-1] = mapDrawingChars[UWALL];
+  }
+  for (int yy = yMinMapSize; yy < yMaxMapSize; yy++) {
+    levelMap[xMinMapSize][yy] = mapDrawingChars[UWALL];
+    levelMap[xMaxMapSize-1][yy] = mapDrawingChars[UWALL];
+  }
+}
+
 // write a single feature to a location on the level
 void LevelMap::writeFeature(int x, int y, levelFeature feature) {
   levelMap[x][y] = mapDrawingChars[feature];
@@ -106,7 +120,7 @@ void LevelMap::makeCavernLevel() {
   }
   }
 
-  // run cellular automata
+  // run cellular automata-style rules
   for (int n=0; n<generations; n++) {
 
     for (int x = xMinMapSize; x < xMaxMapSize; x++) {
@@ -134,16 +148,7 @@ void LevelMap::makeCavernLevel() {
     }
     }
   }
-
-  // make map edges solid
-  for (int xx = xMinMapSize; xx < xMaxMapSize; xx++) {
-    levelMap[xx][yMinMapSize] = mapDrawingChars[WALL];
-    levelMap[xx][yMaxMapSize-1] = mapDrawingChars[WALL];
-  }
-  for (int yy = yMinMapSize; yy < yMaxMapSize; yy++) {
-    levelMap[xMinMapSize][yy] = mapDrawingChars[WALL];
-    levelMap[xMaxMapSize-1][yy] = mapDrawingChars[WALL];
-  }
+  mapBoundary();
 }
 
 void LevelMap::generate(int depth, levelType type) {

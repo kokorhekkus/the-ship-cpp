@@ -17,9 +17,11 @@ private:
   LevelMap* levelMap;
 
 public:
-
   Level(LevelMap* a_levelMap);
   ~Level();
+
+  // return the location of an empty map location
+  int* findEmptyLocation() const;
 
   // return 0 if no object at location, otherwise return object ID 
   unsigned int objectAt(int x, int y);

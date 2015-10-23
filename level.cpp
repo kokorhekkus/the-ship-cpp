@@ -2,6 +2,8 @@
 
 #include "level.h"
 #include "log.h"
+#include "random.h"
+#include "config.h"
 
 #include <sstream>
 #include <algorithm>
@@ -20,6 +22,24 @@ Level::Level(LevelMap* a_levelMap) :
 
 Level::~Level() {
   shiplog("Destroying a Level object",10);
+}
+
+// find an empty map location (i.e. floor only)
+int* Level::findEmptyLocation() const {
+	// TODO: will this cause a memory leak..? no cleanup
+	// of array
+	int* location_array = new int[2];
+	int x, y;
+	for(;;) {
+		x = inRange(xMinMapSize,xMaxMapSize);
+		y = inRange(yMinMapSize,yMaxMapSize);
+		if (levelMap->at(x,y) == FLOOR) {
+			break;
+		}
+	}
+	location_array[0] = x;
+	location_array[1] = y;
+	return location_array;
 }
 
 // return 0 if no object at location, otherwise return object ID 
