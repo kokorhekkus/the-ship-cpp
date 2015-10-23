@@ -129,7 +129,7 @@ void LevelMap::makeCavernLevel() {
       int adjWallCount = 0;
       for (int i=-1;i<=1; i++) {
       for (int j=-1;j<=1; j++) {
-        if (levelMap[x+i][y+j].id != FLOOR) {
+          if (this->at(x+i,y+j) != FLOOR) {
           adjWallCount++;
         }
       }
