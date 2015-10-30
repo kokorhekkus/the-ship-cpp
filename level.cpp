@@ -4,6 +4,7 @@
 #include "log.h"
 #include "random.h"
 #include "config.h"
+#include "object.h"
 
 #include <sstream>
 #include <algorithm>
@@ -14,17 +15,36 @@ using namespace std;
 // LevelMap class implementation
 //----------------------------------------------------------------------
 
-Level::Level(LevelMap* a_levelMap) :
-  levelMap(a_levelMap) {
-
+Level::Level(LevelMap* a_levelMap) : levelMap(a_levelMap) {
   shiplog("Creating a new Level object",10);
 }
 
 Level::~Level() {
-  shiplog("Destroying a Level object",10);
+	shiplog("Destroying a Level object",10);
 }
 
-// find an empty map location (i.e. floor only)
+// add a load of random items to the floor of the level
+void Level::addFloorItems(int chanceToGen) {
+	shiplog("Adding random floor items",10);
+
+	ThingMaker tm;
+	tm.initThings();
+
+	// Go through all empty spaces on map and have a chance of creating an object there
+	for (int x = xMinMapSize; x < xMaxMapSize; x++) {
+	for (int y = yMinMapSize; y < yMaxMapSize; y++) {
+		if (levelMap->at(x,y) == FLOOR) {
+			if (percentChance(chanceToGen)) {
+				int objType = inRange(0,5);
+				Thing* thing = tm.instantiate(getInventoryType(objType),x,y);
+				this->addObject(*thing);
+			}
+		}
+	}
+	}
+}
+
+// find a random empty map location (i.e. floor only)
 int* Level::findEmptyLocation() const {
 	// TODO: will this cause a memory leak..? no cleanup
 	// of array
@@ -114,4 +134,28 @@ void Level::printObjects() const {
 void Level::print() const {
   levelMap->print();
   printObjects();
+}
+
+// convert an integer to an inventoryType enum
+inventoryType Level::getInventoryType(int i) {
+  switch (i) {
+    case 0:
+      return LRW;
+      break;
+    case 1:
+      return SRW;
+      break;
+    case 2:
+      return BODY;
+      break;
+    case 3:
+      return HEAD;
+      break;
+    case 4:
+      return LEG;
+      break;
+    case 5:
+      return FOOT;
+      break;
+  }
 }

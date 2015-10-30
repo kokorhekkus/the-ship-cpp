@@ -3,6 +3,7 @@
 
 #include "map.h"
 #include "object.h"
+#include "enums.h"
 
 #include <list>
 
@@ -16,9 +17,15 @@ private:
   std::list<Thing*> objects;
   LevelMap* levelMap;
 
+  inventoryType getInventoryType(int i);
+
 public:
   Level(LevelMap* a_levelMap);
   ~Level();
+
+  // add a load of random items to the floor of the level, percent chance
+  // to generate an item is chanceToGen
+  void addFloorItems(int chanceToGen);
 
   // return the location of an empty map location
   int* findEmptyLocation() const;

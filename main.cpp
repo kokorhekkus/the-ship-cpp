@@ -36,8 +36,6 @@ int main(int argc, char *argv[]) {
 	shiplog("Initialising", 1);
 	// init, and enter game loop checking for keyboard input
 	init_for_draw();
-	ThingMaker tm;
-	tm.initThings();
 	init_monsters();
 	initMapDrawingChars();
 
@@ -60,11 +58,11 @@ int main(int argc, char *argv[]) {
 	shiplog("Getting regiment choice", 1);
 	playerCareer c_choice = career_choice();
 
-
 	shiplog("Generating starting level", 1);
 	LevelMap currentLevelMap(1, MAIN);
 	currentLevelMap.generate(1, CAVERN);
 	Level currentLevel(&currentLevelMap);
+  currentLevel.addFloorItems(2);
 
 	shiplog("Creating PC", 1);
 	// find empty random area of map
@@ -72,21 +70,6 @@ int main(int argc, char *argv[]) {
 	int startx = *(startLoc);
 	int starty = *(startLoc+1);
 	Player pc(iname, w_choice, c_choice, startx, starty, WHITE, '@');
-
-
-	// TEST OBJECTS
-	//Thing* lrw = tm.instantiate(LRW,10,12);
-	//Thing* srw = tm.instantiate(SRW,11,12);
-	//Thing* body = tm.instantiate(BODY,12,12);
-	//Thing* head = tm.instantiate(HEAD,13,12);
-	//Thing* leg = tm.instantiate(LEG,10,13);
-	//Thing* foot = tm.instantiate(FOOT,11,13);
-	//currentLevel.addObject(*lrw);
-	//currentLevel.addObject(*srw);
-	//currentLevel.addObject(*body);
-	//currentLevel.addObject(*head);
-	//currentLevel.addObject(*leg);
-	//currentLevel.addObject(*foot);
 
 	clear();
 	printScreen(currentLevel, pc, TRUE);
