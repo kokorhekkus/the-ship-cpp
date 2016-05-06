@@ -45,10 +45,8 @@ void Level::addFloorItems(int chanceToGen) {
 }
 
 // find a random empty map location (i.e. floor only)
-int* Level::findEmptyLocation() const {
-	// TODO: will this cause a memory leak..? no cleanup
-	// of array
-	int* location_array = new int[2];
+Location Level::findEmptyLocation() const {
+	Location loc;
 	int x, y;
 	for(;;) {
 		x = inRange(xMinMapSize,xMaxMapSize);
@@ -57,25 +55,22 @@ int* Level::findEmptyLocation() const {
 			break;
 		}
 	}
-	location_array[0] = x;
-	location_array[1] = y;
-	return location_array;
+	loc.x = x;
+	loc.y = y;
+	return loc;
 }
 
 // return 0 if no object at location, otherwise return object ID 
 unsigned int Level::objectAt(int x, int y) {
   // we can easily compare lists, so convert from arrays
   // (easy to initialise a list from an array)
-  int locArray1[2] = {x, y};
-  list<int> locList1(locArray1, locArray1 + sizeof(locArray1) / sizeof(int));
+  Location loc = {x, y};
   
   for(list<Thing*>::iterator it = objects.begin(); it != objects.end(); ++it) {
 	
-	int* locArray2p = (*it)->getLocation();
-	int locArray2[2] = {*(locArray2p), *(locArray2p+1)};
-	list<int> locList2(locArray2, locArray2 + sizeof(locArray2) / sizeof(int));
+	Location objLoc = (*it)->getLocation();
 
-	if (locList1 == locList2) {
+	if ((loc.x == objLoc.x) && (loc.y == objLoc.y)) {
 	  unsigned int retId = (*it)->getId();
 	  ostringstream oss;
 	  oss << "Found object ID " << retId << " at location (" << x << "," << y << ")";

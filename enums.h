@@ -85,4 +85,11 @@ enum mapBranch {
   REACTOR
 };
 
+// also common data structures
+struct Location {
+  int x;
+  int y;
+};
+
+
 #endif

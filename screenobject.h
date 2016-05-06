@@ -20,7 +20,7 @@ public:
   virtual ~ScreenObject();
 
   // returns location
-  int* getLocation() const; // returns an array [x,y]
+  Location getLocation() const;
   int getX() const;
   int getY() const;
 

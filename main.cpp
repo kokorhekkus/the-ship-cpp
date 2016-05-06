@@ -66,10 +66,8 @@ int main(int argc, char *argv[]) {
 
 	shiplog("Creating PC", 1);
 	// find empty random area of map
-	int* startLoc = currentLevel.findEmptyLocation();
-	int startx = *(startLoc);
-	int starty = *(startLoc+1);
-	Player pc(iname, w_choice, c_choice, startx, starty, WHITE, '@');
+	Location startLoc = currentLevel.findEmptyLocation();
+	Player pc(iname, w_choice, c_choice, startLoc.x, startLoc.y, WHITE, '@');
 
 	clear();
 	printScreen(currentLevel, pc, TRUE);
@@ -135,11 +133,9 @@ int main(int argc, char *argv[]) {
 	// pick up objects from the floor
   if (c == 'g') {
   	shiplog("Trying to pick up an object",50);
-  	int* loc = pc.getLocation();
-  	int x = *(loc);
-  	int y = *(loc+1);
+  	Location loc = pc.getLocation();
 
-  	unsigned int id = currentLevel.objectAt(x, y); 
+  	unsigned int id = currentLevel.objectAt(loc.x, loc.y); 
   	if (id != 0) {
   		Thing& t = currentLevel.getObject(id);
   		ostringstream oss;

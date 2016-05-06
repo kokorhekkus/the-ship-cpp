@@ -16,13 +16,13 @@ ScreenObject::ScreenObject(int a_xloc, int a_yloc,
 ScreenObject::~ScreenObject() {}
 
 // Location getters
-int* ScreenObject::getLocation() const {
+Location ScreenObject::getLocation() const {
   // TODO: will this cause a memory leak..? no cleanup
   // of array
-  int* location_array = new int[2];
-  location_array[0] = xloc;
-  location_array[1] = yloc;
-  return location_array;
+  Location loc;
+  loc.x = xloc;
+  loc.y = yloc;
+  return loc;
 }
 int ScreenObject::getX() const { return xloc; }
 int ScreenObject::getY() const { return yloc; }
