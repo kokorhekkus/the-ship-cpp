@@ -5,6 +5,7 @@
 #include "random.h"
 #include "config.h"
 #include "object.h"
+#include "monster.h"
 
 #include <sstream>
 #include <algorithm>
@@ -43,6 +44,22 @@ void Level::addFloorItems(int chanceToGen) {
 	}
 	}
 }
+
+// add monsters to the level
+// TODO: do this properly
+void Level::addLevelMonsters() {
+	// test monster
+	string mn = "Cuntpuncher";
+	Location loc = this->findEmptyLocation(); 
+	Monster monster(1,mn,5,5,5,5,loc.x,loc.y,RED,'C');
+	this->addMonster(monster);
+}
+
+// add a monster to the level
+void Level::addMonster(Monster m) {
+  monsters.push_back(m);
+}
+
 
 // find a random empty map location (i.e. floor only)
 Location Level::findEmptyLocation() const {
@@ -125,10 +142,18 @@ void Level::printObjects() const {
   }
 }
 
+// print all monsters on the level to the terminal
+void Level::printMonsters() const {
+  for(list<Monster>::const_iterator it = monsters.begin(); it != monsters.end(); ++it) {
+	it->print();
+  }
+}
+
 // prints everything on the level
 void Level::print() const {
   levelMap->print();
   printObjects();
+  printMonsters();
 }
 
 // convert an integer to an inventoryType enum

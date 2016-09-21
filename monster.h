@@ -10,17 +10,14 @@
 // An individual monster
 class Monster : public ScreenObject {
 private:
-  int id;
+  unsigned int id;
   std::string name;
   int life;
   int speed;
   int armour;
   int weapon;
-  int xloc;
-  int yloc;
 
 public:
-  // Constructor that sets all Monster variables
   Monster(int id, std::string& name, int life,
 		  int speed, int armour, int weapon,
 		  int xloc, int yloc, mapColor color, char look);

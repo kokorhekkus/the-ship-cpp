@@ -4,6 +4,7 @@
 #include "map.h"
 #include "object.h"
 #include "enums.h"
+#include "monster.h"
 
 #include <list>
 
@@ -15,6 +16,7 @@ class Level {
 private:
   // needs to be pointers to the base class due to object slicing
   std::list<Thing*> objects;
+  std::list<Monster> monsters;
   LevelMap* levelMap;
 
   inventoryType getInventoryType(int i);
@@ -26,6 +28,12 @@ public:
   // add a load of random items to the floor of the level, percent chance
   // to generate an item is chanceToGen
   void addFloorItems(int chanceToGen);
+
+  // generate monsters for the level
+  void addLevelMonsters();
+
+  // add a monster to the level
+  void addMonster(Monster m);   
 
   // return the location of an empty map location
   Location findEmptyLocation() const;
@@ -45,6 +53,9 @@ public:
 
   // print all objects on the level to the terminal
   void printObjects() const;
+
+  // print all monsters on the level to the terminal
+  void printMonsters() const;
 
   // prints everything on the level
   void print() const;

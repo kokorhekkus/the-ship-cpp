@@ -63,9 +63,9 @@ int main(int argc, char *argv[]) {
 	currentLevelMap.generate(1, CAVERN);
 	Level currentLevel(&currentLevelMap);
   currentLevel.addFloorItems(2);
+  currentLevel.addLevelMonsters();
 
 	shiplog("Creating PC", 1);
-	// find empty random area of map
 	Location startLoc = currentLevel.findEmptyLocation();
 	Player pc(iname, w_choice, c_choice, startLoc.x, startLoc.y, WHITE, '@');
 
@@ -111,9 +111,8 @@ int main(int argc, char *argv[]) {
   		msg.print("Bonk.");
   	} else {
   		printScreen(currentLevel, pc, FALSE);
-  		int x = pc.getX();
-  		int y = pc.getY();
-  		unsigned int objectId = currentLevel.objectAt(x,y);
+      Location loc = pc.getLocation();
+  		unsigned int objectId = currentLevel.objectAt(loc.x,loc.y);
   		if (objectId != 0) {
   			Thing t = currentLevel.getObject(objectId);
   			string s = "You see ";
