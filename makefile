@@ -1,6 +1,5 @@
 all: theship
 
-# NOTE: Add -ltinfo to run in a native Linux env (i.e. not Cygwin)
 theship: main.o engine.o random.o player.o screens.o monster.o object.o map.o \
 		 screenobject.o log.o level.o message.o
 		g++ -g -o theship main.o engine.o random.o player.o screens.o \
